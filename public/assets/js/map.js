@@ -1,5 +1,5 @@
 /* ============================================================
-   UDAAN Carpooling Platform — Maps, Routes and GPS tracking
+   Odoo Carpooling Platform â€” Maps, Routes and GPS tracking
    ============================================================ */
 
 let map = null;
@@ -19,7 +19,7 @@ function initSearchMap() {
     map = L.map('live-map').setView([23.0225, 72.5714], 11);
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
+        attribution: 'Â© OpenStreetMap contributors'
     }).addTo(map);
     
     setupAddressAutocomplete('pickup_address', 'pickup-suggestions', (data) => {
@@ -96,7 +96,7 @@ function initOfferMap() {
     map = L.map('live-map').setView([23.0225, 72.5714], 11);
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
+        attribution: 'Â© OpenStreetMap contributors'
     }).addTo(map);
     
     setupAddressAutocomplete('pickup_address', 'pickup-suggestions', (data) => {
@@ -183,7 +183,7 @@ async function calculateRoute() {
                 const suggestedFare = Math.round(distance * defaultFareRate);
                 document.getElementById('fare_per_seat').value = suggestedFare;
                 if (document.getElementById('suggested-fare-tip')) {
-                    document.getElementById('suggested-fare-tip').innerText = `Recommended fare based on ₹8/km route default.`;
+                    document.getElementById('suggested-fare-tip').innerText = `Recommended fare based on â‚¹8/km route default.`;
                 }
             }
             
@@ -255,7 +255,7 @@ function initTrackingMap() {
     map = L.map('live-map').setView([pickupLat, pickupLng], 13);
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
+        attribution: 'Â© OpenStreetMap contributors'
     }).addTo(map);
     
     if (routePolyline) {
@@ -420,7 +420,7 @@ function setupTripActionButtons() {
  * Ride chat group mock polling engine (session stored logs).
  */
 const mockMessages = [
-    { sender: "System", text: "Welcome to UDAAN ride chat!", time: "Now" }
+    { sender: "System", text: "Welcome to Odoo ride chat!", time: "Now" }
 ];
 
 function startChatPoller() {

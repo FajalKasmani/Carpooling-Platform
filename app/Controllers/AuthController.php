@@ -146,7 +146,7 @@ class AuthController extends Controller
         $_SESSION['role']      = 'employee';
         $_SESSION['org_id']    = (int)$org['id'];
 
-        NotificationService::push('success', 'Account created successfully! Welcome to UDAAN.');
+        NotificationService::push('success', 'Account created successfully! Welcome to Odoo.');
         $this->redirect('/dashboard');
     }
 
@@ -267,6 +267,168 @@ class AuthController extends Controller
 
         NotificationService::push('success', 'Saved place deleted!');
         $this->redirect('/settings');
+    }
+
+    /**
+     * Show forgot password page.
+     * GET /forgot-password
+     */
+    public function showForgotPassword(): void
+    {
+        $flash = $this->getFlash();
+        $this->view('auth/forgot-password', ['flash' => $flash]);
+    }
+
+    /**
+     * Process forgot password request.
+     * POST /forgot-password
+     */
+    public function forgotPassword(): void
+    {
+        $data = $_POST;
+        $email = $data['email'] ?? '';
+
+        $userModel = new User();
+        $user = $userModel->findByEmail($email);
+
+        if (!$user) {
+            $this->flash('error', 'No account found with that email address');
+            $this->redirect('/forgot-password');
+        }
+
+        // Generate 4 digit code
+        $code = sprintf("%04d", mt_rand(1000, 9999));
+
+        // Insert into password_resets database
+        $db = \App\Core\Database::getConnection();
+        
+        // Remove previous pending requests for this email to avoid duplicates
+        $stmt = $db->prepare("DELETE FROM password_resets WHERE email = ? AND status = 'pending'");
+        $stmt->execute([$email]);
+        
+        $stmt = $db->prepare("INSERT INTO password_resets (email, code, status) VALUES (?, ?, 'pending')");
+        $stmt->execute([$email, $code]);
+
+        $this->redirect('/forgot-password/verify?email=' . urlencode($email));
+    }
+
+    public function showVerifyCode(): void
+    {
+        $email = $_GET['email'] ?? '';
+        if (empty($email)) {
+            $this->redirect('/forgot-password');
+        }
+        $flash = $this->getFlash();
+        $this->view('auth/verify-code', ['email' => $email, 'flash' => $flash]);
+    }
+
+    /**
+     * Process 4-digit code verification.
+     * POST /forgot-password/verify
+     */
+    public function verifyCode(): void
+    {
+        $data = $_POST;
+        $email = $data['email'] ?? '';
+        $code = $data['code'] ?? '';
+
+        if (empty($email) || empty($code)) {
+            $this->flash('error', 'Please enter the verification code');
+            $this->redirect('/forgot-password/verify?email=' . urlencode($email));
+        }
+
+        $db = \App\Core\Database::getConnection();
+        $stmt = $db->prepare("SELECT * FROM password_resets WHERE email = ? AND code = ? AND status = 'pending' LIMIT 1");
+        $stmt->execute([$email, $code]);
+        $request = $stmt->fetch();
+
+        if (!$request) {
+            $this->flash('error', 'Incorrect or expired code. Please contact your administrator.');
+            $this->redirect('/forgot-password/verify?email=' . urlencode($email));
+        }
+
+        // Update status to verified
+        $stmt = $db->prepare("UPDATE password_resets SET status = 'verified' WHERE id = ?");
+        $stmt->execute([$request['id']]);
+
+        $this->redirect('/reset-password?email=' . urlencode($email) . '&code=' . urlencode($code));
+    }
+
+    public function showResetPassword(): void
+    {
+        $email = $_GET['email'] ?? '';
+        $code = $_GET['code'] ?? '';
+
+        if (empty($email) || empty($code)) {
+            $this->flash('error', 'Invalid request.');
+            $this->redirect('/login');
+        }
+
+        $db = \App\Core\Database::getConnection();
+        $stmt = $db->prepare("SELECT * FROM password_resets WHERE email = ? AND code = ? AND status = 'verified' LIMIT 1");
+        $stmt->execute([$email, $code]);
+        $request = $stmt->fetch();
+
+        if (!$request) {
+            $this->flash('error', 'This reset link is invalid or has already been used.');
+            $this->redirect('/login');
+        }
+
+        $flash = $this->getFlash();
+        $this->view('auth/reset-password', [
+            'flash' => $flash,
+            'email' => $email,
+            'code' => $code
+        ]);
+    }
+
+    /**
+     * Process reset password form.
+     * POST /reset-password
+     */
+    public function resetPassword(): void
+    {
+        $data = $_POST;
+        $email = $data['email'] ?? '';
+        $code = $data['code'] ?? '';
+        $password = $data['password'] ?? '';
+
+        if (empty($email) || empty($code) || empty($password)) {
+            $this->flash('error', 'Invalid reset request.');
+            $this->redirect('/login');
+        }
+
+        $db = \App\Core\Database::getConnection();
+        $stmt = $db->prepare("SELECT * FROM password_resets WHERE email = ? AND code = ? AND status = 'verified' LIMIT 1");
+        $stmt->execute([$email, $code]);
+        $request = $stmt->fetch();
+
+        if (!$request) {
+            $this->flash('error', 'Reset authorization expired.');
+            $this->redirect('/login');
+        }
+
+        $userModel = new User();
+        $user = $userModel->findByEmail($email);
+
+        if (!$user) {
+            $this->flash('error', 'User not found.');
+            $this->redirect('/login');
+        }
+
+        // Update password in DB
+        $stmt = $db->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
+        $stmt->execute([
+            password_hash($password, PASSWORD_DEFAULT),
+            $user['id']
+        ]);
+
+        // Complete the request
+        $stmt = $db->prepare("UPDATE password_resets SET status = 'completed' WHERE id = ?");
+        $stmt->execute([$request['id']]);
+
+        NotificationService::push('success', 'Password reset successfully! You can now log in.');
+        $this->redirect('/login');
     }
 
     private function isAjax(): bool

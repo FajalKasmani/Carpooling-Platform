@@ -1,5 +1,5 @@
 /* ============================================================
-   UDAAN Carpooling Platform — core javascript helpers
+   Odoo Carpooling Platform â€” core javascript helpers
    ============================================================ */
 
 /**
@@ -92,7 +92,7 @@ function setupAddressAutocomplete(inputId, suggestionsId, onSelectCallback) {
         timeout = setTimeout(async () => {
             const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=5&countrycodes=in`;
             try {
-                const res = await fetch(url, { headers: { 'User-Agent': 'UDAAN-App' } });
+                const res = await fetch(url, { headers: { 'User-Agent': 'Odoo-App' } });
                 const data = await res.json();
                 
                 suggestions.innerHTML = '';

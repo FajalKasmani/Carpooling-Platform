@@ -19,6 +19,12 @@ $router->post('/login',      [AuthController::class, 'login']);
 $router->get('/register',    [AuthController::class, 'showRegister']);
 $router->post('/register',   [AuthController::class, 'register']);
 $router->get('/logout',      [AuthController::class, 'logout']);
+$router->get('/forgot-password', [AuthController::class, 'showForgotPassword']);
+$router->post('/forgot-password', [AuthController::class, 'forgotPassword']);
+$router->get('/forgot-password/verify', [AuthController::class, 'showVerifyCode']);
+$router->post('/forgot-password/verify', [AuthController::class, 'verifyCode']);
+$router->get('/reset-password',  [AuthController::class, 'showResetPassword']);
+$router->post('/reset-password', [AuthController::class, 'resetPassword']);
 $router->get('/api/whoami',  [AuthController::class, 'whoami']);
 
 // ── Dashboard Route ───────────────────────────────────────

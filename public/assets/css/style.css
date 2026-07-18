@@ -1,9 +1,9 @@
 /* ============================================================
-   UDAAN Carpooling Platform — Premium Design System
+   Odoo Carpooling Platform â€” Premium Design System
    Vanilla CSS additions to Bootstrap 5
    ============================================================ */
 
-/* ── Global Styles ── */
+/* â”€â”€ Global Styles â”€â”€ */
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: #f8fafc;
@@ -11,7 +11,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ── Typography & Gradient Text ── */
+/* â”€â”€ Typography & Gradient Text â”€â”€ */
 .text-gradient {
     background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
     -webkit-background-clip: text;
@@ -19,7 +19,7 @@ body {
     font-weight: 800;
 }
 
-/* ── Sidebar Nav ── */
+/* â”€â”€ Sidebar Nav â”€â”€ */
 #sidebar {
     background-color: #0f172a !important;
 }
@@ -44,7 +44,7 @@ body {
     border-left-color: #38bdf8;
 }
 
-/* ── Custom Cards ── */
+/* â”€â”€ Custom Cards â”€â”€ */
 .ride-card {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(226, 232, 240, 0.8) !important;
@@ -56,7 +56,7 @@ body {
     border-color: rgba(56, 189, 248, 0.4) !important;
 }
 
-/* ── Live Marker Pulse Animation ── */
+/* â”€â”€ Live Marker Pulse Animation â”€â”€ */
 @keyframes pulse-ring {
     0% {
         transform: scale(0.8);
@@ -81,7 +81,7 @@ body {
     animation: pulse-ring 1.5s ease-out infinite;
 }
 
-/* ── Custom scrollbar ── */
+/* â”€â”€ Custom scrollbar â”€â”€ */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -100,7 +100,7 @@ body {
     background: #94a3b8;
 }
 
-/* ── Suggestions Dropdown List ── */
+/* â”€â”€ Suggestions Dropdown List â”€â”€ */
 .suggestions-list {
     background: white;
     border: 1px solid #e2e8f0;
@@ -119,12 +119,12 @@ body {
     background-color: #f1f5f9;
 }
 
-/* ── Shadow Formats ── */
+/* â”€â”€ Shadow Formats â”€â”€ */
 .shadow-modal {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* ── Bottom Mobile Nav Styles ── */
+/* â”€â”€ Bottom Mobile Nav Styles â”€â”€ */
 #mobile-bottom-nav .fs-4 {
     line-height: 1;
 }

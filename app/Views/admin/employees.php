@@ -115,6 +115,50 @@ $mockLocations = ['Ahmedabad', 'Gandhinagar', 'Vadodara'];
     </div>
 </div>
 
+<!-- Password Resets Section -->
+<div class="card border rounded-0 shadow-sm mt-4">
+    <div class="card-header bg-white border-bottom py-3">
+        <h5 class="fw-bold text-dark mb-0"><i class="bi bi-shield-lock text-info me-2"></i>Password Reset Requests</h5>
+        <small class="text-muted">Users who have requested a password recovery. Provide them the 4-digit code to allow them to reset their password.</small>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-borderless table-striped align-middle mb-0" style="font-size: 0.85rem;">
+                <thead>
+                    <tr class="border-bottom text-info">
+                        <th class="fw-normal py-3 ps-4">Request Email</th>
+                        <th class="fw-normal py-3">Generated Code</th>
+                        <th class="fw-normal py-3">Requested At</th>
+                        <th class="fw-normal py-3 pe-4">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($resetRequests)): ?>
+                        <tr><td colspan="4" class="text-center py-4 text-muted">No pending password reset requests.</td></tr>
+                    <?php else: ?>
+                        <?php foreach ($resetRequests as $req): ?>
+                        <tr class="border-bottom">
+                            <td class="ps-4 text-dark font-monospace fw-semibold"><?= htmlspecialchars($req['email']) ?></td>
+                            <td>
+                                <span class="badge bg-warning text-dark px-3 py-2 fs-6 font-monospace" style="letter-spacing: 1px;"><?= $req['code'] ?></span>
+                            </td>
+                            <td class="text-muted"><?= $req['created_at'] ?></td>
+                            <td class="pe-4">
+                                <?php if ($req['status'] === 'pending'): ?>
+                                    <span class="badge bg-danger rounded-pill px-2.5 py-1.5">Awaiting Verification</span>
+                                <?php else: ?>
+                                    <span class="badge bg-success rounded-pill px-2.5 py-1.5">Code Verified</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <script>
 async function toggleAccess(userId, newStatus) {
     if (!confirm(`Are you sure you want to change this employee's access status?`)) return;

@@ -63,10 +63,18 @@ class AdminController extends Controller
         $employees = $userModel->getByOrgId($orgId);
         $stats = $this->getStats($orgId);
 
+        // Fetch password resets isolated by organization domain
+        $db = \App\Core\Database::getConnection();
+        $orgDomain = $stats['org']['domain'] ?? '';
+        $stmt = $db->prepare("SELECT * FROM password_resets WHERE email LIKE ? AND status IN ('pending', 'verified') ORDER BY created_at DESC");
+        $stmt->execute(['%@' . $orgDomain]);
+        $resetRequests = $stmt->fetchAll();
+
         $this->view('admin/employees', [
-            'stats'     => $stats,
-            'employees' => $employees,
-            'flash'     => $this->getFlash(),
+            'stats'         => $stats,
+            'employees'     => $employees,
+            'resetRequests' => $resetRequests,
+            'flash'         => $this->getFlash(),
         ]);
     }
 

@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? htmlspecialchars($title) . ' — UDAAN' : 'UDAAN — Enterprise Carpooling' ?></title>
+    <title><?= isset($title) ? htmlspecialchars($title) . ' — Odoo' : 'Odoo' ?></title>
     
+    <!-- SVG Favicon Data URI -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -28,7 +30,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-lg-none sticky-top shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-gradient" href="<?= $baseUrl ?>/dashboard">
-                <i class="bi bi-car-front-fill me-2 text-info"></i>UDAAN
+                <i class="bi bi-car-front-fill me-2 text-info"></i>Odoo
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar">
                 <span class="navbar-toggler-icon"></span>

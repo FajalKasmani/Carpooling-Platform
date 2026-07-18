@@ -1,6 +1,6 @@
 <?php
 // ============================================================
-// UDAAN Carpooling Platform — Single Entry Point
+// Odoo Carpooling Platform — Single Entry Point
 // Front controller pattern
 // ============================================================
 

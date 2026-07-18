@@ -16,7 +16,7 @@ team-repo-temp/
 # database/*.sql
 
 # Vendor (if composer used)
-vendor/
+#vendor/
 
 # IDE files
 .vscode/

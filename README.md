@@ -1,81 +1,85 @@
+<<<<<<< HEAD
 # 🚗  — Carpooling Platform (MVC)
+=======
+# ðŸš— Odoo â€” Enterprise Carpooling Platform (MVC)
+>>>>>>> cd0a27e (map integration, route traking, add on extra function on moudules)
 
-> **Team UDAAN** | Core PHP 8.2 (MVC) + MySQL + Bootstrap 5 + Vanilla JS + Leaflet.js
+> **Team Odoo** | Core PHP 8.2 (MVC) + MySQL + Bootstrap 5 + Vanilla JS + Leaflet.js
 
 Enterprise carpooling platform that enables employees to find and offer rides, manage trips, track journeys in real time, and make secure payments while promoting sustainable commuting. Restructured into a clean MVC architecture to support parallel collaboration across a team of 4 developers.
 
 ---
 
-## 📁 Project Structure
+## ðŸ“ Project Structure
 
 ```
 project/
-├── app/
-│   ├── Controllers/
-│   │   ├── AuthController.php
-│   │   ├── RideController.php
-│   │   ├── VehicleController.php
-│   │   ├── TripController.php
-│   │   ├── WalletController.php
-│   │   ├── PaymentController.php
-│   │   ├── ReportController.php
-│   │   └── AdminController.php
-│   ├── Models/
-│   │   ├── User.php
-│   │   ├── Vehicle.php
-│   │   ├── Ride.php
-│   │   ├── Booking.php
-│   │   ├── Wallet.php
-│   │   └── Payment.php
-│   ├── Views/
-│   │   ├── auth/
-│   │   ├── rides/
-│   │   ├── trips/
-│   │   ├── wallet/
-│   │   ├── reports/
-│   │   ├── admin/
-│   │   └── layouts/ (header.php, footer.php, sidebar.php)
-│   ├── Helpers/
-│   │   ├── Validator.php
-│   │   ├── ResponseHelper.php
-│   │   └── GeoHelper.php
-│   ├── Middleware/
-│   │   ├── AuthMiddleware.php
-│   │   └── AdminMiddleware.php
-│   ├── Core/
-│   │   ├── Router.php
-│   │   ├── Controller.php (BaseController)
-│   │   ├── Model.php (BaseModel)
-│   │   └── Database.php (PDO singleton)
-│   ├── Services/
-│   │   ├── MapsService.php
-│   │   ├── RazorpayService.php
-│   │   └── NotificationService.php
-│   └── Config/
-│       └── config.php
-├── public/
-│   ├── assets/
-│   │   ├── css/
-│   │   ├── js/
-│   │   └── uploads/
-│   └── index.php   ← single entry point
-├── routes/
-│   └── web.php
-├── database/
-│   ├── schema.sql
-│   └── seed.sql
-├── storage/
-│   ├── logs/
-│   └── temp/
-├── vendor/          ← autoloader
-├── .env
-├── composer.json
-└── README.md
+â”œâ”€â”€ app/
+â”‚   â”œâ”€â”€ Controllers/
+â”‚   â”‚   â”œâ”€â”€ AuthController.php
+â”‚   â”‚   â”œâ”€â”€ RideController.php
+â”‚   â”‚   â”œâ”€â”€ VehicleController.php
+â”‚   â”‚   â”œâ”€â”€ TripController.php
+â”‚   â”‚   â”œâ”€â”€ WalletController.php
+â”‚   â”‚   â”œâ”€â”€ PaymentController.php
+â”‚   â”‚   â”œâ”€â”€ ReportController.php
+â”‚   â”‚   â””â”€â”€ AdminController.php
+â”‚   â”œâ”€â”€ Models/
+â”‚   â”‚   â”œâ”€â”€ User.php
+â”‚   â”‚   â”œâ”€â”€ Vehicle.php
+â”‚   â”‚   â”œâ”€â”€ Ride.php
+â”‚   â”‚   â”œâ”€â”€ Booking.php
+â”‚   â”‚   â”œâ”€â”€ Wallet.php
+â”‚   â”‚   â””â”€â”€ Payment.php
+â”‚   â”œâ”€â”€ Views/
+â”‚   â”‚   â”œâ”€â”€ auth/
+â”‚   â”‚   â”œâ”€â”€ rides/
+â”‚   â”‚   â”œâ”€â”€ trips/
+â”‚   â”‚   â”œâ”€â”€ wallet/
+â”‚   â”‚   â”œâ”€â”€ reports/
+â”‚   â”‚   â”œâ”€â”€ admin/
+â”‚   â”‚   â””â”€â”€ layouts/ (header.php, footer.php, sidebar.php)
+â”‚   â”œâ”€â”€ Helpers/
+â”‚   â”‚   â”œâ”€â”€ Validator.php
+â”‚   â”‚   â”œâ”€â”€ ResponseHelper.php
+â”‚   â”‚   â””â”€â”€ GeoHelper.php
+â”‚   â”œâ”€â”€ Middleware/
+â”‚   â”‚   â”œâ”€â”€ AuthMiddleware.php
+â”‚   â”‚   â””â”€â”€ AdminMiddleware.php
+â”‚   â”œâ”€â”€ Core/
+â”‚   â”‚   â”œâ”€â”€ Router.php
+â”‚   â”‚   â”œâ”€â”€ Controller.php (BaseController)
+â”‚   â”‚   â”œâ”€â”€ Model.php (BaseModel)
+â”‚   â”‚   â””â”€â”€ Database.php (PDO singleton)
+â”‚   â”œâ”€â”€ Services/
+â”‚   â”‚   â”œâ”€â”€ MapsService.php
+â”‚   â”‚   â”œâ”€â”€ RazorpayService.php
+â”‚   â”‚   â””â”€â”€ NotificationService.php
+â”‚   â””â”€â”€ Config/
+â”‚       â””â”€â”€ config.php
+â”œâ”€â”€ public/
+â”‚   â”œâ”€â”€ assets/
+â”‚   â”‚   â”œâ”€â”€ css/
+â”‚   â”‚   â”œâ”€â”€ js/
+â”‚   â”‚   â””â”€â”€ uploads/
+â”‚   â””â”€â”€ index.php   â† single entry point
+â”œâ”€â”€ routes/
+â”‚   â””â”€â”€ web.php
+â”œâ”€â”€ database/
+â”‚   â”œâ”€â”€ schema.sql
+â”‚   â””â”€â”€ seed.sql
+â”œâ”€â”€ storage/
+â”‚   â”œâ”€â”€ logs/
+â”‚   â””â”€â”€ temp/
+â”œâ”€â”€ vendor/          â† autoloader
+â”œâ”€â”€ .env
+â”œâ”€â”€ composer.json
+â””â”€â”€ README.md
 ```
 
 ---
 
-## 🚀 Installation & Setup
+## ðŸš€ Installation & Setup
 
 ### 1. Prerequisites
 - PHP 8.2+ with PDO MySQL extension
@@ -109,20 +113,20 @@ Requests are routed to the public front controller (`public/index.php`) via URL 
 
 ---
 
-## 🔐 Demo Login Credentials
+## ðŸ” Demo Login Credentials
 
 | Role | Email | Password |
 |------|-------|----------|
-| 🧑 Driver | `driver@udaan.com` | `password` |
-| 👩 Passenger | `passenger@udaan.com` | `password` |
-| 👤 Admin | `admin@udaan.com` | `password` |
+| ðŸ§‘ Driver | `driver@Odoo.com` | `password` |
+| ðŸ‘© Passenger | `passenger@Odoo.com` | `password` |
+| ðŸ‘¤ Admin | `admin@Odoo.com` | `password` |
 
 ---
 
-## 🛠️ Tech Stack & Integrations
+## ðŸ› ï¸ Tech Stack & Integrations
 - **Backend:** Core PHP 8.2 (Object-Oriented, MVC)
 - **Frontend:** Bootstrap 5, Vanilla JavaScript, Chart.js
 - **Map & Routing:** Leaflet.js + OpenStreetMap (via Nominatim & OSRM)
 - **Payments:** Razorpay Test Mode integration ready
 
-*Built with ❤️ by Team UDAAN*
+*Built with â¤ï¸ by Team Odoo*

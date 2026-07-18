@@ -1,5 +1,5 @@
 /* ============================================================
-   UDAAN Carpooling Platform — Dashboard & Search Results Loader
+   Odoo Carpooling Platform â€” Dashboard & Search Results Loader
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,7 +55,7 @@ async function loadDashboardStats() {
         container.innerHTML = `
             <div class="p-3 border rounded-3 bg-light d-flex justify-content-between align-items-center flex-wrap g-3">
                 <div class="d-flex align-items-center">
-                    <div class="fs-1 text-primary me-3 bg-white border p-2 rounded-circle">🚗</div>
+                    <div class="fs-1 text-primary me-3 bg-white border p-2 rounded-circle">ðŸš—</div>
                     <div>
                         <span class="badge bg-primary text-uppercase mb-1" style="font-size: 0.65rem;">${trip.user_role}</span>
                         <h6 class="fw-bold mb-1">${trip.pickup_address} <i class="bi bi-arrow-right mx-1 text-muted"></i> ${trip.drop_address}</h6>
@@ -127,7 +127,7 @@ async function loadSearchResults() {
                 <div class="row align-items-center g-3">
                     <div class="col-12 col-md-5">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="fs-2 bg-primary bg-opacity-10 p-2.5 rounded-circle me-3">🧑</div>
+                            <div class="fs-2 bg-primary bg-opacity-10 p-2.5 rounded-circle me-3">ðŸ§‘</div>
                             <div>
                                 <h6 class="fw-bold text-dark mb-0">${ride.driver_name}</h6>
                                 <div class="text-warning small">
@@ -152,7 +152,7 @@ async function loadSearchResults() {
                     
                     <div class="col-12 col-md-3 text-md-end">
                         <span class="text-muted d-block" style="font-size: 0.75rem;">FARE PER SEAT</span>
-                        <h3 class="fw-extrabold text-primary mb-3">₹${parseFloat(ride.fare_per_seat).toFixed(2)}</h3>
+                        <h3 class="fw-extrabold text-primary mb-3">â‚¹${parseFloat(ride.fare_per_seat).toFixed(2)}</h3>
                         <button class="btn btn-primary w-100 fw-bold rounded-3 py-2 select-ride-btn" 
                                 data-id="${ride.id}" 
                                 data-driver="${ride.driver_name}" 

@@ -1,6 +1,6 @@
 {
-    "name": "udaan/carpooling-platform",
-    "description": "Enterprise Carpooling Platform — Core PHP MVC",
+    "name": "Odoo/carpooling-platform",
+    "description": "Enterprise Carpooling Platform â€” Core PHP MVC",
     "type": "project",
     "license": "MIT",
     "require": {

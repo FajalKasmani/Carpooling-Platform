@@ -192,4 +192,16 @@ CREATE TABLE ratings (
     CONSTRAINT chk_rating_range CHECK (rating BETWEEN 1 AND 5)
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------
+-- password_resets
+-- ---------------------------------------------------------
+DROP TABLE IF EXISTS password_resets;
+CREATE TABLE password_resets (
+    id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email        VARCHAR(150) NOT NULL,
+    code         CHAR(4) NOT NULL,
+    status       ENUM('pending', 'verified', 'completed') NOT NULL DEFAULT 'pending',
+    created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
 SET FOREIGN_KEY_CHECKS = 1;

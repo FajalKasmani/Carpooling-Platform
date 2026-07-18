@@ -4,7 +4,7 @@
         <!-- Logo -->
         <a href="<?= $baseUrl ?>/dashboard" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none border-bottom border-secondary w-100">
             <i class="bi bi-car-front-fill fs-3 me-2 text-info"></i>
-            <span class="fs-4 fw-extrabold text-gradient">UDAAN</span>
+            <span class="fs-4 fw-extrabold text-gradient">Odoo</span>
         </a>
         
         <!-- Navigation Links -->
