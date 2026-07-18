@@ -56,7 +56,7 @@ project/
 ├── public/
 │   ├── assets/
 │   │   ├── css/
-│   │   ├── js/
+│   │   ├── js /
 │   │   └── uploads/
 │   └── index.php   ← single entry point
 ├── routes/
