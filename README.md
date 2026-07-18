@@ -1,4 +1,4 @@
-# 🚗 UDAAN — Enterprise Carpooling Platform (MVC)
+# 🚗  — Carpooling Platform (MVC)
 
 > **Team UDAAN** | Core PHP 8.2 (MVC) + MySQL + Bootstrap 5 + Vanilla JS + Leaflet.js
 
