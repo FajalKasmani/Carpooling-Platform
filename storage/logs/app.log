@@ -1,0 +1,965 @@
+[2026-07-18 16:08:16] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 16:08:23] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 16:08:25] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 16:08:37] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 16:09:15] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 16:09:19] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:08:25] Failed opening required 'C:\xampp\htdocs\CarPooling\app/layouts/header.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\CarPooling\app\Views\dashboard.php:3
+#0 C:\xampp\htdocs\CarPooling\app\Core\Controller.php(31): require()
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\AuthController.php(193): App\Core\Controller->view('dashboard')
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\AuthController->dashboard()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/dashboard')
+#4 {main}
+
+[2026-07-18 17:09:23] Failed opening required 'C:\xampp\htdocs\CarPooling\app/layouts/header.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\CarPooling\app\Views\dashboard.php:3
+#0 C:\xampp\htdocs\CarPooling\app\Core\Controller.php(31): require()
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\AuthController.php(193): App\Core\Controller->view('dashboard')
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\AuthController->dashboard()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/dashboard')
+#4 {main}
+
+[2026-07-18 17:09:58] Failed opening required 'C:\xampp\htdocs\CarPooling\app/layouts/header.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\CarPooling\app\Views\dashboard.php:3
+#0 C:\xampp\htdocs\CarPooling\app\Core\Controller.php(31): require()
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\AuthController.php(193): App\Core\Controller->view('dashboard')
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\AuthController->dashboard()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/dashboard')
+#4 {main}
+
+[2026-07-18 17:17:03] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:17:10] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:20:23] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:20:29] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Booking.php:160
+#0 C:\xampp\htdocs\CarPooling\app\Models\Booking.php(160): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(198): App\Models\Booking->getHistory(32)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->history()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/ride-history')
+#4 {main}
+
+[2026-07-18 17:20:30] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:22:16] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 17:22:25] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 17:23:17] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:24:11] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:24:31] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:24:44] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:24:47] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:30:41] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:31:05] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:38:36] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 17:39:35] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:40:50] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:40:52] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 17:40:53] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 17:40:53] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 17:58:16] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 17:59:58] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:00:02] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:00:05] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:02:52] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 18:03:53] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'photo' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php:28
+#0 C:\xampp\htdocs\CarPooling\app\Models\Vehicle.php(28): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\VehicleController.php(69): App\Models\Vehicle->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\VehicleController->store()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/vehicles')
+#4 {main}
+
+[2026-07-18 18:06:48] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:12:30] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Models\Ride.php:14
+#0 C:\xampp\htdocs\CarPooling\app\Models\Ride.php(14): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\RideController.php(119): App\Models\Ride->create(Array)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\RideController->offer()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('POST', '/offerRide')
+#4 {main}
+
+[2026-07-18 18:17:45] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:19:17] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:19:20] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:24:17] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:24:33] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:36:39] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:53:54] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:54:21] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:57:16] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 18:57:42] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 18:57:44] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 18:57:46] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 19:00:58] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:01:20] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 19:03:41] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:03:41] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:03:55] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:03:55] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:02] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:04:04] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:07] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:12] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:18] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:30] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:04:30] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:34] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(17): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->index()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/wallet')
+#4 {main}
+
+[2026-07-18 19:04:44] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:46] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:04:47] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:50] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(17): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->index()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/wallet')
+#4 {main}
+
+[2026-07-18 19:04:55] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:04:55] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:56] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:04:57] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:58] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:04:58] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(17): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->index()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/wallet')
+#4 {main}
+
+[2026-07-18 19:05:05] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:06] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:06] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:11] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:11] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:12] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:12] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:13] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:13] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:14] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:16] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(17): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->index()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/wallet')
+#4 {main}
+
+[2026-07-18 19:05:21] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:22] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:23] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:23] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:31] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:31] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:32] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:32] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 19:05:34] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(17): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->index()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/wallet')
+#4 {main}
+
+[2026-07-18 19:05:35] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`carpooling_platform`.`wallets`, CONSTRAINT `fk_wallets_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) in C:\xampp\htdocs\CarPooling\app\Models\Wallet.php:19
+#0 C:\xampp\htdocs\CarPooling\app\Models\Wallet.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\CarPooling\app\Controllers\WalletController.php(57): App\Models\Wallet->getBalance(34)
+#2 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\WalletController->apiBalance()
+#3 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/api/wallet')
+#4 {main}
+
+[2026-07-18 19:05:35] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 20:42:06] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 20:42:44] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 20:43:46] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 20:48:44] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 20:48:55] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:01:37] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:02:13] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:07:42] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:11:35] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:15:28] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:16:51] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:16:54] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:17:39] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:18:21] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:18:49] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:19:19] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:19:23] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:19:42] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:19:51] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:19:57] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:20:32] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:21:14] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:29:26] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:29:48] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:30:47] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:30:50] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:30:51] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:31:10] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:33:43] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:34:55] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:46:12] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:46:23] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:46:28] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:51:20] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:51:55] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:51:58] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:53:32] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:55:32] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:55:34] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-18 21:57:29] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:57:29] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:57:34] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 21:57:35] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:00:17] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:00:27] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:04:34] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:04:55] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:04:57] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:05:02] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:05:10] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:05:17] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:09:04] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:09:09] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:09:19] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:11:03] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:11:14] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:11:25] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 22:11:42] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 23:57:03] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-18 23:57:29] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
