@@ -1,0 +1,6 @@
+# Apache rewrite engine configuration to redirect root requests to public/ folder
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^$ public/ [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L]
+</IfModule>

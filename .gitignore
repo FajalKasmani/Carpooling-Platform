@@ -1,2 +1,28 @@
+<<<<<<< HEAD
 # Environment
 .env
+=======
+# UDAAN Carpooling Platform — .gitignore
+
+# Temporary clone folder
+team-repo-temp/
+
+# PHP / Environment
+.env
+*.log
+*.DS_Store
+
+# Database dump files (optional, remove if you want to commit)
+# database/*.sql
+
+# Vendor (if composer used)
+vendor/
+
+# IDE files
+.vscode/
+.idea/
+
+# Windows
+Thumbs.db
+desktop.ini
+>>>>>>> master
