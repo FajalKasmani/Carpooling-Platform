@@ -1,41 +1,111 @@
-# 🚗 UDAAN — Smart Carpooling Platform
+# 🚗 UDAAN — Enterprise Carpooling Platform (MVC)
 
-> **Team UDAAN** | Hackathon MVP | PHP + MySQL + Vanilla JS + Tailwind CSS
+> **Team UDAAN** | Core PHP 8.2 (MVC) + MySQL + Bootstrap 5 + Vanilla JS + Leaflet.js
 
-Enterprise carpooling platform that enables employees to find and offer rides, manage trips, track journeys in real time, and make secure payments while promoting sustainable commuting.
+Enterprise carpooling platform that enables employees to find and offer rides, manage trips, track journeys in real time, and make secure payments while promoting sustainable commuting. Restructured into a clean MVC architecture to support parallel collaboration across a team of 4 developers.
 
 ---
 
-## 🚀 Quick Start
+## 📁 Project Structure
+
+```
+project/
+├── app/
+│   ├── Controllers/
+│   │   ├── AuthController.php
+│   │   ├── RideController.php
+│   │   ├── VehicleController.php
+│   │   ├── TripController.php
+│   │   ├── WalletController.php
+│   │   ├── PaymentController.php
+│   │   ├── ReportController.php
+│   │   └── AdminController.php
+│   ├── Models/
+│   │   ├── User.php
+│   │   ├── Vehicle.php
+│   │   ├── Ride.php
+│   │   ├── Booking.php
+│   │   ├── Wallet.php
+│   │   └── Payment.php
+│   ├── Views/
+│   │   ├── auth/
+│   │   ├── rides/
+│   │   ├── trips/
+│   │   ├── wallet/
+│   │   ├── reports/
+│   │   ├── admin/
+│   │   └── layouts/ (header.php, footer.php, sidebar.php)
+│   ├── Helpers/
+│   │   ├── Validator.php
+│   │   ├── ResponseHelper.php
+│   │   └── GeoHelper.php
+│   ├── Middleware/
+│   │   ├── AuthMiddleware.php
+│   │   └── AdminMiddleware.php
+│   ├── Core/
+│   │   ├── Router.php
+│   │   ├── Controller.php (BaseController)
+│   │   ├── Model.php (BaseModel)
+│   │   └── Database.php (PDO singleton)
+│   ├── Services/
+│   │   ├── MapsService.php
+│   │   ├── RazorpayService.php
+│   │   └── NotificationService.php
+│   └── Config/
+│       └── config.php
+├── public/
+│   ├── assets/
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── uploads/
+│   └── index.php   ← single entry point
+├── routes/
+│   └── web.php
+├── database/
+│   ├── schema.sql
+│   └── seed.sql
+├── storage/
+│   ├── logs/
+│   └── temp/
+├── vendor/          ← autoloader
+├── .env
+├── composer.json
+└── README.md
+```
+
+---
+
+## 🚀 Installation & Setup
 
 ### 1. Prerequisites
-- PHP 8.0+ with PDO MySQL extension
+- PHP 8.2+ with PDO MySQL extension
 - MySQL 8.x
-- A local web server (XAMPP / WAMP / Laragon)
+- Local Web Server (XAMPP / WAMP)
 
-### 2. Setup Database
-```bash
-# Place project in your web server's root (e.g., htdocs/CarPooling)
-# Then open in browser:
-http://localhost/CarPooling/setup.php
-```
-This will:
-- Run `database/schema.sql` (team's full schema)
-- Run `database/seed.sql` (team's 30 demo users)
-- Add UDAAN demo users with real bcrypt passwords
+### 2. Move Project to htdocs
+Ensure the project is located at `C:/xampp/htdocs/CarPooling`
 
-### 3. Configure Database
-Edit `config.php`:
-```php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');    // your MySQL user
-define('DB_PASS', '');        // your MySQL password
+### 3. Database Initialization
+1. Open phpMyAdmin (`http://localhost/phpmyadmin`) or MySQL CLI.
+2. Create a database named `carpooling_platform`.
+3. Import `database/schema.sql` (schema tables).
+4. Import `database/seed.sql` (seed demo users & data).
+
+### 4. Configuration
+Duplicate or edit `.env` in the root:
+```ini
+DB_HOST=localhost
+DB_NAME=carpooling_platform
+DB_USER=root
+DB_PASS=
 ```
 
-### 4. Launch the App
+### 5. Launch the Application
+Access the app in your browser:
 ```
-http://localhost/CarPooling/index.html
+http://localhost/CarPooling/
 ```
+Requests are routed to the public front controller (`public/index.php`) via URL rewriting.
 
 ---
 
@@ -49,54 +119,10 @@ http://localhost/CarPooling/index.html
 
 ---
 
-## 📁 Project Structure
-
-```
-CarPooling/
-├── index.html              ← Full SPA Dashboard (Tailwind CSS + Leaflet.js)
-├── config.php              ← Database connection (PDO)
-├── setup.php               ← One-click DB setup + seed
-├── .gitignore
-│
-├── api/                    ← PHP JSON API endpoints
-│   ├── auth.php            ← Login / logout / session check
-│   ├── get_rides.php       ← Fetch available rides
-│   ├── book_ride.php       ← Book a ride (wallet deduction)
-│   ├── offer_ride.php      ← Driver publishes new ride
-│   ├── my_trips.php        ← Passenger's booking history
-│   └── wallet.php          ← Wallet balance & top-up
-│
-└── database/               ← Team's SQL files
-    ├── schema.sql           ← Full database schema (team)
-    └── seed.sql             ← 30 demo users + data (team)
-```
-
----
-
-## 🎯 Features
-
-| Feature | Status |
-|---------|--------|
-| 🔐 Login / Session auth | ✅ |
-| 🔍 Find & search rides | ✅ |
-| 🚗 Book a ride (wallet deduction) | ✅ |
-| ➕ Offer / publish a ride | ✅ |
-| 🧳 My trips history | ✅ |
-| 📍 Live tracking (Leaflet.js map) | ✅ |
-| 💳 Wallet with QR recharge | ✅ |
-| 📱 Mobile responsive | ✅ |
-| 🌿 CO₂ savings tracker | ✅ |
-| ⚡ Offline demo mode | ✅ |
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend:** HTML5, Tailwind CSS (CDN), Vanilla JavaScript
-- **Map:** Leaflet.js + OpenStreetMap (no API key needed)
-- **Backend:** PHP 8+ (Procedural + PDO)
-- **Database:** MySQL 8.x (InnoDB)
-
----
+## 🛠️ Tech Stack & Integrations
+- **Backend:** Core PHP 8.2 (Object-Oriented, MVC)
+- **Frontend:** Bootstrap 5, Vanilla JavaScript, Chart.js
+- **Map & Routing:** Leaflet.js + OpenStreetMap (via Nominatim & OSRM)
+- **Payments:** Razorpay Test Mode integration ready
 
 *Built with ❤️ by Team UDAAN*
