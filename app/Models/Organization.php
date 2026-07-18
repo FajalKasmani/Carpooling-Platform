@@ -12,6 +12,18 @@ class Organization extends Model
         return $stmt->fetch() ?: null;
     }
 
+    public function create(array $data): int
+    {
+        $stmt = $this->db->prepare("INSERT INTO organizations (name, domain, fuel_cost_per_km, default_fare_per_km) VALUES (?, ?, ?, ?)");
+        $stmt->execute([
+            $data['name'],
+            $data['domain'],
+            $data['fuel_cost_per_km'] ?? 10.00,
+            $data['default_fare_per_km'] ?? 8.00
+        ]);
+        return (int)$this->db->lastInsertId();
+    }
+
     public function findByDomain(string $domain): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM organizations WHERE domain = ?");

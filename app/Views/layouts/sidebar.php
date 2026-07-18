@@ -51,6 +51,12 @@
                     <span>Reports</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="<?= $baseUrl ?>/settings" class="nav-link text-white text-start d-flex align-items-center py-2.5 px-3 rounded" id="side-nav-settings">
+                    <i class="bi bi-gear fs-5 me-3"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
             
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                 <li class="nav-item border-top border-secondary mt-3 pt-3">
@@ -73,6 +79,8 @@
                 <span class="d-none d-sm-inline mx-1 text-truncate" style="max-width: 100px;"><?= htmlspecialchars($_SESSION['user_name'] ?? 'Employee') ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="<?= $baseUrl ?>/settings"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="<?= $baseUrl ?>/logout"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a></li>
             </ul>
         </div>

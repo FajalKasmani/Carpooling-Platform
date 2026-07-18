@@ -10,6 +10,15 @@ use App\Services\NotificationService;
 class AuthController extends Controller
 {
     /**
+     * Show welcome splash landing page.
+     * GET /
+     */
+    public function showWelcome(): void
+    {
+        $this->view('auth/welcome');
+    }
+
+    /**
      * Show login page.
      * GET /login
      */
@@ -107,8 +116,12 @@ class AuthController extends Controller
         $org = $orgModel->findByDomain($emailDomain);
 
         if (!$org) {
-            $this->flash('error', "No organization found for domain '{$emailDomain}'. Please use your company email.");
-            $this->redirect('/register');
+            // Auto-create the organization for the domain so any user can test
+            $orgId = $orgModel->create([
+                'name' => ucfirst(explode('.', $emailDomain)[0]) . ' Organization',
+                'domain' => $emailDomain
+            ]);
+            $org = $orgModel->findById($orgId);
         }
 
         $userModel = new User();
@@ -169,5 +182,97 @@ class AuthController extends Controller
 
         unset($user['password_hash']);
         $this->json(['success' => true, 'user' => $user]);
+    }
+
+    /**
+     * Show employee dashboard.
+     * GET /dashboard
+     */
+    public function dashboard(): void
+    {
+        $this->view('dashboard');
+    }
+
+    /**
+     * Show settings and saved places.
+     * GET /settings
+     */
+    public function settings(): void
+    {
+        $db = \App\Core\Database::getConnection();
+        $stmt = $db->prepare("SELECT * FROM saved_places WHERE user_id = ? ORDER BY label");
+        $stmt->execute([$this->userId()]);
+        $places = $stmt->fetchAll();
+
+        $this->view('user/settings', [
+            'places' => $places,
+            'flash'  => $this->getFlash()
+        ]);
+    }
+
+    /**
+     * Add a saved place.
+     * POST /saved-places
+     */
+    public function addSavedPlace(): void
+    {
+        $data = $this->jsonBody();
+        if (empty($data)) $data = $_POST;
+
+        $v = new Validator($data);
+        $v->required('label')
+          ->required('address')
+          ->required('lat')
+          ->required('lng');
+
+        if ($v->fails()) {
+            if ($this->isAjax()) {
+                $this->json(['success' => false, 'error' => $v->firstError()], 400);
+            }
+            $this->flash('error', $v->firstError());
+            $this->redirect('/settings');
+        }
+
+        $db = \App\Core\Database::getConnection();
+        $stmt = $db->prepare("INSERT INTO saved_places (user_id, label, address, lat, lng) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([
+            $this->userId(),
+            $data['label'],
+            $data['address'],
+            $data['lat'],
+            $data['lng']
+        ]);
+
+        if ($this->isAjax()) {
+            $this->json(['success' => true, 'message' => 'Place saved successfully!']);
+        }
+
+        NotificationService::push('success', 'Place saved successfully!');
+        $this->redirect('/settings');
+    }
+
+    /**
+     * Delete a saved place.
+     * POST /saved-places/:id/delete
+     */
+    public function deleteSavedPlace(string $id): void
+    {
+        $db = \App\Core\Database::getConnection();
+        $stmt = $db->prepare("DELETE FROM saved_places WHERE id = ? AND user_id = ?");
+        $stmt->execute([(int)$id, $this->userId()]);
+
+        if ($this->isAjax()) {
+            $this->json(['success' => true, 'message' => 'Saved place deleted!']);
+        }
+
+        NotificationService::push('success', 'Saved place deleted!');
+        $this->redirect('/settings');
+    }
+
+    private function isAjax(): bool
+    {
+        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+                && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+            || str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json');
     }
 }

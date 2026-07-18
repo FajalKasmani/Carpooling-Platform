@@ -22,8 +22,11 @@ $router->get('/logout',      [AuthController::class, 'logout']);
 $router->get('/api/whoami',  [AuthController::class, 'whoami']);
 
 // ── Dashboard Route ───────────────────────────────────────
-$router->get('/',            [AuthController::class, 'showLogin']); // default redirect
-$router->get('/dashboard',   [RideController::class, 'showFind'],    [AuthMiddleware::class]); // fallback view
+$router->get('/',            [AuthController::class, 'showWelcome']); // landing page
+$router->get('/dashboard',   [AuthController::class, 'dashboard'],   [AuthMiddleware::class]); // fallback view
+$router->get('/settings',    [AuthController::class, 'settings'],    [AuthMiddleware::class]);
+$router->post('/saved-places', [AuthController::class, 'addSavedPlace'], [AuthMiddleware::class]);
+$router->post('/saved-places/:id/delete', [AuthController::class, 'deleteSavedPlace'], [AuthMiddleware::class]);
 
 // ── Ride Discovery / Publish ──────────────────────────────
 $router->get('/find-ride',       [RideController::class, 'showFind'],       [AuthMiddleware::class]);

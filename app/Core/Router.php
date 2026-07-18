@@ -118,11 +118,19 @@ class Router
 
     /**
      * Determine the base path for subdirectory installs.
-     * For XAMPP: /CarPooling/public
+     * For XAMPP: /CarPooling/public or /CarPooling
      */
     private function getBasePath(): string
     {
         $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-        return dirname($scriptName);
+        $base = dirname($scriptName);
+        
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+        // If the browser URL does not contain '/public', strip it from the base path matching
+        if (!str_contains($requestUri, '/public') && str_ends_with($base, '/public')) {
+            $base = substr($base, 0, -7);
+        }
+        
+        return $base;
     }
 }
