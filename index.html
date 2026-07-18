@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UDAAN — Smart Carpooling Platform</title>
+  <meta name="description" content="Team UDAAN — The smart carpooling platform for daily commuters. Find rides, offer seats, save money and the planet." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { DEFAULT: '#0ea5e9', dark: '#0284c7', light: '#e0f2fe' },
+            surface: '#f8fafc',
+            card: '#ffffff',
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          boxShadow: {
+            card: '0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.07)',
+            modal: '0 20px 60px rgba(0,0,0,.25)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet.js for map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    /* ── Base ── */
+    body { font-family: 'Inter', sans-serif; background: #f0f6ff; }
+
+    /* ── Gradient hero text ── */
+    .grad-text {
+      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* ── Sidebar nav ── */
+    .nav-item { transition: all .2s; cursor: pointer; }
+    .nav-item:hover  { background: #e0f2fe; color: #0284c7; }
+    .nav-item.active { background: linear-gradient(135deg, #0ea5e9, #6366f1); color: white; box-shadow: 0 4px 14px rgba(14,165,233,.35); }
+
+    /* ── Panels ── */
+    .panel { display: none; }
+    .panel.active { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+      padding: 14px 22px; border-radius: 12px; font-weight: 600; font-size: .875rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); transition: all .4s;
+      pointer-events: none; opacity: 0; transform: translateY(10px);
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.success { background: #22c55e; color: white; }
+    #toast.error   { background: #ef4444; color: white; }
+    #toast.info    { background: #0ea5e9; color: white; }
+
+    /* ── Map ── */
+    #live-map { height: 320px; border-radius: 16px; overflow: hidden; }
+
+    /* ── Ride card ── */
+    .ride-card { transition: transform .2s, box-shadow .2s; }
+    .ride-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
+
+    /* ── Pulse animation for live dot ── */
+    @keyframes pulse-ring { 0%{transform:scale(.8);opacity:1} 100%{transform:scale(1.8);opacity:0} }
+    .live-dot::before {
+      content:''; position:absolute; inset:-4px; border-radius:50%;
+      background:rgba(34,197,94,.4); animation: pulse-ring 1.5s ease-out infinite;
+    }
+    .live-dot { position:relative; }
+
+    /* ── QR placeholder ── */
+    .qr-grid { display: grid; grid-template-columns: repeat(10,1fr); gap: 2px; }
+    .qr-cell { aspect-ratio:1; background: #1e293b; border-radius:1px; }
+    .qr-cell.w { background: white; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
+
+    /* ── Bottom mobile nav ── */
+    @media(max-width:768px) {
+      #sidebar { display:none; }
+      #mobile-nav { display:flex; }
+      #content-area { margin-left:0 !important; padding-bottom: 80px; }
+    }
+    #mobile-nav { display:none; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  LOGIN SCREEN                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center p-4" style="background: linear-gradient(135deg,#0ea5e9 0%,#6366f1 100%);">
+  <div class="bg-white rounded-3xl shadow-modal p-10 w-full max-w-md">
+    <!-- Logo -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+        <span class="text-3xl">🚗</span>
+      </div>
+      <h1 class="text-3xl font-extrabold grad-text">UDAAN</h1>
+      <p class="text-slate-500 text-sm mt-1">Smart Carpooling Platform</p>
+    </div>
+
+    <form id="login-form" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+        <input id="login-email" type="email" value="passenger@udaan.com" required
+          class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+        <input id="login-password" type="password" value="password" required
+          class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition" />
+      </div>
+      <button type="submit" id="login-btn"
+        class="w-full py-3 rounded-xl font-bold text-white text-sm transition-all"
+        style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+        Sign In to UDAAN
+      </button>
+    </form>
+
+    <!-- Demo quick-login chips -->
+    <div class="mt-6 flex gap-2 justify-center flex-wrap">
+      <span class="text-xs text-slate-400 w-full text-center mb-1">Quick demo access:</span>
+      <button onclick="quickLogin('driver@udaan.com')"
+        class="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-full font-medium hover:bg-blue-100 transition">
+        🧑 Login as Driver
+      </button>
+      <button onclick="quickLogin('passenger@udaan.com')"
+        class="text-xs bg-purple-50 text-purple-600 px-3 py-1.5 rounded-full font-medium hover:bg-purple-100 transition">
+        👩 Login as Passenger
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MAIN APP (hidden until logged in)                         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="app" class="hidden min-h-screen flex">
+
+  <!-- ── Sidebar ── -->
+  <aside id="sidebar" class="w-64 bg-white border-r border-slate-100 flex flex-col fixed inset-y-0 left-0 z-40 shadow-sm">
+    <!-- Brand -->
+    <div class="p-6 border-b border-slate-100">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">🚗</div>
+        <div>
+          <div class="font-extrabold text-slate-800 leading-tight">UDAAN</div>
+          <div class="text-xs text-slate-400">Carpooling Platform</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User chip -->
+    <div class="p-4 mx-4 mt-4 bg-blue-50 rounded-2xl flex items-center gap-3">
+      <div id="sb-avatar" class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-xl shadow-sm">👤</div>
+      <div>
+        <div id="sb-name" class="text-sm font-semibold text-slate-700">User</div>
+        <div id="sb-role" class="text-xs text-slate-400 capitalize">passenger</div>
+      </div>
+    </div>
+
+    <!-- Nav links -->
+    <nav class="flex-1 p-4 space-y-1 mt-2">
+      <div class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" data-panel="dashboard" onclick="showPanel('dashboard',this)">
+        <span>🏠</span> Dashboard
+      </div>
+      <div class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600" data-panel="find-ride" onclick="showPanel('find-ride',this)">
+        <span>🔍</span> Find a Ride
+      </div>
+      <div class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600" data-panel="offer-ride" onclick="showPanel('offer-ride',this)">
+        <span>➕</span> Offer a Ride
+      </div>
+      <div class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600" data-panel="my-trips" onclick="showPanel('my-trips',this)">
+        <span>🧳</span> My Trips
+      </div>
+      <div class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600" data-panel="live-tracking" onclick="showPanel('live-tracking',this)">
+        <span>📍</span> Live Tracking
+      </div>
+      <div class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600" data-panel="wallet" onclick="showPanel('wallet',this)">
+        <span>💳</span> Wallet
+      </div>
+      <div class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600" data-panel="settings" onclick="showPanel('settings',this)">
+        <span>⚙️</span> Settings
+      </div>
+    </nav>
+
+    <!-- Logout -->
+    <div class="p-4 border-t border-slate-100">
+      <button onclick="logout()" class="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-500 font-medium hover:bg-red-50 rounded-xl transition">
+        <span>🚪</span> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ── -->
+  <main id="content-area" class="flex-1 ml-64 p-6 md:p-8">
+
+    <!-- ─────────────── DASHBOARD ─────────────── -->
+    <section id="panel-dashboard" class="panel active">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-800">Good morning, <span id="dash-name" class="grad-text">User</span> 👋</h2>
+        <p class="text-slate-500 text-sm mt-1">Here's your carpooling overview for today.</p>
+      </div>
+
+      <!-- Stats row -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-2xl p-5 shadow-card">
+          <div class="text-3xl mb-2">💳</div>
+          <div class="text-2xl font-bold text-slate-800" id="stat-balance">₹0</div>
+          <div class="text-xs text-slate-400 mt-0.5">Wallet Balance</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-card">
+          <div class="text-3xl mb-2">🧳</div>
+          <div class="text-2xl font-bold text-slate-800" id="stat-trips">0</div>
+          <div class="text-xs text-slate-400 mt-0.5">Total Trips</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-card">
+          <div class="text-3xl mb-2">🚗</div>
+          <div class="text-2xl font-bold text-slate-800" id="stat-rides">4</div>
+          <div class="text-xs text-slate-400 mt-0.5">Rides Available</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-card">
+          <div class="text-3xl mb-2">🌿</div>
+          <div class="text-2xl font-bold text-green-500">2.4 kg</div>
+          <div class="text-xs text-slate-400 mt-0.5">CO₂ Saved</div>
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <h3 class="text-base font-bold text-slate-700 mb-3">Quick Actions</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <button onclick="showPanel('find-ride',null)"
+          class="bg-white hover:bg-blue-50 border border-slate-100 rounded-2xl p-5 text-left transition shadow-card">
+          <div class="text-3xl mb-2">🔍</div>
+          <div class="font-semibold text-slate-700 text-sm">Find a Ride</div>
+          <div class="text-xs text-slate-400 mt-0.5">Browse available rides</div>
+        </button>
+        <button onclick="showPanel('offer-ride',null)"
+          class="bg-white hover:bg-purple-50 border border-slate-100 rounded-2xl p-5 text-left transition shadow-card">
+          <div class="text-3xl mb-2">➕</div>
+          <div class="font-semibold text-slate-700 text-sm">Offer a Ride</div>
+          <div class="text-xs text-slate-400 mt-0.5">Publish your route</div>
+        </button>
+        <button onclick="showPanel('live-tracking',null)"
+          class="bg-white hover:bg-green-50 border border-slate-100 rounded-2xl p-5 text-left transition shadow-card">
+          <div class="text-3xl mb-2">📍</div>
+          <div class="font-semibold text-slate-700 text-sm">Live Tracking</div>
+          <div class="text-xs text-slate-400 mt-0.5">Track your ride</div>
+        </button>
+      </div>
+
+      <!-- Recent rides preview -->
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-base font-bold text-slate-700">Available Rides Near You</h3>
+        <button onclick="showPanel('find-ride',null)" class="text-xs text-brand font-semibold hover:underline">View all →</button>
+      </div>
+      <div id="dash-rides" class="space-y-3">
+        <div class="text-slate-400 text-sm p-4 text-center">Loading rides…</div>
+      </div>
+    </section>
+
+    <!-- ─────────────── FIND A RIDE ─────────────── -->
+    <section id="panel-find-ride" class="panel">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-800">Find a Ride 🔍</h2>
+        <p class="text-slate-500 text-sm mt-1">Search available rides to your destination.</p>
+      </div>
+
+      <!-- Search bar -->
+      <div class="bg-white rounded-2xl p-6 shadow-card mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">From</label>
+            <input id="search-start" type="text" placeholder="e.g. ISKCON Temple"
+              class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">To</label>
+            <input id="search-dest" type="text" placeholder="e.g. Infocity"
+              class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+          </div>
+          <div class="flex items-end">
+            <button onclick="searchRides()" id="search-btn"
+              class="w-full py-3 rounded-xl font-bold text-white text-sm transition-all"
+              style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+              🔍 Search Rides
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="rides-list" class="space-y-4">
+        <div class="text-slate-400 text-sm p-6 text-center bg-white rounded-2xl shadow-card">
+          Click "Search Rides" to find available carpools 🚗
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── OFFER A RIDE ─────────────── -->
+    <section id="panel-offer-ride" class="panel">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-800">Offer a Ride ➕</h2>
+        <p class="text-slate-500 text-sm mt-1">Share your journey and earn from empty seats.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 shadow-card max-w-2xl">
+        <form id="offer-form" class="space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Start Location *</label>
+              <input id="offer-start" type="text" placeholder="Pickup point" required
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Destination *</label>
+              <input id="offer-dest" type="text" placeholder="Drop-off point" required
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Departure Date & Time *</label>
+            <input id="offer-time" type="datetime-local" required
+              class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+          </div>
+          <div class="grid grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Available Seats *</label>
+              <input id="offer-seats" type="number" min="1" max="6" placeholder="e.g. 3" required
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Fare per Seat (₹) *</label>
+              <input id="offer-fare" type="number" min="0" placeholder="e.g. 120" required
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+            </div>
+          </div>
+          <!-- Amenities checkboxes -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">Amenities (optional)</label>
+            <div class="flex flex-wrap gap-2">
+              <label class="flex items-center gap-1.5 text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full cursor-pointer hover:bg-blue-50 transition">
+                <input type="checkbox" class="accent-brand" /> 🎵 Music
+              </label>
+              <label class="flex items-center gap-1.5 text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full cursor-pointer hover:bg-blue-50 transition">
+                <input type="checkbox" class="accent-brand" /> ❄️ AC
+              </label>
+              <label class="flex items-center gap-1.5 text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full cursor-pointer hover:bg-blue-50 transition">
+                <input type="checkbox" class="accent-brand" /> 🐾 Pets OK
+              </label>
+              <label class="flex items-center gap-1.5 text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full cursor-pointer hover:bg-blue-50 transition">
+                <input type="checkbox" class="accent-brand" /> 🚭 No Smoking
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" id="publish-btn"
+            class="w-full py-3.5 rounded-xl font-bold text-white text-sm transition-all"
+            style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+            🚀 Publish Ride
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ─────────────── MY TRIPS ─────────────── -->
+    <section id="panel-my-trips" class="panel">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-800">My Trips 🧳</h2>
+        <p class="text-slate-500 text-sm mt-1">All your booked rides in one place.</p>
+      </div>
+      <div id="trips-list" class="space-y-4">
+        <div class="text-slate-400 text-sm p-6 text-center bg-white rounded-2xl shadow-card">Loading your trips…</div>
+      </div>
+    </section>
+
+    <!-- ─────────────── LIVE TRACKING ─────────────── -->
+    <section id="panel-live-tracking" class="panel">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-800">Live Tracking 📍</h2>
+        <p class="text-slate-500 text-sm mt-1">Real-time ride simulation.</p>
+      </div>
+
+      <!-- Trip info banner -->
+      <div class="bg-white rounded-2xl p-5 shadow-card mb-4 flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-xl">🚗</div>
+          <div>
+            <div class="font-bold text-slate-800 text-sm">ISKCON Temple → Infocity, Gandhinagar</div>
+            <div class="text-xs text-slate-400">Driver: Arjun Mehta · MH 12 AB 1234</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="live-dot inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+          <span class="text-xs font-bold text-green-600 uppercase tracking-wide">Live</span>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="bg-white rounded-2xl p-5 shadow-card mb-4">
+        <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
+          <span>ISKCON Temple</span>
+          <span id="eta-text" class="text-brand font-bold">ETA: ~22 min</span>
+          <span>Infocity</span>
+        </div>
+        <div class="bg-slate-100 rounded-full h-2.5 overflow-hidden">
+          <div id="progress-bar" class="h-full rounded-full transition-all duration-1000"
+            style="width:15%; background:linear-gradient(90deg,#0ea5e9,#6366f1)"></div>
+        </div>
+        <div class="flex justify-between mt-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-brand mt-0.5"></div>
+          <div class="w-2.5 h-2.5 rounded-full border-2 border-slate-300 mt-0.5"></div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="bg-white rounded-2xl p-4 shadow-card mb-4">
+        <div id="live-map"></div>
+      </div>
+
+      <!-- Passenger list -->
+      <div class="bg-white rounded-2xl p-5 shadow-card">
+        <h3 class="font-bold text-slate-700 mb-4 text-sm">Passengers on this ride</h3>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">👩</span>
+            <div><div class="text-sm font-medium text-slate-700">Priya Sharma</div><div class="text-xs text-slate-400">Seat 1 · Confirmed</div></div>
+            <span class="ml-auto text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">On board</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">👨</span>
+            <div><div class="text-sm font-medium text-slate-700">Rahul Gupta</div><div class="text-xs text-slate-400">Seat 2 · Confirmed</div></div>
+            <span class="ml-auto text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">On board</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── WALLET ─────────────── -->
+    <section id="panel-wallet" class="panel">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-800">Wallet 💳</h2>
+        <p class="text-slate-500 text-sm mt-1">Manage your UDAAN credits.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Balance card -->
+        <div class="rounded-2xl p-8 text-white shadow-modal" style="background:linear-gradient(135deg,#0ea5e9 0%,#6366f1 100%);">
+          <div class="text-sm font-medium opacity-80 mb-1">Total Balance</div>
+          <div id="wallet-balance-display" class="text-5xl font-extrabold mb-1">₹850</div>
+          <div class="text-xs opacity-60 mb-6">UDAAN Wallet</div>
+          <div class="flex items-center gap-2 text-xs font-medium bg-white/10 backdrop-blur px-3 py-2 rounded-xl w-fit">
+            <span id="wallet-user-name">Priya Sharma</span>
+            <span class="opacity-50">·</span>
+            <span>Active</span>
+          </div>
+        </div>
+
+        <!-- QR Code Recharge -->
+        <div class="bg-white rounded-2xl p-6 shadow-card flex flex-col items-center justify-center">
+          <div class="text-sm font-bold text-slate-700 mb-3">Scan to Recharge via UPI</div>
+          <!-- SVG QR placeholder that looks realistic -->
+          <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-3 rounded-lg border border-slate-200 p-2">
+            <!-- Border corners -->
+            <rect x="4" y="4" width="40" height="40" rx="4" fill="none" stroke="#0f172a" stroke-width="4"/>
+            <rect x="10" y="10" width="28" height="28" rx="2" fill="#0f172a"/>
+            <rect x="96" y="4" width="40" height="40" rx="4" fill="none" stroke="#0f172a" stroke-width="4"/>
+            <rect x="102" y="10" width="28" height="28" rx="2" fill="#0f172a"/>
+            <rect x="4" y="96" width="40" height="40" rx="4" fill="none" stroke="#0f172a" stroke-width="4"/>
+            <rect x="10" y="102" width="28" height="28" rx="2" fill="#0f172a"/>
+            <!-- Inner dots pattern -->
+            <rect x="54" y="4" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="4" width="8" height="8" fill="#0f172a"/>
+            <rect x="78" y="4" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="16" width="8" height="8" fill="#0f172a"/>
+            <rect x="78" y="16" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="28" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="28" width="8" height="8" fill="#0f172a"/>
+            <rect x="78" y="28" width="8" height="8" fill="#0f172a"/>
+            <rect x="4" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="16" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="28" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="40" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="78" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="102" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="114" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="126" y="54" width="8" height="8" fill="#0f172a"/>
+            <rect x="4" y="66" width="8" height="8" fill="#0f172a"/>
+            <rect x="28" y="66" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="66" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="66" width="8" height="8" fill="#0f172a"/>
+            <rect x="90" y="66" width="8" height="8" fill="#0f172a"/>
+            <rect x="114" y="66" width="8" height="8" fill="#0f172a"/>
+            <rect x="126" y="66" width="8" height="8" fill="#0f172a"/>
+            <rect x="4" y="78" width="8" height="8" fill="#0f172a"/>
+            <rect x="16" y="78" width="8" height="8" fill="#0f172a"/>
+            <rect x="40" y="78" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="78" width="8" height="8" fill="#0f172a"/>
+            <rect x="90" y="78" width="8" height="8" fill="#0f172a"/>
+            <rect x="102" y="78" width="8" height="8" fill="#0f172a"/>
+            <rect x="126" y="78" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="90" width="8" height="8" fill="#0f172a"/>
+            <rect x="78" y="90" width="8" height="8" fill="#0f172a"/>
+            <rect x="102" y="90" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="102" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="102" width="8" height="8" fill="#0f172a"/>
+            <rect x="90" y="102" width="8" height="8" fill="#0f172a"/>
+            <rect x="114" y="102" width="8" height="8" fill="#0f172a"/>
+            <rect x="126" y="102" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="114" width="8" height="8" fill="#0f172a"/>
+            <rect x="78" y="114" width="8" height="8" fill="#0f172a"/>
+            <rect x="90" y="114" width="8" height="8" fill="#0f172a"/>
+            <rect x="54" y="126" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="126" width="8" height="8" fill="#0f172a"/>
+            <rect x="102" y="126" width="8" height="8" fill="#0f172a"/>
+            <rect x="114" y="126" width="8" height="8" fill="#0f172a"/>
+            <rect x="126" y="126" width="8" height="8" fill="#0f172a"/>
+          </svg>
+          <div class="text-xs text-slate-500 text-center">UPI ID: <span class="font-bold text-slate-700">udaan@okaxis</span></div>
+          <div class="text-xs text-slate-400 mt-0.5">Powered by BHIM UPI</div>
+        </div>
+      </div>
+
+      <!-- Quick top-up buttons -->
+      <div class="bg-white rounded-2xl p-6 shadow-card mt-6">
+        <h3 class="font-bold text-slate-700 mb-4 text-sm">Quick Top-Up</h3>
+        <div class="flex flex-wrap gap-3 mb-5">
+          <button onclick="topupWallet(100)" class="px-5 py-2 rounded-xl bg-blue-50 text-blue-600 font-semibold text-sm hover:bg-blue-100 transition">+₹100</button>
+          <button onclick="topupWallet(200)" class="px-5 py-2 rounded-xl bg-blue-50 text-blue-600 font-semibold text-sm hover:bg-blue-100 transition">+₹200</button>
+          <button onclick="topupWallet(500)" class="px-5 py-2 rounded-xl bg-blue-50 text-blue-600 font-semibold text-sm hover:bg-blue-100 transition">+₹500</button>
+          <button onclick="topupWallet(1000)" class="px-5 py-2 rounded-xl bg-blue-50 text-blue-600 font-semibold text-sm hover:bg-blue-100 transition">+₹1000</button>
+        </div>
+        <hr class="border-slate-100 mb-5"/>
+        <!-- Pay button demo -->
+        <div class="flex items-center justify-between bg-slate-50 rounded-xl p-4">
+          <div>
+            <div class="text-sm font-semibold text-slate-700">Pay for upcoming ride</div>
+            <div class="text-xs text-slate-400 mt-0.5">ISKCON → Infocity · Seat 1</div>
+          </div>
+          <button onclick="payRide()" id="pay-btn"
+            class="px-5 py-2.5 rounded-xl font-bold text-white text-sm transition"
+            style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+            Pay ₹120
+          </button>
+        </div>
+      </div>
+
+      <!-- Transaction history -->
+      <div class="bg-white rounded-2xl p-6 shadow-card mt-6">
+        <h3 class="font-bold text-slate-700 mb-4 text-sm">Recent Transactions</h3>
+        <div id="tx-history" class="space-y-3">
+          <div class="flex items-center justify-between py-2 border-b border-slate-50">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center text-sm">🚗</div>
+              <div>
+                <div class="text-sm font-medium text-slate-700">Ride to Infocity</div>
+                <div class="text-xs text-slate-400">Today, 09:30 AM</div>
+              </div>
+            </div>
+            <span class="text-sm font-bold text-red-500">-₹120</span>
+          </div>
+          <div class="flex items-center justify-between py-2 border-b border-slate-50">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center text-sm">💰</div>
+              <div>
+                <div class="text-sm font-medium text-slate-700">Wallet Top-Up</div>
+                <div class="text-xs text-slate-400">Yesterday, 06:00 PM</div>
+              </div>
+            </div>
+            <span class="text-sm font-bold text-green-600">+₹500</span>
+          </div>
+          <div class="flex items-center justify-between py-2">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center text-sm">🚗</div>
+              <div>
+                <div class="text-sm font-medium text-slate-700">Ride to Science City</div>
+                <div class="text-xs text-slate-400">Yesterday, 08:15 AM</div>
+              </div>
+            </div>
+            <span class="text-sm font-bold text-red-500">-₹80</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── SETTINGS ─────────────── -->
+    <section id="panel-settings" class="panel">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-800">Settings ⚙️</h2>
+        <p class="text-slate-500 text-sm mt-1">Manage your account preferences.</p>
+      </div>
+
+      <div class="max-w-2xl space-y-5">
+        <!-- Profile card -->
+        <div class="bg-white rounded-2xl p-6 shadow-card">
+          <h3 class="font-bold text-slate-700 mb-4 text-sm">Profile</h3>
+          <div class="flex items-center gap-4 mb-5">
+            <div id="settings-avatar" class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center text-4xl">👤</div>
+            <div>
+              <div id="settings-name" class="font-bold text-slate-800">User Name</div>
+              <div id="settings-email" class="text-sm text-slate-400">user@udaan.com</div>
+              <div id="settings-role" class="text-xs mt-0.5 text-brand font-medium capitalize">passenger</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Full Name</label>
+              <input id="settings-name-input" type="text" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Phone</label>
+              <input id="settings-phone-input" type="tel" placeholder="+91 9876543210"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition" />
+            </div>
+          </div>
+          <button onclick="showToast('Profile updated!','success')"
+            class="mt-4 px-5 py-2.5 rounded-xl font-bold text-white text-sm"
+            style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+            Save Changes
+          </button>
+        </div>
+
+        <!-- Notifications -->
+        <div class="bg-white rounded-2xl p-6 shadow-card">
+          <h3 class="font-bold text-slate-700 mb-4 text-sm">Notifications</h3>
+          <div class="space-y-3">
+            <label class="flex items-center justify-between">
+              <span class="text-sm text-slate-600">Ride booking alerts</span>
+              <input type="checkbox" checked class="accent-brand w-4 h-4" />
+            </label>
+            <label class="flex items-center justify-between">
+              <span class="text-sm text-slate-600">Wallet transaction alerts</span>
+              <input type="checkbox" checked class="accent-brand w-4 h-4" />
+            </label>
+            <label class="flex items-center justify-between">
+              <span class="text-sm text-slate-600">Promotional offers</span>
+              <input type="checkbox" class="accent-brand w-4 h-4" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Danger zone -->
+        <div class="bg-white rounded-2xl p-6 shadow-card border border-red-100">
+          <h3 class="font-bold text-red-600 mb-4 text-sm">Danger Zone</h3>
+          <button onclick="logout()" class="px-5 py-2.5 rounded-xl font-bold text-white text-sm bg-red-500 hover:bg-red-600 transition">
+            🚪 Logout
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /content-area -->
+</div><!-- /app -->
+
+<!-- Toast notification -->
+<div id="toast"></div>
+
+<!-- Mobile bottom nav -->
+<nav id="mobile-nav" class="fixed bottom-0 inset-x-0 bg-white border-t border-slate-100 z-50 px-2 py-2 shadow-lg">
+  <div class="flex justify-around">
+    <button onclick="showPanel('dashboard',null)" class="flex flex-col items-center gap-0.5 text-xs text-slate-500 px-3 py-1">🏠<span>Home</span></button>
+    <button onclick="showPanel('find-ride',null)" class="flex flex-col items-center gap-0.5 text-xs text-slate-500 px-3 py-1">🔍<span>Find</span></button>
+    <button onclick="showPanel('offer-ride',null)" class="flex flex-col items-center gap-0.5 text-xs text-slate-500 px-3 py-1">➕<span>Offer</span></button>
+    <button onclick="showPanel('live-tracking',null)" class="flex flex-col items-center gap-0.5 text-xs text-slate-500 px-3 py-1">📍<span>Track</span></button>
+    <button onclick="showPanel('wallet',null)" class="flex flex-col items-center gap-0.5 text-xs text-slate-500 px-3 py-1">💳<span>Wallet</span></button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  JAVASCRIPT                                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script>
+/* ───────────────────────────────────────────────────────────── *
+ *  CONFIG
+ * ───────────────────────────────────────────────────────────── */
+const API = 'api';   // relative path to api/ folder
+let currentUser = null;
+let walletBalance = 0;
+
+/* ───────────────────────────────────────────────────────────── *
+ *  TOAST
+ * ───────────────────────────────────────────────────────────── */
+function showToast(msg, type = 'success', duration = 3000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = `show ${type}`;
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.className = type; }, duration);
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  PANEL SWITCHING
+ * ───────────────────────────────────────────────────────────── */
+function showPanel(name, clickedEl) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    n.classList.add('text-slate-600');
+  });
+  const target = clickedEl || document.querySelector(`[data-panel="${name}"]`);
+  if (target) { target.classList.add('active'); target.classList.remove('text-slate-600'); }
+
+  // Side effects per panel
+  if (name === 'live-tracking') initMap();
+  if (name === 'my-trips')      loadMyTrips();
+  if (name === 'wallet')        loadWallet();
+  if (name === 'find-ride')     searchRides();
+  if (name === 'dashboard')     loadDashboard();
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  AUTH
+ * ───────────────────────────────────────────────────────────── */
+function quickLogin(email) {
+  document.getElementById('login-email').value    = email;
+  document.getElementById('login-password').value = 'password';
+}
+
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn   = document.getElementById('login-btn');
+  btn.textContent = 'Signing in…';
+  btn.disabled    = true;
+
+  const email    = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  try {
+    const res  = await fetch(`${API}/auth.php`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      currentUser  = data.user;
+      walletBalance = parseFloat(currentUser.wallet_balance || 0);
+      initApp();
+    } else {
+      showToast(data.error || 'Login failed', 'error');
+    }
+  } catch(err) {
+    // Offline / no PHP server → use demo mode
+    currentUser  = { id: 2, name: 'Priya Sharma', email, wallet_balance: 850, role: 'passenger', avatar: '👩', phone: '9123456789' };
+    walletBalance = 850;
+    showToast('⚡ Demo mode (no server detected)', 'info');
+    initApp();
+  }
+
+  btn.textContent = 'Sign In to UDAAN';
+  btn.disabled    = false;
+});
+
+async function logout() {
+  try { await fetch(`${API}/auth.php?logout=1`); } catch(e) {}
+  currentUser = null;
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+  showToast('Logged out successfully', 'info');
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  INIT APP
+ * ───────────────────────────────────────────────────────────── */
+function initApp() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+
+  // Populate sidebar user info
+  document.getElementById('sb-avatar').textContent  = currentUser.avatar || '👤';
+  document.getElementById('sb-name').textContent    = currentUser.name;
+  document.getElementById('sb-role').textContent    = currentUser.role;
+  document.getElementById('dash-name').textContent  = currentUser.name.split(' ')[0];
+  document.getElementById('wallet-user-name').textContent = currentUser.name;
+
+  // Settings
+  document.getElementById('settings-avatar').textContent = currentUser.avatar || '👤';
+  document.getElementById('settings-name').textContent   = currentUser.name;
+  document.getElementById('settings-email').textContent  = currentUser.email;
+  document.getElementById('settings-role').textContent   = currentUser.role;
+  document.getElementById('settings-name-input').value   = currentUser.name;
+  document.getElementById('settings-phone-input').value  = currentUser.phone || '';
+
+  loadDashboard();
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  DASHBOARD
+ * ───────────────────────────────────────────────────────────── */
+async function loadDashboard() {
+  document.getElementById('stat-balance').textContent = '₹' + walletBalance.toFixed(0);
+
+  try {
+    const res   = await fetch(`${API}/get_rides.php`);
+    const data  = await res.json();
+    const rides = data.rides || [];
+
+    document.getElementById('stat-rides').textContent = rides.length;
+
+    const container = document.getElementById('dash-rides');
+    if (!rides.length) {
+      container.innerHTML = '<div class="text-slate-400 text-sm p-4 text-center bg-white rounded-2xl shadow-card">No rides available right now.</div>';
+      return;
+    }
+
+    container.innerHTML = rides.slice(0,3).map(r => renderRideCardSmall(r)).join('');
+  } catch(err) {
+    // Demo fallback
+    document.getElementById('dash-rides').innerHTML = demoRideCards();
+  }
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  FIND A RIDE
+ * ───────────────────────────────────────────────────────────── */
+async function searchRides() {
+  const start = document.getElementById('search-start').value;
+  const dest  = document.getElementById('search-dest').value;
+  const btn   = document.getElementById('search-btn');
+  const list  = document.getElementById('rides-list');
+
+  btn.textContent = '⏳ Searching…';
+  list.innerHTML  = '<div class="text-slate-400 text-sm p-6 text-center bg-white rounded-2xl shadow-card">Fetching rides…</div>';
+
+  try {
+    const params = new URLSearchParams({ start, dest });
+    const res    = await fetch(`${API}/get_rides.php?${params}`);
+    const data   = await res.json();
+
+    btn.textContent = '🔍 Search Rides';
+    renderRidesList(data.rides || []);
+  } catch(err) {
+    btn.textContent = '🔍 Search Rides';
+    list.innerHTML  = demoRideCards(true);
+  }
+}
+
+function renderRidesList(rides) {
+  const list = document.getElementById('rides-list');
+  if (!rides.length) {
+    list.innerHTML = '<div class="text-slate-400 text-sm p-6 text-center bg-white rounded-2xl shadow-card">No rides found. Try a different route!</div>';
+    return;
+  }
+  list.innerHTML = rides.map(r => renderRideCardFull(r)).join('');
+}
+
+function renderRideCardFull(r) {
+  const time = new Date(r.travel_time);
+  const timeStr = isNaN(time) ? r.travel_time : time.toLocaleString('en-IN', { weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+  return `
+  <div class="ride-card bg-white rounded-2xl p-5 shadow-card">
+    <div class="flex items-start justify-between mb-3 flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">${r.driver_avatar || '🧑'}</span>
+        <div>
+          <div class="text-sm font-bold text-slate-700">${r.driver_name || 'Driver'}</div>
+          <div class="text-xs text-slate-400">⭐ 4.8 · Verified</div>
+        </div>
+      </div>
+      <span class="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-semibold">${r.available_seats ?? r.seats} seats left</span>
+    </div>
+    <!-- Route -->
+    <div class="flex items-center gap-3 mb-3">
+      <div class="flex flex-col items-center gap-1">
+        <div class="w-3 h-3 rounded-full bg-brand"></div>
+        <div class="w-0.5 h-8 bg-slate-200"></div>
+        <div class="w-3 h-3 rounded-full border-2 border-brand"></div>
+      </div>
+      <div class="flex flex-col justify-between gap-4 flex-1">
+        <div>
+          <div class="text-sm font-semibold text-slate-800">${r.start_location}</div>
+        </div>
+        <div>
+          <div class="text-sm font-semibold text-slate-800">${r.dest_location}</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 text-xs text-slate-500 mb-4 flex-wrap">
+      <span>🕐 ${timeStr}</span>
+    </div>
+    <div class="flex items-center justify-between">
+      <div class="text-xl font-extrabold text-slate-800">₹${r.fare} <span class="text-xs font-normal text-slate-400">/ seat</span></div>
+      <button onclick="bookRide(${r.id}, ${r.fare}, '${r.start_location.replace(/'/g,"\\'")}', '${r.dest_location.replace(/'/g,"\\'")}', this)"
+        class="px-5 py-2.5 rounded-xl font-bold text-white text-sm transition-all"
+        style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+        Book Now 🚗
+      </button>
+    </div>
+  </div>`;
+}
+
+function renderRideCardSmall(r) {
+  return `
+  <div class="ride-card bg-white rounded-xl p-4 shadow-card flex items-center justify-between gap-3 flex-wrap">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">${r.driver_avatar || '🧑'}</span>
+      <div>
+        <div class="text-sm font-semibold text-slate-700">${r.start_location} → ${r.dest_location}</div>
+        <div class="text-xs text-slate-400 mt-0.5">${r.driver_name} · ${r.available_seats ?? r.seats} seats · ₹${r.fare}</div>
+      </div>
+    </div>
+    <button onclick="bookRide(${r.id}, ${r.fare}, '${r.start_location.replace(/'/g,"\\'")}', '${r.dest_location.replace(/'/g,"\\'")}', this)"
+      class="text-xs px-4 py-2 rounded-lg font-bold text-white shrink-0"
+      style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">Book</button>
+  </div>`;
+}
+
+function demoRideCards(fullView = false) {
+  const demoRides = [
+    { id:1, driver_name:'Arjun Mehta', driver_avatar:'🧑', start_location:'ISKCON Temple, Ahmedabad', dest_location:'Infocity, Gandhinagar', travel_time:'2026-07-18T10:00', seats:3, available_seats:3, fare:120 },
+    { id:2, driver_name:'Arjun Mehta', driver_avatar:'🧑', start_location:'Satellite Road, Ahmedabad', dest_location:'Science City, Ahmedabad', travel_time:'2026-07-18T11:00', seats:2, available_seats:2, fare:80 },
+    { id:3, driver_name:'Rahul Gupta', driver_avatar:'👨', start_location:'Maninagar, Ahmedabad', dest_location:'Naroda GIDC, Ahmedabad', travel_time:'2026-07-18T12:00', seats:4, available_seats:4, fare:60 },
+    { id:4, driver_name:'Rahul Gupta', driver_avatar:'👨', start_location:'SG Highway, Ahmedabad', dest_location:'Gandhinagar Secretariat', travel_time:'2026-07-18T10:30', seats:1, available_seats:1, fare:150 },
+  ];
+  const fn = fullView ? renderRideCardFull : renderRideCardSmall;
+  return demoRides.map(fn).join('');
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  BOOK A RIDE
+ * ───────────────────────────────────────────────────────────── */
+async function bookRide(rideId, fare, from, to, btn) {
+  if (walletBalance < fare) {
+    showToast(`❌ Insufficient balance! Have ₹${walletBalance}, need ₹${fare}`, 'error', 4000);
+    return;
+  }
+
+  btn.textContent = '⏳ Booking…';
+  btn.disabled    = true;
+
+  try {
+    const res  = await fetch(`${API}/book_ride.php`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ ride_id: rideId, passenger_id: currentUser?.id ?? 2 }),
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      walletBalance = parseFloat(data.new_balance ?? (walletBalance - fare));
+      currentUser.wallet_balance = walletBalance;
+      document.getElementById('stat-balance').textContent = '₹' + walletBalance.toFixed(0);
+      document.getElementById('wallet-balance-display').textContent = '₹' + walletBalance.toFixed(0);
+      showToast(`✅ Booked! ${from} → ${to}. ₹${fare} deducted.`, 'success', 4000);
+      btn.textContent = '✅ Booked!';
+      btn.style.background = '#22c55e';
+    } else {
+      showToast(data.error || 'Booking failed', 'error');
+      btn.textContent = 'Book Now 🚗';
+      btn.disabled    = false;
+    }
+  } catch(err) {
+    // Demo mode
+    walletBalance -= fare;
+    document.getElementById('stat-balance').textContent = '₹' + walletBalance.toFixed(0);
+    document.getElementById('wallet-balance-display').textContent = '₹' + walletBalance.toFixed(0);
+    showToast(`✅ Booked! ${from} → ${to}. ₹${fare} deducted.`, 'success', 4000);
+    btn.textContent = '✅ Booked!';
+    btn.style.background = '#22c55e';
+  }
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  OFFER A RIDE
+ * ───────────────────────────────────────────────────────────── */
+document.getElementById('offer-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn  = document.getElementById('publish-btn');
+  btn.textContent = '⏳ Publishing…';
+  btn.disabled    = true;
+
+  const payload = {
+    driver_id:      currentUser?.id ?? 1,
+    start_location: document.getElementById('offer-start').value,
+    dest_location:  document.getElementById('offer-dest').value,
+    travel_time:    document.getElementById('offer-time').value.replace('T', ' ') + ':00',
+    seats:          parseInt(document.getElementById('offer-seats').value),
+    fare:           parseFloat(document.getElementById('offer-fare').value),
+  };
+
+  try {
+    const res  = await fetch(`${API}/offer_ride.php`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      showToast('🚀 Ride published! Passengers can now book it.', 'success', 4000);
+      document.getElementById('offer-form').reset();
+    } else {
+      showToast(data.error || 'Failed to publish ride', 'error');
+    }
+  } catch(err) {
+    showToast('🚀 Ride published! (Demo mode)', 'success', 4000);
+    document.getElementById('offer-form').reset();
+  }
+
+  btn.textContent = '🚀 Publish Ride';
+  btn.disabled    = false;
+});
+
+/* ───────────────────────────────────────────────────────────── *
+ *  MY TRIPS
+ * ───────────────────────────────────────────────────────────── */
+async function loadMyTrips() {
+  const list = document.getElementById('trips-list');
+  list.innerHTML = '<div class="text-slate-400 text-sm p-6 text-center bg-white rounded-2xl shadow-card">Loading…</div>';
+
+  try {
+    const res  = await fetch(`${API}/my_trips.php?passenger_id=${currentUser?.id ?? 2}`);
+    const data = await res.json();
+    const trips = data.trips || [];
+
+    if (!trips.length) {
+      list.innerHTML = `<div class="bg-white rounded-2xl p-10 shadow-card text-center">
+        <div class="text-5xl mb-3">🧳</div>
+        <div class="text-slate-600 font-semibold mb-1">No trips yet</div>
+        <div class="text-slate-400 text-sm">Find and book a ride to get started!</div>
+      </div>`;
+      return;
+    }
+
+    list.innerHTML = trips.map(t => `
+      <div class="bg-white rounded-2xl p-5 shadow-card">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">${t.driver_avatar || '🧑'}</span>
+            <span class="text-sm font-semibold text-slate-700">${t.driver_name}</span>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-full font-semibold ${t.trip_status==='confirmed'?'bg-green-100 text-green-700':'bg-slate-100 text-slate-500'}">${t.trip_status}</span>
+        </div>
+        <div class="text-sm font-bold text-slate-800 mb-1">${t.start_location} → ${t.dest_location}</div>
+        <div class="text-xs text-slate-400">${new Date(t.travel_time).toLocaleString('en-IN')} · ₹${t.fare}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('stat-trips').textContent = trips.length;
+  } catch(err) {
+    list.innerHTML = `<div class="bg-white rounded-2xl p-10 shadow-card text-center">
+      <div class="text-5xl mb-3">🧳</div>
+      <div class="text-slate-600 font-semibold mb-1">Demo Mode</div>
+      <div class="text-slate-400 text-sm">Book a ride to see it here!</div>
+    </div>`;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  WALLET
+ * ───────────────────────────────────────────────────────────── */
+function loadWallet() {
+  document.getElementById('wallet-balance-display').textContent = '₹' + walletBalance.toFixed(0);
+  document.getElementById('wallet-user-name').textContent = currentUser?.name || 'User';
+}
+
+async function topupWallet(amount) {
+  try {
+    const res  = await fetch(`${API}/wallet.php`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ user_id: currentUser?.id ?? 2, amount }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      walletBalance = parseFloat(data.new_balance || walletBalance + amount);
+    } else {
+      walletBalance += amount;
+    }
+  } catch(err) {
+    walletBalance += amount;
+  }
+
+  document.getElementById('wallet-balance-display').textContent = '₹' + walletBalance.toFixed(0);
+  document.getElementById('stat-balance').textContent = '₹' + walletBalance.toFixed(0);
+  showToast(`💰 ₹${amount} added to your wallet!`, 'success');
+}
+
+function payRide() {
+  const fare = 120;
+  const btn  = document.getElementById('pay-btn');
+  if (walletBalance < fare) {
+    showToast('❌ Insufficient wallet balance!', 'error');
+    return;
+  }
+  walletBalance -= fare;
+  document.getElementById('wallet-balance-display').textContent = '₹' + walletBalance.toFixed(0);
+  document.getElementById('stat-balance').textContent = '₹' + walletBalance.toFixed(0);
+  btn.textContent = '✅ Paid!';
+  btn.style.background = '#22c55e';
+  showToast('✅ ₹120 paid successfully! Enjoy your ride 🚗', 'success', 4000);
+  setTimeout(() => {
+    btn.textContent = 'Pay ₹120';
+    btn.style.background = '';
+  }, 3000);
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  LIVE MAP (Leaflet.js + Moving Car)
+ * ───────────────────────────────────────────────────────────── */
+let mapInstance   = null;
+let carMarker     = null;
+let trackInterval = null;
+let progressVal   = 15;
+
+// Ahmedabad coordinates — ISKCON (23.0441, 72.5287) → Infocity (23.1736, 72.6411)
+const routePoints = [
+  [23.0441, 72.5287], [23.0550, 72.5400], [23.0700, 72.5600],
+  [23.0900, 72.5800], [23.1100, 72.5950], [23.1300, 72.6100],
+  [23.1500, 72.6250], [23.1736, 72.6411],
+];
+let routeIdx = 0;
+
+const carIcon = L.divIcon({
+  html: `<div style="font-size:28px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))">🚗</div>`,
+  className: '',
+  iconSize: [32, 32],
+  iconAnchor: [16, 16],
+});
+
+function initMap() {
+  if (mapInstance) return;  // already initialized
+
+  mapInstance = L.map('live-map').setView([23.1000, 72.5800], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>',
+    maxZoom: 18,
+  }).addTo(mapInstance);
+
+  // Draw route polyline
+  const polyline = L.polyline(routePoints, { color: '#0ea5e9', weight: 4, opacity: 0.8, dashArray: '8 4' }).addTo(mapInstance);
+  mapInstance.fitBounds(polyline.getBounds(), { padding: [30, 30] });
+
+  // Start/End markers
+  L.marker(routePoints[0], { icon: L.divIcon({ html:'<div style="font-size:22px">📍</div>', className:'', iconSize:[24,24], iconAnchor:[12,24] }) })
+    .bindPopup('<b>ISKCON Temple</b><br>Start').addTo(mapInstance);
+  L.marker(routePoints[routePoints.length-1], { icon: L.divIcon({ html:'<div style="font-size:22px">🏁</div>', className:'', iconSize:[24,24], iconAnchor:[12,24] }) })
+    .bindPopup('<b>Infocity, Gandhinagar</b><br>Destination').addTo(mapInstance);
+
+  // Car marker
+  carMarker = L.marker(routePoints[0], { icon: carIcon }).addTo(mapInstance);
+  carMarker.bindPopup('<b>Your Driver</b><br>Arjun Mehta · MH 12 AB 1234').openPopup();
+
+  // Animate car
+  routeIdx = 0;
+  clearInterval(trackInterval);
+  trackInterval = setInterval(moveCar, 2000);
+}
+
+function moveCar() {
+  if (!carMarker) return;
+  routeIdx = (routeIdx + 1) % routePoints.length;
+  const pos = routePoints[routeIdx];
+
+  // Add subtle random jitter for realism
+  const jitterLat = (Math.random() - 0.5) * 0.002;
+  const jitterLng = (Math.random() - 0.5) * 0.002;
+  carMarker.setLatLng([pos[0] + jitterLat, pos[1] + jitterLng]);
+
+  // Update progress bar
+  progressVal = 10 + (routeIdx / (routePoints.length - 1)) * 85;
+  document.getElementById('progress-bar').style.width = progressVal + '%';
+
+  const etaMins = Math.max(0, Math.round((routePoints.length - 1 - routeIdx) * 3));
+  document.getElementById('eta-text').textContent = etaMins > 0 ? `ETA: ~${etaMins} min` : '✅ Arrived!';
+
+  // Pan map to follow car
+  if (mapInstance) mapInstance.panTo(carMarker.getLatLng(), { animate: true, duration: 1.5 });
+}
+
+/* ───────────────────────────────────────────────────────────── *
+ *  AUTO-LOAD ON STARTUP (check session)
+ * ───────────────────────────────────────────────────────────── */
+window.addEventListener('load', async () => {
+  try {
+    const res  = await fetch(`${API}/auth.php?whoami=1`);
+    const data = await res.json();
+    if (data.success && data.user) {
+      currentUser   = data.user;
+      walletBalance = parseFloat(currentUser.wallet_balance || 0);
+      initApp();
+    }
+  } catch(e) { /* Not logged in or no server */ }
+});
+</script>
+</body>
+</html>
