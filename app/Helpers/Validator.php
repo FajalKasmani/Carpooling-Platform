@@ -60,8 +60,8 @@ class Validator
     public function phone(string $field): self
     {
         $value = $this->data[$field] ?? '';
-        if ($value && !preg_match('/^\d{10,15}$/', $value)) {
-            $this->errors[$field] = 'Phone must be 10-15 digits';
+        if ($value && !preg_match('/^\d{10}$/', $value)) {
+            $this->errors[$field] = 'Mobile Number can be only 10 digit';
         }
         return $this;
     }

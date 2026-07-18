@@ -963,3 +963,11 @@
 #2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
 #3 {main}
 
+[2026-07-19 00:01:49] SQLSTATE[HY000] [1049] Unknown database 'carpooling_platform' in C:\xampp\htdocs\Carpooling\app\Core\Database.php:25
+#0 C:\xampp\htdocs\Carpooling\app\Core\Database.php(25): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\Carpooling\app\Core\Model.php(13): App\Core\Database::getConnection()
+#2 C:\xampp\htdocs\Carpooling\app\Controllers\AuthController.php(115): App\Core\Model->__construct()
+#3 C:\xampp\htdocs\Carpooling\app\Core\Router.php(78): App\Controllers\AuthController->register()
+#4 C:\xampp\htdocs\Carpooling\public\index.php(20): App\Core\Router->dispatch('POST', '/register')
+#5 {main}
+

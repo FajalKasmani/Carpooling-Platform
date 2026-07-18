@@ -269,7 +269,7 @@
                             <label for="name" class="form-label">Full Name</label>
                             <div class="input-group">
                                 <span class="input-group-text border-end-0"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control border-start-0 ps-0" id="name" name="name" required placeholder="John Doe">
+                                <input type="text" class="form-control border-start-0 ps-0" id="name" name="name" value="<?= htmlspecialchars($flash['old_name'] ?? '') ?>" required placeholder="John Doe">
                             </div>
                         </div>
 
@@ -277,7 +277,7 @@
                             <label for="email" class="form-label">Company Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-text border-end-0"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" required placeholder="name@company.com">
+                                <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" value="<?= htmlspecialchars($flash['old_email'] ?? '') ?>" required placeholder="name@company.com">
                             </div>
                             <div class="form-text mt-1 text-muted" style="font-size: 0.78rem;">Your organization will be auto-detected via email domain.</div>
                         </div>
@@ -286,7 +286,7 @@
                             <label for="phone" class="form-label">Mobile Number</label>
                             <div class="input-group">
                                 <span class="input-group-text border-end-0"><i class="bi bi-telephone"></i></span>
-                                <input type="tel" class="form-control border-start-0 ps-0" id="phone" name="phone" required placeholder="10-digit number">
+                                <input type="tel" class="form-control border-start-0 ps-0" id="phone" name="phone" value="<?= htmlspecialchars($flash['old_phone'] ?? '') ?>" required placeholder="10-digit number">
                             </div>
                         </div>
                         

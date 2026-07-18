@@ -276,7 +276,7 @@
                             <label for="email" class="form-label">Corporate Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-text border-end-0"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" required placeholder="name@company.com">
+                                <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" value="<?= htmlspecialchars($flash['old_email'] ?? '') ?>" required placeholder="name@company.com">
                             </div>
                         </div>
                         

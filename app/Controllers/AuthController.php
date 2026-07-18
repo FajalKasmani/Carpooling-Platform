@@ -58,19 +58,28 @@ class AuthController extends Controller
 
         if ($v->fails()) {
             $this->flash('error', $v->firstError());
+            $this->flash('old_email', $data['email'] ?? '');
             $this->redirect('/login');
         }
 
         $userModel = new User();
         $user = $userModel->findByEmail($data['email']);
 
-        if (!$user || !password_verify($data['password'], $user['password_hash'])) {
-            $this->flash('error', 'Invalid email or password');
+        if (!$user) {
+            $this->flash('error', 'Account not found. Please check your email or register a new account.');
+            $this->flash('old_email', $data['email'] ?? '');
+            $this->redirect('/login');
+        }
+
+        if (!password_verify($data['password'], $user['password_hash'])) {
+            $this->flash('error', 'Incorrect password. Please try again.');
+            $this->flash('old_email', $data['email'] ?? '');
             $this->redirect('/login');
         }
 
         if ($user['status'] !== 'active') {
             $this->flash('error', 'Your account has been deactivated. Contact admin.');
+            $this->flash('old_email', $data['email'] ?? '');
             $this->redirect('/login');
         }
 
@@ -105,6 +114,9 @@ class AuthController extends Controller
 
         if ($v->fails()) {
             $this->flash('error', $v->firstError());
+            $this->flash('old_name', $data['name'] ?? '');
+            $this->flash('old_email', $data['email'] ?? '');
+            $this->flash('old_phone', $data['phone'] ?? '');
             $this->redirect('/register');
         }
 
@@ -127,7 +139,10 @@ class AuthController extends Controller
         $userModel = new User();
 
         if ($userModel->emailExists($data['email'])) {
-            $this->flash('error', 'An account with this email already exists');
+            $this->flash('error', 'Company Email Address already exists');
+            $this->flash('old_name', $data['name'] ?? '');
+            $this->flash('old_email', $data['email'] ?? '');
+            $this->flash('old_phone', $data['phone'] ?? '');
             $this->redirect('/register');
         }
 
