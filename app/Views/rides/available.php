@@ -127,6 +127,7 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
 </div>
 
 <script src="<?= $baseUrl ?>/assets/js/app.js"></script>
+<script src="<?= $baseUrl ?>/assets/js/dashboard.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         loadSearchResults();

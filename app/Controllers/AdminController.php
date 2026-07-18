@@ -14,26 +14,37 @@ use App\Services\NotificationService;
 class AdminController extends Controller
 {
     /**
+     * Get unified stats for admin dashboard header.
+     */
+    private function getStats(int $orgId): array
+    {
+        $userModel    = new User();
+        $rideModel    = new Ride();
+        $orgModel     = new Organization();
+        $vehicleModel = new Vehicle();
+
+        $org = $orgModel->findById($orgId);
+        
+        $vehicles = $vehicleModel->getByOrgId($orgId);
+        $activeVehicles = count(array_filter($vehicles, fn($v) => $v['status'] === 'approved'));
+
+        // For simplicity, defining total rides as "Rides This Month" conceptually here
+        return [
+            'total_employees' => $userModel->countByOrg($orgId),
+            'registered_vehicles' => $activeVehicles,
+            'total_rides'     => $rideModel->countByOrg($orgId),
+            'org'             => $org,
+        ];
+    }
+
+    /**
      * Admin Dashboard.
      * GET /admin/dashboard
      */
     public function dashboard(): void
     {
         $orgId = $_SESSION['org_id'];
-
-        $userModel    = new User();
-        $rideModel    = new Ride();
-        $bookingModel = new Booking();
-        $orgModel     = new Organization();
-
-        $org = $orgModel->findById($orgId);
-
-        $stats = [
-            'total_employees' => $userModel->countByOrg($orgId),
-            'total_rides'     => $rideModel->countByOrg($orgId),
-            'total_bookings'  => $bookingModel->countByOrg($orgId),
-            'org'             => $org,
-        ];
+        $stats = $this->getStats($orgId);
 
         $this->view('admin/dashboard', [
             'stats' => $stats,
@@ -50,8 +61,10 @@ class AdminController extends Controller
         $orgId     = $_SESSION['org_id'];
         $userModel = new User();
         $employees = $userModel->getByOrgId($orgId);
+        $stats = $this->getStats($orgId);
 
         $this->view('admin/employees', [
+            'stats'     => $stats,
             'employees' => $employees,
             'flash'     => $this->getFlash(),
         ]);
@@ -86,8 +99,10 @@ class AdminController extends Controller
         $orgId        = $_SESSION['org_id'];
         $vehicleModel = new Vehicle();
         $vehicles     = $vehicleModel->getByOrgId($orgId);
+        $stats = $this->getStats($orgId);
 
         $this->view('admin/vehicles', [
+            'stats'    => $stats,
             'vehicles' => $vehicles,
             'flash'    => $this->getFlash(),
         ]);
@@ -99,11 +114,12 @@ class AdminController extends Controller
      */
     public function settings(): void
     {
-        $orgModel = new Organization();
-        $org      = $orgModel->findById($_SESSION['org_id']);
+        $orgId = $_SESSION['org_id'];
+        $stats = $this->getStats($orgId);
 
         $this->view('admin/settings', [
-            'org'   => $org,
+            'stats' => $stats,
+            'org'   => $stats['org'],
             'flash' => $this->getFlash(),
         ]);
     }

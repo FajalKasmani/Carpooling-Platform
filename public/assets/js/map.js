@@ -81,9 +81,8 @@ function updateSearchMarkers() {
     }
     
     if (plat && plng && dlat && dlng) {
-        // Draw simple line
-        const bounds = L.latLngBounds([plat, plng], [dlat, dlng]);
-        map.fitBounds(bounds, { padding: [50, 50] });
+        // Draw the actual route polyline
+        calculateRoute();
     }
 }
 
@@ -171,14 +170,22 @@ async function calculateRoute() {
             const route = data.routes[0];
             const distance = (route.distance / 1000).toFixed(1); // km
             
-            document.getElementById('distance_km').value = distance;
-            document.getElementById('route_polyline').value = route.geometry;
+            if (document.getElementById('distance_km')) {
+                document.getElementById('distance_km').value = distance;
+            }
+            if (document.getElementById('route_polyline')) {
+                document.getElementById('route_polyline').value = route.geometry;
+            }
             
             // Set mileage suggest fare
-            const defaultFareRate = 8.0;
-            const suggestedFare = Math.round(distance * defaultFareRate);
-            document.getElementById('fare_per_seat').value = suggestedFare;
-            document.getElementById('suggested-fare-tip').innerText = `Recommended fare based on ₹8/km route default.`;
+            if (document.getElementById('fare_per_seat')) {
+                const defaultFareRate = 8.0;
+                const suggestedFare = Math.round(distance * defaultFareRate);
+                document.getElementById('fare_per_seat').value = suggestedFare;
+                if (document.getElementById('suggested-fare-tip')) {
+                    document.getElementById('suggested-fare-tip').innerText = `Recommended fare based on ₹8/km route default.`;
+                }
+            }
             
             // Draw Route Line
             drawPolyline(route.geometry);

@@ -16,8 +16,8 @@ class Ride extends Model
                 driver_id, vehicle_id, pickup_address, pickup_lat, pickup_lng,
                 drop_address, drop_lat, drop_lng, route_polyline,
                 travel_date, travel_time, available_seats, total_seats,
-                fare_per_seat, distance_km, is_recurring
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                fare_per_seat, is_recurring
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
         $seats = $data['available_seats'];
         $stmt->execute([
@@ -35,7 +35,6 @@ class Ride extends Model
             $seats,
             $seats,
             $data['fare_per_seat'],
-            $data['distance_km'] ?? null,
             $data['is_recurring'] ?? false,
         ]);
         return (int)$this->db->lastInsertId();
@@ -75,10 +74,12 @@ class Ride extends Model
               AND r.available_seats >= ?
               AND r.travel_date = ?
               AND u.status = 'active'
+              AND u.org_id = ?
         ";
         $params = [
             $filters['seats'] ?? 1,
             $filters['travel_date'],
+            $filters['org_id'],
         ];
 
         // Time window filter (±1 hour)

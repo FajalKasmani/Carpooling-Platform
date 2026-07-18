@@ -47,6 +47,7 @@ class RideController extends Controller
             'travel_date' => $data['travel_date'],
             'travel_time' => $data['travel_time'] ?? '09:00',
             'seats'       => $data['seats']       ?? 1,
+            'org_id'      => $_SESSION['org_id'],
         ]);
 
         $this->json(['success' => true, 'rides' => $rides, 'count' => count($rides)]);

@@ -38,7 +38,7 @@ ALTER TABLE organizations AUTO_INCREMENT = 1;
 -- organizations (2)
 -- ---------------------------------------------------------
 INSERT INTO organizations (id, name, domain, fuel_cost_per_km, default_fare_per_km) VALUES
-(1, 'Nova Technologies Pvt Ltd', 'novatech.com', 9.50, 7.00),
+(1, 'Odoo Pvt. Ltd.', 'odoo.com', 9.50, 7.00),
 (2, 'Bright Finserv Solutions',  'brightfinserv.com', 10.20, 7.50);
 
 -- ---------------------------------------------------------
@@ -46,21 +46,21 @@ INSERT INTO organizations (id, name, domain, fuel_cost_per_km, default_fare_per_
 -- password is 'password' for all of them
 -- ---------------------------------------------------------
 INSERT INTO users (id, org_id, name, email, phone, password_hash, role, status) VALUES
-(1,  1, 'Ananya Rao',        'ananya.rao@novatech.com',       '9876500001', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin',    'active'),
-(2,  1, 'Rohan Mehta',       'rohan.mehta@novatech.com',      '9876500002', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(3,  1, 'Priya Sharma',      'priya.sharma@novatech.com',     '9876500003', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(4,  1, 'Karthik Iyer',      'karthik.iyer@novatech.com',     '9876500004', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(5,  1, 'Sneha Nair',        'sneha.nair@novatech.com',       '9876500005', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(6,  1, 'Arjun Verma',       'arjun.verma@novatech.com',      '9876500006', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(7,  1, 'Divya Menon',       'divya.menon@novatech.com',      '9876500007', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(8,  1, 'Vikram Singh',      'vikram.singh@novatech.com',     '9876500008', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(9,  1, 'Neha Kulkarni',     'neha.kulkarni@novatech.com',    '9876500009', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(10, 1, 'Aditya Desai',      'aditya.desai@novatech.com',     '9876500010', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(11, 1, 'Kavya Reddy',       'kavya.reddy@novatech.com',      '9876500011', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(12, 1, 'Manish Gupta',      'manish.gupta@novatech.com',     '9876500012', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(13, 1, 'Ritika Joshi',      'ritika.joshi@novatech.com',     '9876500013', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
-(14, 1, 'Suresh Pillai',     'suresh.pillai@novatech.com',    '9876500014', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'inactive'),
-(15, 1, 'Anjali Bhatt',      'anjali.bhatt@novatech.com',     '9876500015', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(1,  1, 'Ananya Rao',        'ananya.rao@odoo.com',       '9876500001', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin',    'active'),
+(2,  1, 'Rohan Mehta',       'rohan.mehta@odoo.com',      '9876500002', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(3,  1, 'Priya Sharma',      'priya.sharma@odoo.com',     '9876500003', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(4,  1, 'Karthik Iyer',      'karthik.iyer@odoo.com',     '9876500004', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(5,  1, 'Sneha Nair',        'sneha.nair@odoo.com',       '9876500005', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(6,  1, 'Arjun Verma',       'arjun.verma@odoo.com',      '9876500006', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(7,  1, 'Divya Menon',       'divya.menon@odoo.com',      '9876500007', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(8,  1, 'Vikram Singh',      'vikram.singh@odoo.com',     '9876500008', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(9,  1, 'Neha Kulkarni',     'neha.kulkarni@odoo.com',    '9876500009', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(10, 1, 'Aditya Desai',      'aditya.desai@odoo.com',     '9876500010', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(11, 1, 'Kavya Reddy',       'kavya.reddy@odoo.com',      '9876500011', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(12, 1, 'Manish Gupta',      'manish.gupta@odoo.com',     '9876500012', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(13, 1, 'Ritika Joshi',      'ritika.joshi@odoo.com',     '9876500013', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
+(14, 1, 'Suresh Pillai',     'suresh.pillai@odoo.com',    '9876500014', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'inactive'),
+(15, 1, 'Anjali Bhatt',      'anjali.bhatt@odoo.com',     '9876500015', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
 (16, 2, 'Farhan Khan',       'farhan.khan@brightfinserv.com', '9876500016', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin',    'active'),
 (17, 2, 'Meera Pillai',      'meera.pillai@brightfinserv.com','9876500017', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),
 (18, 2, 'Siddharth Rao',     'siddharth.rao@brightfinserv.com','9876500018','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employee', 'active'),

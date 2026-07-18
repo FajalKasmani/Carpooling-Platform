@@ -1,52 +1,143 @@
 <?php
-$title = "Org settings";
+$title = "Admin Dashboard - Settings";
 require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2 fw-bold text-gradient" style="background: linear-gradient(135deg, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><i class="bi bi-sliders me-2"></i>Organization Config</h1>
-    <a href="<?= $baseUrl ?>/admin/dashboard" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-2"></i>Admin Dashboard</a>
+<!-- Unified Admin Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex align-items-center">
+        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 48px; height: 48px; font-size: 1.2rem;">
+            <?= strtoupper(substr($stats['org']['name'] ?? 'C', 0, 1)) ?>
+        </div>
+        <h4 class="mb-0 fw-bold text-dark"><?= htmlspecialchars($stats['org']['name'] ?? 'Company Name') ?></h4>
+    </div>
+    <div>
+        <span class="badge bg-danger rounded-pill px-3 py-2 fs-6">Admin</span>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-12 col-md-6 mx-auto">
-        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
-            <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-calculator-fill text-primary me-2"></i>Carpool Rate Metrics</h5>
-            
-            <?php if (!empty($flash)): ?>
-                <div class="alert alert-danger border-0 text-white bg-danger bg-opacity-25" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i><?= htmlspecialchars($flash['message']) ?>
-                </div>
-            <?php endif; ?>
-            
-            <form action="<?= $baseUrl ?>/admin/settings" method="POST">
-                <div class="mb-4">
-                    <label for="fuel_cost_per_km" class="form-label fw-semibold text-muted">Estimated Fuel Cost (per km)</label>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text bg-transparent border-secondary text-muted">₹</span>
-                        <input type="number" class="form-control" id="fuel_cost_per_km" name="fuel_cost_per_km" min="0" step="0.5" value="<?= number_format($org['fuel_cost_per_km'], 2) ?>" required>
-                    </div>
-                    <div class="form-text text-muted" style="font-size: 0.75rem;">Used to compute estimated eco CO₂ fuel savings reports.</div>
-                </div>
-                
-                <div class="mb-4">
-                    <label for="default_fare_per_km" class="form-label fw-semibold text-muted">Default Seat Fare (per km)</label>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text bg-transparent border-secondary text-muted">₹</span>
-                        <input type="number" class="form-control" id="default_fare_per_km" name="default_fare_per_km" min="0" step="0.5" value="<?= number_format($org['default_fare_per_km'], 2) ?>" required>
-                    </div>
-                    <div class="form-text text-muted" style="font-size: 0.75rem;">Baseline suggested fare per seat recommended on Offer Ride forms.</div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold rounded-3 shadow-sm py-2.5">
-                    <i class="bi bi-check-circle me-2"></i>Save Configuration
-                </button>
-            </form>
+<!-- Unified Stats Panel -->
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
+            <div class="card-body py-2 px-3">
+                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Total Employees</div>
+                <div class="fs-4 text-info fw-bold"><?= $stats['total_employees'] ?></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
+            <div class="card-body py-2 px-3">
+                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Registered Vehicles</div>
+                <div class="fs-4 text-info fw-bold"><?= $stats['registered_vehicles'] ?></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
+            <div class="card-body py-2 px-3">
+                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Rides This Month</div>
+                <div class="fs-4 text-info fw-bold"><?= $stats['total_rides'] ?></div>
+            </div>
         </div>
     </div>
 </div>
 
-<?php
-require_once dirname(__DIR__) . '/layouts/footer.php';
-?>
+<!-- Unified Tabs -->
+<ul class="nav nav-tabs mb-0 border-bottom-0 gap-1" style="font-family: inherit;">
+    <li class="nav-item">
+        <a class="nav-link text-secondary border rounded-0 px-4 py-2" href="<?= $baseUrl ?>/admin/employees" style="font-size: 0.9rem;">Employees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-secondary border rounded-0 px-4 py-2" href="<?= $baseUrl ?>/admin/vehicles" style="font-size: 0.9rem;">Vehicles</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active rounded-0 border border-bottom-0 text-dark px-4 py-2" href="<?= $baseUrl ?>/admin/settings" style="font-size: 0.9rem;">Settings</a>
+    </li>
+</ul>
+
+<!-- Tab Content Area -->
+<div class="card border rounded-0 shadow-sm p-4">
+    <?php if (!empty($flash)): ?>
+        <div class="alert alert-info border-0 rounded-0" role="alert">
+            <?= htmlspecialchars($flash['message']) ?>
+        </div>
+    <?php endif; ?>
+
+    <form action="<?= $baseUrl ?>/admin/settings" method="POST">
+        <!-- Company Details Section -->
+        <h5 class="fw-bold text-info border-bottom pb-2 mb-4" style="font-size: 1.1rem;">Company Details</h5>
+        <div class="row g-4 mb-5">
+            <div class="col-12 col-md-6">
+                <div class="d-flex border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Company Name</div>
+                    <div class="text-dark fw-semibold w-50" style="font-size: 0.9rem;"><?= htmlspecialchars($org['name']) ?></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="d-flex border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Industry</div>
+                    <div class="text-dark fw-semibold w-50" style="font-size: 0.9rem;">Software</div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6">
+                <div class="d-flex border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Registered Address</div>
+                    <div class="text-dark fw-semibold w-50" style="font-size: 0.9rem;">Gandhinagar</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="d-flex border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Admin Contact</div>
+                    <div class="text-dark fw-semibold w-50" style="font-size: 0.9rem;">admin@company.com</div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6">
+                <div class="d-flex border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Registered Employees</div>
+                    <div class="text-dark fw-semibold w-50" style="font-size: 0.9rem;"><?= $stats['total_employees'] ?></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carpooling Configuration Section -->
+        <h5 class="fw-bold text-info border-bottom pb-2 mb-4" style="font-size: 1.1rem;">Carpooling Configuration</h5>
+        <div class="row g-4 mb-5 align-items-center">
+            <div class="col-12 col-md-6">
+                <div class="d-flex align-items-center border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Fuel Cost / Liter</div>
+                    <div class="w-50">
+                        <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-semibold p-0 text-dark" value="Rs. 96.50">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="d-flex align-items-center border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Cost Per KM (Database)</div>
+                    <div class="w-50">
+                        <input type="number" class="form-control form-control-sm border-0 bg-transparent fw-semibold p-0 text-dark" name="default_fare_per_km" step="0.5" value="<?= number_format($org['default_fare_per_km'], 2) ?>" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6">
+                <div class="d-flex align-items-center border-bottom pb-2">
+                    <div class="text-muted w-50" style="font-size: 0.85rem;">Travel Cost (Operational)</div>
+                    <div class="w-50">
+                        <input type="number" class="form-control form-control-sm border-0 bg-transparent fw-semibold p-0 text-dark" name="fuel_cost_per_km" step="0.5" value="<?= number_format($org['fuel_cost_per_km'], 2) ?>" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-outline-info rounded-0 text-info fw-semibold px-4 py-2" style="font-size: 0.9rem;">Save Settings</button>
+        </div>
+    </form>
+</div>
+
+<?php require_once dirname(__DIR__) . '/layouts/footer.php'; ?>
