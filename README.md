@@ -1,6 +1,6 @@
 # 🚗 Carpooling Platform
 
-A web-based enterprise carpooling platform built using **Core PHP (MVC)**, **MySQL**, **Bootstrap 5**, **Leaflet.js**, and **Razorpay**. The application enables employees to offer rides, search for available rides, manage trips, track journeys in real time, and make secure payments.
+A carpooling platform built using **Core PHP (MVC)**, **MySQL**, **Bootstrap 5**, **Leaflet.js**, and **Razorpay**. The application enables employees to offer rides, search for available rides, manage trips, track journeys in real time, and make secure payments.
 
 ---
 
