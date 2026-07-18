@@ -8,21 +8,37 @@
 
 USE carpooling_platform;
 
-SET FOREIGN_KEY_CHECKS = 0;
+-- NOTE: We use DELETE (in strict child-before-parent order) instead of
+-- TRUNCATE here. TRUNCATE requires FOREIGN_KEY_CHECKS=0 to stay active for
+-- every statement in the batch, but phpMyAdmin's Import tab sometimes runs
+-- large files in separate chunks/requests, which resets that session
+-- setting partway through and causes error #1701. DELETE in dependency
+-- order works regardless of how the import tool batches the file.
 
-TRUNCATE TABLE ratings;
-TRUNCATE TABLE saved_places;
-TRUNCATE TABLE payments;
-TRUNCATE TABLE wallet_transactions;
-TRUNCATE TABLE wallets;
-TRUNCATE TABLE trip_locations;
-TRUNCATE TABLE bookings;
-TRUNCATE TABLE rides;
-TRUNCATE TABLE vehicles;
-TRUNCATE TABLE users;
-TRUNCATE TABLE organizations;
+DELETE FROM ratings;
+DELETE FROM saved_places;
+DELETE FROM payments;
+DELETE FROM wallet_transactions;
+DELETE FROM trip_locations;
+DELETE FROM bookings;
+DELETE FROM wallets;
+DELETE FROM rides;
+DELETE FROM vehicles;
+DELETE FROM users;
+DELETE FROM organizations;
 
-SET FOREIGN_KEY_CHECKS = 1;
+-- Reset auto-increment counters so seeded IDs below match cleanly
+ALTER TABLE ratings AUTO_INCREMENT = 1;
+ALTER TABLE saved_places AUTO_INCREMENT = 1;
+ALTER TABLE payments AUTO_INCREMENT = 1;
+ALTER TABLE wallet_transactions AUTO_INCREMENT = 1;
+ALTER TABLE trip_locations AUTO_INCREMENT = 1;
+ALTER TABLE bookings AUTO_INCREMENT = 1;
+ALTER TABLE wallets AUTO_INCREMENT = 1;
+ALTER TABLE rides AUTO_INCREMENT = 1;
+ALTER TABLE vehicles AUTO_INCREMENT = 1;
+ALTER TABLE users AUTO_INCREMENT = 1;
+ALTER TABLE organizations AUTO_INCREMENT = 1;
 
 -- ---------------------------------------------------------
 -- organizations (2)
