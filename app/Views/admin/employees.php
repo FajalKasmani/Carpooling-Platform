@@ -1,7 +1,7 @@
 <?php
 $title = "Admin Dashboard - Employees";
 require_once dirname(__DIR__) . '/layouts/header.php';
-require_once dirname(__DIR__) . '/layouts/sidebar.php';
+//require_once dirname(__DIR__) . '/layouts/sidebar.php';
 
 // Mock data for UI presentation based on wireframes
 $mockDepartments = ['Engineering', 'Sales', 'HR', 'Marketing', 'Finance'];

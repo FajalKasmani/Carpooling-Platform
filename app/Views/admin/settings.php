@@ -1,7 +1,7 @@
 <?php
 $title = "Admin Dashboard - Settings";
 require_once dirname(__DIR__) . '/layouts/header.php';
-require_once dirname(__DIR__) . '/layouts/sidebar.php';
+//require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
 <!-- Unified Admin Header -->

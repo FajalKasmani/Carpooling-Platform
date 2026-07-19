@@ -1,7 +1,7 @@
 <?php
 $title = "Ride History";
 require_once dirname(__DIR__) . '/layouts/header.php';
-require_once dirname(__DIR__) . '/layouts/sidebar.php';
+//require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
