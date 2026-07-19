@@ -4,97 +4,103 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2 fw-bold"><i class="bi bi-wallet2 me-2 text-primary"></i>My Wallet</h1>
+<div class="page-header reveal">
+    <div class="page-title">
+        <span class="page-title-icon">
+            <i class="bi bi-wallet2"></i>
+        </span>
+        My Wallet
+    </div>
 </div>
 
 <div class="row g-4">
-    <!-- Wallet Card Widget & Recharge Form -->
-    <div class="col-12 col-xl-5">
+    <!-- Wallet Card + Recharge -->
+    <div class="col-12 col-xl-5 reveal" style="animation-delay:.06s">
         <!-- Balance Card -->
-        <div class="card border-0 text-white shadow-lg rounded-4 mb-4 p-4" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;">
-            <div class="d-flex justify-content-between align-items-start mb-4">
+        <div class="mb-4" style="background:linear-gradient(135deg,#6C63FF 0%,#9B8FFF 50%,#00D4AA 100%);border-radius:var(--radius-xl);padding:28px 28px 24px;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:-30%;right:-10%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+            <div style="position:absolute;bottom:-20%;left:20%;width:150px;height:150px;background:radial-gradient(circle,rgba(0,0,0,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+            <div class="d-flex justify-content-between align-items-start mb-4" style="position:relative;z-index:1;">
                 <div>
-                    <span class="text-white-50 d-block text-uppercase fw-bold" style="font-size: 0.8rem; letter-spacing: 0.05em;">Total Prepaid Balance</span>
-                    <h1 class="fw-extrabold text-white mt-1 mb-0">₹<?= number_format($balance, 2) ?></h1>
+                    <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.65);display:block;margin-bottom:6px;">Total Prepaid Balance</span>
+                    <h1 class="mono" style="font-size:36px;font-weight:700;color:#fff;margin:0;">₹<?= number_format($balance, 2) ?></h1>
                 </div>
-                <div class="fs-1 text-white-50"><i class="bi bi-wallet2"></i></div>
+                <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;">
+                    <i class="bi bi-wallet2"></i>
+                </div>
             </div>
-            
-            <div class="border-top border-white-50 border-opacity-10 pt-3">
-                <span class="text-white-50 d-block mb-1" style="font-size: 0.75rem;">MEMBER ACCOUNT</span>
-                <span class="fw-medium text-white"><?= htmlspecialchars($_SESSION['user_name']) ?></span>
+            <div style="border-top:1px solid rgba(255,255,255,0.2);padding-top:14px;position:relative;z-index:1;">
+                <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.5);display:block;margin-bottom:4px;">MEMBER ACCOUNT</span>
+                <span style="font-weight:600;color:#fff;font-size:14px;"><?= htmlspecialchars($_SESSION['user_name']) ?></span>
             </div>
         </div>
 
         <!-- Recharge Form -->
-        <div class="card border-0 shadow-sm rounded-4 p-4">
-            <h5 class="fw-bold mb-3 text-dark"><i class="bi bi-plus-circle-fill text-primary me-2"></i>Add Money to Wallet</h5>
-            <p class="text-muted" style="font-size: 0.85rem;">Instantly load funds to purchase seats on shared commutes. Settle via simulated checkout.</p>
-            
+        <div class="card p-4">
+            <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                <i class="bi bi-plus-circle-fill" style="color:var(--accent);"></i> Add Money to Wallet
+            </h5>
+            <p style="color:var(--text-muted);font-size:13px;margin-bottom:20px;line-height:1.6;">Instantly load funds to purchase seats on shared commutes. Settle via simulated checkout.</p>
+
             <form id="wallet-recharge-form" autocomplete="off">
                 <div class="mb-4">
-                    <label class="form-label fw-semibold text-muted">Amount to Add (₹)</label>
+                    <label class="form-label">Amount to Add (₹)</label>
                     <div class="input-group input-group-lg">
-                        <span class="input-group-text bg-transparent border-secondary fw-bold text-muted">₹</span>
+                        <span class="input-group-text" style="font-weight:700;">₹</span>
                         <input type="number" class="form-control" id="recharge-amount" min="10" max="10000" step="10" value="500" required>
                     </div>
                 </div>
 
                 <div class="row row-cols-3 g-2 mb-4">
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100 py-2.5 rounded-3 fw-semibold preset-amt" data-val="100">+ ₹100</button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100 py-2.5 rounded-3 fw-semibold preset-amt animate" data-val="500">+ ₹500</button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100 py-2.5 rounded-3 fw-semibold preset-amt" data-val="1000">+ ₹1000</button>
-                    </div>
+                    <div class="col"><button type="button" class="btn btn-glass w-100 py-2 fw-semibold preset-amt" data-val="100" style="font-size:13px;">+ ₹100</button></div>
+                    <div class="col"><button type="button" class="btn btn-primary w-100 py-2 fw-semibold preset-amt" data-val="500" style="font-size:13px;">+ ₹500</button></div>
+                    <div class="col"><button type="button" class="btn btn-glass w-100 py-2 fw-semibold preset-amt" data-val="1000" style="font-size:13px;">+ ₹1000</button></div>
                 </div>
-                
-                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold rounded-3 shadow-sm py-2.5">
-                    <i class="bi bi-credit-card me-2"></i>Top Up Instantly
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="bi bi-credit-card"></i> Top Up Instantly
                 </button>
             </form>
         </div>
     </div>
 
     <!-- Transaction Ledger -->
-    <div class="col-12 col-xl-7">
-        <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-clock-history text-primary me-2"></i>Transaction Ledger</h5>
-            
+    <div class="col-12 col-xl-7 reveal" style="animation-delay:.1s">
+        <div class="card p-4 h-100">
+            <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+                <i class="bi bi-clock-history" style="color:var(--accent);"></i> Transaction Ledger
+            </h5>
+
             <div class="table-responsive">
-                <table class="table table-hover align-middle border-0">
-                    <thead class="table-light">
+                <table class="table table-hover align-middle">
+                    <thead>
                         <tr>
-                            <th class="border-0 rounded-start">Date</th>
-                            <th class="border-0">Reference / Description</th>
-                            <th class="border-0 text-end rounded-end">Amount</th>
+                            <th>Date</th>
+                            <th>Reference / Description</th>
+                            <th class="text-end">Amount</th>
                         </tr>
                     </thead>
                     <tbody id="wallet-history-tbody">
                         <?php if (empty($transactions)): ?>
                             <tr>
-                                <td colspan="3" class="text-center text-muted py-5">
-                                    <i class="bi bi-receipt-cutoff fs-2 mb-2 d-block text-secondary opacity-50"></i>
-                                    No ledger entries yet.
+                                <td colspan="3" class="text-center py-5">
+                                    <div style="width:48px;height:48px;border-radius:14px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;color:var(--text-faint);">
+                                        <i class="bi bi-receipt-cutoff"></i>
+                                    </div>
+                                    <div style="color:var(--text-muted);font-size:13.5px;">No ledger entries yet.</div>
                                 </td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($transactions as $t): ?>
                                 <tr>
+                                    <td><small style="color:var(--text-muted);"><?= date('M d, Y h:i A', strtotime($t['created_at'])) ?></small></td>
                                     <td>
-                                        <small class="text-muted"><?= date('M d, Y h:i A', strtotime($t['created_at'])) ?></small>
-                                    </td>
-                                    <td>
-                                        <span class="fw-semibold text-dark"><?= htmlspecialchars(str_replace('_', ' ', $t['reference'] ?? 'Wallet Update')) ?></span>
-                                        <span class="badge rounded-pill ms-2 text-uppercase bg-<?= $t['type'] === 'recharge' ? 'success' : 'danger' ?> bg-opacity-10 text-<?= $t['type'] === 'recharge' ? 'success' : 'danger' ?>" style="font-size: 0.65rem;">
+                                        <span style="font-weight:600;"><?= htmlspecialchars(str_replace('_', ' ', $t['reference'] ?? 'Wallet Update')) ?></span>
+                                        <span class="badge ms-2 <?= $t['type'] === 'recharge' ? 'badge-green' : 'badge-red' ?>" style="font-size:9.5px;text-transform:uppercase;">
                                             <?= $t['type'] ?>
                                         </span>
                                     </td>
-                                    <td class="text-end fw-bold text-<?= $t['type'] === 'recharge' ? 'success' : 'danger' ?>">
+                                    <td class="text-end" style="font-weight:700;font-family:'JetBrains Mono',monospace;color:<?= $t['type'] === 'recharge' ? 'var(--green)' : 'var(--red)' ?>;">
                                         <?= $t['type'] === 'recharge' ? '+' : '-' ?> ₹<?= number_format($t['amount'], 2) ?>
                                     </td>
                                 </tr>
@@ -120,7 +126,7 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
         document.getElementById('wallet-recharge-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const amount = parseFloat(document.getElementById('recharge-amount').value);
-            
+
             const res = await fetchJSON('/wallet/recharge', {
                 method: 'POST',
                 body: JSON.stringify({ amount: amount, reference: 'wallet_topup' })

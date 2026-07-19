@@ -4,39 +4,50 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2 fw-bold"><i class="bi bi-compass me-2 text-primary"></i>Track Commute</h1>
-    <a href="<?= $baseUrl ?>/my-trips" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-2"></i>My Trips</a>
+<div class="page-header reveal">
+    <div class="page-title">
+        <span class="page-title-icon" style="background:var(--green-soft);color:var(--green);">
+            <i class="bi bi-compass"></i>
+        </span>
+        Track Commute
+    </div>
+    <a href="<?= $baseUrl ?>/my-trips" class="btn btn-glass btn-sm">
+        <i class="bi bi-arrow-left"></i> My Trips
+    </a>
 </div>
 
 <div class="row g-4">
-    <!-- Route & Tracker Info -->
+    <!-- Map + Info -->
     <div class="col-12 col-xl-7">
-        <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
-            <div id="live-map" style="height: 400px; z-index: 1;"></div>
-            
-            <div class="card-body p-4 bg-white">
+        <div class="card overflow-hidden mb-4 reveal" style="animation-delay:.06s">
+            <div id="live-map" style="height:400px;z-index:1;"></div>
+
+            <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <span class="badge rounded-pill text-uppercase px-3 py-1.5 fw-bold bg-primary bg-opacity-10 text-primary border border-primary-subtle" id="trip-status-badge">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge badge-accent text-uppercase" id="trip-status-badge">
                             <?= str_replace('_', ' ', $booking['status']) ?>
                         </span>
-                        <div class="live-dot d-inline-block ms-2 bg-success rounded-circle" style="width: 8px; height: 8px;"></div>
+                        <div class="live-dot d-inline-block" style="width:8px;height:8px;border-radius:50%;background:var(--green);"></div>
                     </div>
                     <div class="text-end">
-                        <span class="text-muted d-block" style="font-size: 0.75rem;">ESTIMATED FARE</span>
-                        <h4 class="fw-bold text-dark mb-0">₹<?= number_format($booking['fare_amount'], 2) ?></h4>
+                        <span style="font-size:10.5px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;display:block;">ESTIMATED FARE</span>
+                        <h4 class="mono" style="font-weight:700;color:var(--teal);margin:0;">₹<?= number_format($booking['fare_amount'], 2) ?></h4>
                     </div>
                 </div>
 
                 <div class="row g-3">
                     <div class="col-6">
-                        <small class="text-muted d-block">PICKUP</small>
-                        <span class="fw-semibold text-dark" id="txt-pickup"><?= htmlspecialchars($booking['pickup_address']) ?></span>
+                        <div style="padding:12px;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-md);">
+                            <small style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;margin-bottom:4px;">PICKUP</small>
+                            <span style="font-weight:600;color:var(--text);font-size:13px;" id="txt-pickup"><?= htmlspecialchars($booking['pickup_address']) ?></span>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <small class="text-muted d-block">DROP</small>
-                        <span class="fw-semibold text-dark" id="txt-drop"><?= htmlspecialchars($booking['drop_address']) ?></span>
+                        <div style="padding:12px;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-md);">
+                            <small style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;margin-bottom:4px;">DROP</small>
+                            <span style="font-weight:600;color:var(--text);font-size:13px;" id="txt-drop"><?= htmlspecialchars($booking['drop_address']) ?></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,72 +55,75 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
 
         <!-- Driver Control Panel -->
         <?php if ($isDriver): ?>
-            <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-dark text-white">
-                <h5 class="fw-bold mb-3"><i class="bi bi-gear-fill me-2 text-warning"></i>Driver Control Center</h5>
-                <p class="text-muted" style="font-size: 0.9rem;">Start the trip once all passengers are onboard. Ensure location updates are enabled to broadcast your live GPS route.</p>
-                
+            <div class="card p-4 mb-4 reveal" style="animation-delay:.1s;background:linear-gradient(145deg,rgba(108,99,255,0.1),rgba(0,212,170,0.05))!important;">
+                <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+                    <i class="bi bi-gear-fill" style="color:var(--yellow);"></i> Driver Control Center
+                </h5>
+                <p style="color:var(--text-muted);font-size:13px;margin-bottom:20px;line-height:1.65;">Start the trip once all passengers are onboard. Ensure location updates are enabled to broadcast your live GPS route.</p>
+
                 <div class="d-flex gap-3">
                     <?php if ($booking['status'] === 'booked'): ?>
-                        <button type="button" class="btn btn-primary btn-lg flex-grow-1 fw-bold rounded-3" id="btn-start-trip">
-                            <i class="bi bi-play-fill me-2"></i>Start Trip
+                        <button type="button" class="btn btn-teal flex-grow-1" id="btn-start-trip">
+                            <i class="bi bi-play-fill"></i> Start Trip
                         </button>
                     <?php elseif (in_array($booking['status'], ['trip_started', 'trip_in_progress'])): ?>
-                        <button type="button" class="btn btn-danger btn-lg flex-grow-1 fw-bold rounded-3" id="btn-end-trip">
-                            <i class="bi bi-stop-fill me-2"></i>Complete Journey
+                        <button type="button" class="btn btn-danger flex-grow-1" id="btn-end-trip">
+                            <i class="bi bi-stop-fill"></i> Complete Journey
                         </button>
                     <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
-        
-        <!-- Payment Trigger Panel (Passenger complete view) -->
+
+        <!-- Payment Panel (Passenger) -->
         <?php if (!$isDriver && $booking['status'] === 'trip_completed'): ?>
-            <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-light border border-primary-subtle text-dark">
-                <h5 class="fw-bold mb-2"><i class="bi bi-wallet2 me-2 text-primary"></i>Payment Required</h5>
-                <p class="text-muted" style="font-size: 0.9rem;">Your journey is complete! Settle the fare amount with the driver to finalize the ride.</p>
-                <div class="d-flex align-items-center justify-content-between mb-3 border-top pt-3 mt-2">
-                    <span class="fs-5">Amount due:</span>
-                    <span class="fs-4 fw-bold">₹<?= number_format($booking['fare_amount'], 2) ?></span>
+            <div class="card p-4 mb-4 reveal" style="animation-delay:.12s;background:var(--accent-soft)!important;border-color:rgba(108,99,255,0.25)!important;">
+                <h5 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                    <i class="bi bi-wallet2" style="color:var(--accent);"></i> Payment Required
+                </h5>
+                <p style="color:var(--text-muted);font-size:13px;margin-bottom:18px;line-height:1.65;">Your journey is complete! Settle the fare amount with the driver to finalize the ride.</p>
+                <div class="d-flex align-items-center justify-content-between mb-4 pb-3" style="border-bottom:1px solid var(--border);">
+                    <span style="font-size:15px;color:var(--text);">Amount due:</span>
+                    <span class="mono" style="font-size:22px;font-weight:700;color:var(--accent);">₹<?= number_format($booking['fare_amount'], 2) ?></span>
                 </div>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary btn-lg fw-bold rounded-3" id="btn-pay-wallet">
-                        <i class="bi bi-wallet2 me-2"></i>Pay using Wallet
+                    <button class="btn btn-primary" id="btn-pay-wallet">
+                        <i class="bi bi-wallet2"></i> Pay using Wallet
                     </button>
-                    <button class="btn btn-outline-secondary rounded-3" id="btn-pay-cash">
-                        Settle with Cash
-                    </button>
+                    <button class="btn btn-glass" id="btn-pay-cash">Settle with Cash</button>
                 </div>
             </div>
         <?php endif; ?>
     </div>
 
-    <!-- Right Column: Participant Details & Chat Box -->
+    <!-- Right: Participants + Chat -->
     <div class="col-12 col-xl-5">
-        <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-            <h5 class="fw-bold mb-3 text-dark"><i class="bi bi-people-fill me-2 text-primary"></i>Participants</h5>
-            
-            <div class="d-flex align-items-center mb-3">
-                <div class="fs-2 bg-light border rounded-circle d-flex align-items-center justify-content-center text-dark me-3" style="width: 50px; height: 50px;">🧑</div>
+        <!-- Participants -->
+        <div class="card p-4 mb-4 reveal" style="animation-delay:.08s">
+            <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+                <i class="bi bi-people-fill" style="color:var(--accent);"></i> Participants
+            </h5>
+
+            <div class="d-flex align-items-center mb-3 pb-3" style="border-bottom:1px solid var(--border);">
+                <div style="width:46px;height:46px;border-radius:13px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:20px;margin-right:14px;">🧑</div>
                 <div class="flex-grow-1">
-                    <span class="badge bg-secondary mb-1">Driver</span>
-                    <h6 class="fw-bold text-dark mb-0"><?= htmlspecialchars($booking['driver_name']) ?></h6>
-                    <small class="text-muted"><?= htmlspecialchars($booking['driver_phone']) ?></small>
+                    <span class="badge badge-accent mb-1" style="font-size:9.5px;">Driver</span>
+                    <h6 style="font-weight:700;margin-bottom:2px;color:var(--text);"><?= htmlspecialchars($booking['driver_name']) ?></h6>
+                    <small style="color:var(--text-muted);"><?= htmlspecialchars($booking['driver_phone']) ?></small>
                 </div>
-                <a href="tel:<?= htmlspecialchars($booking['driver_phone']) ?>" class="btn btn-light rounded-circle"><i class="bi bi-telephone-fill text-success"></i></a>
+                <a href="tel:<?= htmlspecialchars($booking['driver_phone']) ?>" class="btn btn-glass btn-sm" style="width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;">
+                    <i class="bi bi-telephone-fill" style="color:var(--teal);font-size:13px;"></i>
+                </a>
             </div>
-            
-            <hr class="border-secondary opacity-10 my-3">
-            
-            <h6 class="fw-semibold text-muted mb-2.5">Passengers</h6>
-            <div class="d-flex flex-column gap-2">
+
+            <h6 style="font-weight:600;color:var(--text-muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Passengers</h6>
+            <div class="d-flex flex-column gap-3">
                 <?php foreach ($passengers as $p): ?>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <div class="fs-5 bg-light border rounded-circle d-flex align-items-center justify-content-center text-dark me-2.5" style="width: 38px; height: 38px;">👩</div>
-                            <div>
-                                <span class="fw-semibold text-dark"><?= htmlspecialchars($p['passenger_name']) ?></span>
-                                <small class="text-muted d-block"><?= htmlspecialchars($p['passenger_phone']) ?></small>
-                            </div>
+                    <div class="d-flex align-items-center">
+                        <div style="width:38px;height:38px;border-radius:10px;background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:17px;margin-right:12px;">👩</div>
+                        <div>
+                            <span style="font-weight:600;color:var(--text);font-size:13.5px;"><?= htmlspecialchars($p['passenger_name']) ?></span>
+                            <small style="color:var(--text-muted);display:block;font-size:11.5px;"><?= htmlspecialchars($p['passenger_phone']) ?></small>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -117,26 +131,28 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
         </div>
 
         <!-- Chat Panel -->
-        <div class="card border-0 shadow-sm rounded-4 overflow-hidden d-flex flex-column" style="height: 380px;">
-            <div class="card-header bg-transparent border-0 pt-3 px-4 pb-0 d-flex justify-content-between align-items-center">
-                <h5 class="fw-bold text-dark mb-0"><i class="bi bi-chat-dots-fill me-2 text-primary"></i>Ride Group Chat</h5>
-                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2.5 py-1">Active</span>
+        <div class="card overflow-hidden d-flex flex-column reveal" style="height:380px;animation-delay:.11s">
+            <div class="card-header d-flex justify-content-between align-items-center py-3 px-4">
+                <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;margin:0;display:flex;align-items:center;gap:8px;">
+                    <i class="bi bi-chat-dots-fill" style="color:var(--accent);"></i> Ride Group Chat
+                </h5>
+                <span class="badge badge-teal">Active</span>
             </div>
-            
-            <!-- Chat logs -->
-            <div class="card-body p-4 flex-grow-1 overflow-y-auto" id="chat-messages" style="background-color: #f8fafc;">
-                <div class="text-center text-muted py-5" id="chat-empty">
-                    <i class="bi bi-chat-quote fs-1 mb-2 text-secondary opacity-50"></i>
-                    <p class="mb-0" style="font-size: 0.85rem;">Secure conversation with driver & co-riders.</p>
+
+            <div class="card-body p-4 flex-grow-1 overflow-y-auto" id="chat-messages" style="background:var(--bg-soft);">
+                <div class="text-center py-5" id="chat-empty" style="color:var(--text-faint);">
+                    <i class="bi bi-chat-quote" style="font-size:2.5rem;display:block;margin-bottom:10px;"></i>
+                    <p style="font-size:13px;margin:0;">Secure conversation with driver & co-riders.</p>
                 </div>
             </div>
-            
-            <!-- Chat input -->
-            <div class="card-footer bg-white border-top p-3">
+
+            <div class="card-footer p-3" style="border-top:1px solid var(--border);">
                 <form id="chat-form">
                     <div class="input-group">
-                        <input type="text" class="form-control rounded-start-pill py-2.5 border-end-0" id="chat-input" placeholder="Type a message..." required>
-                        <button class="btn btn-primary rounded-end-pill px-4" type="submit">
+                        <input type="text" class="form-control" id="chat-input" placeholder="Type a message..." required
+                               style="border-top-left-radius:var(--radius-pill)!important;border-bottom-left-radius:var(--radius-pill)!important;border-right:none!important;">
+                        <button class="btn btn-primary px-4" type="submit"
+                                style="border-top-right-radius:var(--radius-pill)!important;border-bottom-right-radius:var(--radius-pill)!important;">
                             <i class="bi bi-send-fill"></i>
                         </button>
                     </div>
@@ -146,7 +162,7 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
     </div>
 </div>
 
-<!-- Map tracking logic variables -->
+<!-- Map tracking variables -->
 <script>
     const bookingId = <?= $booking['id'] ?>;
     const isDriver = <?= $isDriver ? 'true' : 'false' ?>;

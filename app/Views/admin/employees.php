@@ -3,103 +3,93 @@ $title = "Admin Dashboard - Employees";
 require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 
-// Mock data for UI presentation based on wireframes
 $mockDepartments = ['Engineering', 'Sales', 'HR', 'Marketing', 'Finance'];
 $mockManagers = ['A. Shah', 'R. Mehta', 'P. Desai', 'S. Patel'];
 $mockLocations = ['Ahmedabad', 'Gandhinagar', 'Vadodara'];
 ?>
 
-<!-- Unified Admin Header -->
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div class="d-flex align-items-center">
-        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 48px; height: 48px; font-size: 1.2rem;">
+<!-- Admin Header -->
+<div class="d-flex justify-content-between align-items-center mb-4 reveal">
+    <div class="d-flex align-items-center gap-3">
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(245,158,11,0.15);color:#F59E0B;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;font-family:'Outfit',sans-serif;">
             <?= strtoupper(substr($stats['org']['name'] ?? 'C', 0, 1)) ?>
         </div>
-        <h4 class="mb-0 fw-bold text-dark"><?= htmlspecialchars($stats['org']['name'] ?? 'Company Name') ?></h4>
+        <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;margin:0;"><?= htmlspecialchars($stats['org']['name'] ?? 'Company Name') ?></h4>
+            <span style="font-size:11px;color:var(--text-faint);">Organization Directory</span>
+        </div>
     </div>
-    <div>
-        <span class="badge bg-danger rounded-pill px-3 py-2 fs-6">Admin</span>
-    </div>
+    <span class="badge badge-red">Admin</span>
 </div>
 
-<!-- Unified Stats Panel -->
-<div class="row g-3 mb-4">
-    <div class="col-12 col-md-4">
-        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
-            <div class="card-body py-2 px-3">
-                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Total Employees</div>
-                <div class="fs-4 text-info fw-bold"><?= $stats['total_employees'] ?></div>
-            </div>
+<!-- Admin Stats -->
+<div class="row g-3 mb-4 reveal" style="animation-delay:.04s">
+    <div class="col-4">
+        <div class="stat-card p-3 text-center">
+            <div class="stat-label mb-1">Total Employees</div>
+            <div class="stat-value mono" style="color:var(--teal);"><?= $stats['total_employees'] ?></div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
-        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
-            <div class="card-body py-2 px-3">
-                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Registered Vehicles</div>
-                <div class="fs-4 text-info fw-bold"><?= $stats['registered_vehicles'] ?></div>
-            </div>
+    <div class="col-4">
+        <div class="stat-card p-3 text-center">
+            <div class="stat-label mb-1">Registered Vehicles</div>
+            <div class="stat-value mono" style="color:var(--accent);"><?= $stats['registered_vehicles'] ?></div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
-        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
-            <div class="card-body py-2 px-3">
-                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Rides This Month</div>
-                <div class="fs-4 text-info fw-bold"><?= $stats['total_rides'] ?></div>
-            </div>
+    <div class="col-4">
+        <div class="stat-card p-3 text-center">
+            <div class="stat-label mb-1">Rides This Month</div>
+            <div class="stat-value mono" style="color:var(--yellow);"><?= $stats['total_rides'] ?></div>
         </div>
     </div>
 </div>
 
-<!-- Unified Tabs -->
-<ul class="nav nav-tabs mb-0 border-bottom-0 gap-1" style="font-family: inherit;">
-    <li class="nav-item">
-        <a class="nav-link active rounded-0 border border-bottom-0 text-dark px-4 py-2" href="<?= $baseUrl ?>/admin/employees" style="font-size: 0.9rem;">Employees</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-secondary border rounded-0 px-4 py-2" href="<?= $baseUrl ?>/admin/vehicles" style="font-size: 0.9rem;">Vehicles</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-secondary border rounded-0 px-4 py-2" href="<?= $baseUrl ?>/admin/settings" style="font-size: 0.9rem;">Settings</a>
-    </li>
-</ul>
+<!-- Tabs -->
+<div class="d-flex gap-2 mb-4 reveal" style="animation-delay:.06s">
+    <a href="<?= $baseUrl ?>/admin/employees" class="btn btn-primary btn-sm"><i class="bi bi-people"></i> Employees</a>
+    <a href="<?= $baseUrl ?>/admin/vehicles" class="btn btn-glass btn-sm"><i class="bi bi-car-front"></i> Vehicles</a>
+    <a href="<?= $baseUrl ?>/admin/settings" class="btn btn-glass btn-sm"><i class="bi bi-sliders"></i> Settings</a>
+</div>
 
-<!-- Tab Content Area -->
-<div class="card border rounded-0 shadow-sm">
-    <div class="card-body p-0">
+<!-- Employee Table -->
+<div class="card reveal" style="animation-delay:.08s">
+    <div class="card-body p-4">
+        <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+            <i class="bi bi-people-fill" style="color:var(--accent);"></i> Employee Directory
+        </h5>
         <div class="table-responsive">
-            <table class="table table-borderless table-striped align-middle mb-0" style="font-size: 0.85rem;">
+            <table class="table table-hover align-middle">
                 <thead>
-                    <tr class="border-bottom text-info">
-                        <th class="fw-normal py-3 ps-4">Name</th>
-                        <th class="fw-normal py-3">Email</th>
-                        <th class="fw-normal py-3">Department</th>
-                        <th class="fw-normal py-3">Manager</th>
-                        <th class="fw-normal py-3">Location</th>
-                        <th class="fw-normal py-3 pe-4">Platform Access</th>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Manager</th>
+                        <th>Location</th>
+                        <th class="text-end">Platform Access</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($employees)): ?>
-                        <tr><td colspan="6" class="text-center py-4 text-muted">No employees found.</td></tr>
+                        <tr><td colspan="6" class="text-center py-5" style="color:var(--text-muted);">No employees found.</td></tr>
                     <?php else: ?>
-                        <?php foreach ($employees as $index => $emp): 
-                            // Deterministic mocking based on user ID to keep UI stable
+                        <?php foreach ($employees as $index => $emp):
                             $mockDept = $mockDepartments[$emp['id'] % count($mockDepartments)];
                             $mockMgr = $mockManagers[$emp['id'] % count($mockManagers)];
                             $mockLoc = $mockLocations[$emp['id'] % count($mockLocations)];
                             $isActive = $emp['status'] === 'active';
                         ?>
-                        <tr class="border-bottom">
-                            <td class="ps-4 text-dark"><?= htmlspecialchars($emp['name']) ?></td>
-                            <td class="text-dark"><?= htmlspecialchars($emp['email']) ?></td>
-                            <td class="text-dark"><?= $mockDept ?></td>
-                            <td class="text-dark"><?= $mockMgr ?></td>
-                            <td class="text-dark"><?= $mockLoc ?></td>
-                            <td class="pe-4">
+                        <tr>
+                            <td style="font-weight:600;"><?= htmlspecialchars($emp['name']) ?></td>
+                            <td style="color:var(--text-muted);font-size:12.5px;"><?= htmlspecialchars($emp['email']) ?></td>
+                            <td><span class="badge badge-accent"><?= $mockDept ?></span></td>
+                            <td><?= $mockMgr ?></td>
+                            <td><?= $mockLoc ?></td>
+                            <td class="text-end">
                                 <?php if ($isActive): ?>
-                                    <button class="btn btn-link p-0 text-success text-decoration-none" onclick="toggleAccess(<?= $emp['id'] ?>, 'inactive')" style="font-size: 0.85rem;">[Granted]</button>
+                                    <button class="btn btn-teal btn-sm" onclick="toggleAccess(<?= $emp['id'] ?>, 'inactive')">Granted ✓</button>
                                 <?php else: ?>
-                                    <button class="btn btn-link p-0 text-danger text-decoration-none" onclick="toggleAccess(<?= $emp['id'] ?>, 'active')" style="font-size: 0.85rem;">[Revoked]</button>
+                                    <button class="btn btn-danger btn-sm" onclick="toggleAccess(<?= $emp['id'] ?>, 'active')">Revoked ✗</button>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -108,46 +98,43 @@ $mockLocations = ['Ahmedabad', 'Gandhinagar', 'Vadodara'];
                 </tbody>
             </table>
         </div>
-        
-        <div class="p-4 border-top">
-            <button class="btn btn-outline-info rounded-0 text-info fw-semibold px-4 py-1" style="font-size: 0.85rem;">+ Add Employee</button>
-        </div>
     </div>
 </div>
 
 <!-- Password Resets Section -->
-<div class="card border rounded-0 shadow-sm mt-4">
-    <div class="card-header bg-white border-bottom py-3">
-        <h5 class="fw-bold text-dark mb-0"><i class="bi bi-shield-lock text-info me-2"></i>Password Reset Requests</h5>
-        <small class="text-muted">Users who have requested a password recovery. Provide them the 4-digit code to allow them to reset their password.</small>
-    </div>
-    <div class="card-body p-0">
+<div class="card mt-4 reveal" style="animation-delay:.12s">
+    <div class="card-body p-4">
+        <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:5px;display:flex;align-items:center;gap:8px;">
+            <i class="bi bi-shield-lock" style="color:var(--yellow);"></i> Password Reset Requests
+        </h5>
+        <p style="color:var(--text-muted);font-size:12.5px;margin-bottom:20px;">Users who have requested a password recovery. Provide them the 4-digit code to allow them to reset their password.</p>
+
         <div class="table-responsive">
-            <table class="table table-borderless table-striped align-middle mb-0" style="font-size: 0.85rem;">
+            <table class="table table-hover align-middle">
                 <thead>
-                    <tr class="border-bottom text-info">
-                        <th class="fw-normal py-3 ps-4">Request Email</th>
-                        <th class="fw-normal py-3">Generated Code</th>
-                        <th class="fw-normal py-3">Requested At</th>
-                        <th class="fw-normal py-3 pe-4">Status</th>
+                    <tr>
+                        <th>Request Email</th>
+                        <th>Generated Code</th>
+                        <th>Requested At</th>
+                        <th class="text-end">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($resetRequests)): ?>
-                        <tr><td colspan="4" class="text-center py-4 text-muted">No pending password reset requests.</td></tr>
+                        <tr><td colspan="4" class="text-center py-5" style="color:var(--text-muted);">No pending password reset requests.</td></tr>
                     <?php else: ?>
                         <?php foreach ($resetRequests as $req): ?>
-                        <tr class="border-bottom">
-                            <td class="ps-4 text-dark font-monospace fw-semibold"><?= htmlspecialchars($req['email']) ?></td>
+                        <tr>
+                            <td class="mono" style="font-weight:600;"><?= htmlspecialchars($req['email']) ?></td>
                             <td>
-                                <span class="badge bg-warning text-dark px-3 py-2 fs-6 font-monospace" style="letter-spacing: 1px;"><?= $req['code'] ?></span>
+                                <span class="badge badge-yellow mono px-4 py-2" style="font-size:16px;font-weight:700;letter-spacing:4px;"><?= $req['code'] ?></span>
                             </td>
-                            <td class="text-muted"><?= $req['created_at'] ?></td>
-                            <td class="pe-4">
+                            <td style="color:var(--text-muted);font-size:12.5px;"><?= $req['created_at'] ?></td>
+                            <td class="text-end">
                                 <?php if ($req['status'] === 'pending'): ?>
-                                    <span class="badge bg-danger rounded-pill px-2.5 py-1.5">Awaiting Verification</span>
+                                    <span class="badge badge-orange">Awaiting Verification</span>
                                 <?php else: ?>
-                                    <span class="badge bg-success rounded-pill px-2.5 py-1.5">Code Verified</span>
+                                    <span class="badge badge-green">Code Verified</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -162,26 +149,16 @@ $mockLocations = ['Ahmedabad', 'Gandhinagar', 'Vadodara'];
 <script>
 async function toggleAccess(userId, newStatus) {
     if (!confirm(`Are you sure you want to change this employee's access status?`)) return;
-    
     try {
         const res = await fetch('<?= $baseUrl ?>/admin/employees/' + userId, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
+            headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
             body: JSON.stringify({ status: newStatus })
         });
         const data = await res.json();
-        if (data.success) {
-            window.location.reload();
-        } else {
-            alert(data.error || 'Failed to update access.');
-        }
-    } catch (err) {
-        console.error(err);
-        alert('An error occurred.');
-    }
+        if (data.success) { window.location.reload(); }
+        else { alert(data.error || 'Failed to update access.'); }
+    } catch (err) { console.error(err); alert('An error occurred.'); }
 }
 </script>
 

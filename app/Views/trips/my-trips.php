@@ -4,80 +4,89 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2 fw-bold"><i class="bi bi-calendar-event me-2 text-primary"></i>My Trips</h1>
+<div class="page-header reveal">
+    <div class="page-title">
+        <span class="page-title-icon" style="background:var(--orange-soft);color:var(--orange);">
+            <i class="bi bi-calendar-event"></i>
+        </span>
+        My Trips
+    </div>
 </div>
 
-<ul class="nav nav-tabs border-bottom mb-4" id="tripsTab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active fw-semibold" id="passenger-tab" data-bs-toggle="tab" data-bs-target="#passenger" type="button" role="tab" aria-controls="passenger" aria-selected="true">
-            <i class="bi bi-person me-2"></i>Booked as Passenger
+<!-- Custom Tabs -->
+<div class="mb-4 reveal" style="animation-delay:.04s">
+    <div style="display:flex;gap:4px;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-md);padding:4px;width:fit-content;">
+        <button class="nav-link active" id="passenger-tab" data-bs-toggle="tab" data-bs-target="#passenger" type="button" role="tab"
+                style="padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;border:none;background:var(--accent);color:#fff;display:flex;align-items:center;gap:7px;">
+            <i class="bi bi-person"></i> Booked as Passenger
         </button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link fw-semibold" id="driver-tab" data-bs-toggle="tab" data-bs-target="#driver" type="button" role="tab" aria-controls="driver" aria-selected="false">
-            <i class="bi bi-car-front me-2"></i>Offered as Driver
+        <button class="nav-link" id="driver-tab" data-bs-toggle="tab" data-bs-target="#driver" type="button" role="tab"
+                style="padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;border:none;background:transparent;color:var(--text-muted);display:flex;align-items:center;gap:7px;transition:all .15s;">
+            <i class="bi bi-car-front"></i> Offered as Driver
         </button>
-    </li>
-</ul>
+    </div>
+</div>
 
 <div class="tab-content" id="tripsTabContent">
     <!-- Passenger Tab -->
     <div class="tab-pane fade show active" id="passenger" role="tabpanel" aria-labelledby="passenger-tab">
         <?php if (empty($activeTrips)): ?>
-            <div class="card border-0 shadow-sm rounded-4 p-5 text-center">
-                <i class="bi bi-calendar-x fs-1 text-muted mb-3"></i>
-                <h5 class="fw-bold">No Active Bookings</h5>
-                <p class="text-muted">You have not booked any rides yet.</p>
-                <a href="<?= $baseUrl ?>/find-ride" class="btn btn-primary fw-bold px-4 py-2.5 rounded-3 shadow-sm mt-3">
-                    <i class="bi bi-search me-2"></i>Find a Ride
-                </a>
+            <div class="card reveal" style="animation-delay:.06s">
+                <div class="card-body p-5 text-center">
+                    <div style="width:64px;height:64px;border-radius:18px;background:var(--orange-soft);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">
+                        <i class="bi bi-calendar-x"></i>
+                    </div>
+                    <h5 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:8px;">No Active Bookings</h5>
+                    <p style="color:var(--text-muted);font-size:13.5px;">You have not booked any rides yet.</p>
+                    <a href="<?= $baseUrl ?>/find-ride" class="btn btn-primary mt-3">
+                        <i class="bi bi-search"></i> Find a Ride
+                    </a>
+                </div>
             </div>
         <?php else: ?>
             <div class="row row-cols-1 row-cols-lg-2 g-4">
                 <?php foreach ($activeTrips as $t): ?>
-                    <div class="col">
-                        <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden ride-card">
+                    <div class="col reveal" style="animation-delay:.06s">
+                        <div class="ride-card h-100">
                             <div class="card-body p-4">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="badge bg-primary bg-opacity-10 text-primary border border-primary-subtle rounded-pill px-3 py-1.5 fw-semibold">
+                                    <span class="badge badge-accent">
                                         <?= date('M d, Y', strtotime($t['travel_date'])) ?> — <?= date('h:i A', strtotime($t['travel_time'])) ?>
                                     </span>
-                                    <span class="badge rounded-pill text-uppercase px-2.5 py-1.5 fw-bold bg-success bg-opacity-10 text-success border border-success-subtle">
+                                    <span class="badge badge-green text-uppercase">
                                         <?= str_replace('_', ' ', $t['status']) ?>
                                     </span>
                                 </div>
-                                
-                                <div class="d-flex flex-column gap-2 mb-3">
+
+                                <div class="d-flex flex-column gap-3 mb-3">
                                     <div class="d-flex align-items-start gap-2">
-                                        <i class="bi bi-geo-alt-fill text-primary mt-1"></i>
+                                        <i class="bi bi-geo-alt-fill mt-1" style="color:var(--accent);"></i>
                                         <div>
-                                            <small class="text-muted d-block" style="font-size: 0.75rem;">PICKUP</small>
-                                            <span class="fw-semibold text-dark"><?= htmlspecialchars($t['pickup_address']) ?></span>
+                                            <small style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;">PICKUP</small>
+                                            <span style="font-weight:600;color:var(--text);"><?= htmlspecialchars($t['pickup_address']) ?></span>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start gap-2">
-                                        <i class="bi bi-geo-fill text-danger mt-1"></i>
+                                        <i class="bi bi-geo-fill mt-1" style="color:var(--teal);"></i>
                                         <div>
-                                            <small class="text-muted d-block" style="font-size: 0.75rem;">DROP</small>
-                                            <span class="fw-semibold text-dark"><?= htmlspecialchars($t['drop_address']) ?></span>
+                                            <small style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;">DROP</small>
+                                            <span style="font-weight:600;color:var(--text);"><?= htmlspecialchars($t['drop_address']) ?></span>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <hr class="border-secondary opacity-10">
-                                
+
+                                <hr>
+
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center">
-                                        <div class="bg-light border rounded-circle d-flex align-items-center justify-content-center text-dark fs-5 me-2" style="width: 40px; height: 40px;">🧑</div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;">🧑</div>
                                         <div>
-                                            <small class="text-muted d-block" style="font-size: 0.75rem;">DRIVER</small>
-                                            <span class="fw-bold text-dark"><?= htmlspecialchars($t['driver_name']) ?></span>
+                                            <small style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;">DRIVER</small>
+                                            <span style="font-weight:700;color:var(--text);"><?= htmlspecialchars($t['driver_name']) ?></span>
                                         </div>
                                     </div>
-                                    
-                                    <a href="<?= $baseUrl ?>/trip/<?= $t['id'] ?>" class="btn btn-primary fw-semibold rounded-3 py-2 px-3 shadow-sm">
-                                        <i class="bi bi-compass me-2"></i>Track & Details
+                                    <a href="<?= $baseUrl ?>/trip/<?= $t['id'] ?>" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-compass"></i> Track & Details
                                     </a>
                                 </div>
                             </div>
@@ -87,60 +96,64 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
             </div>
         <?php endif; ?>
     </div>
-    
+
     <!-- Driver Tab -->
     <div class="tab-pane fade" id="driver" role="tabpanel" aria-labelledby="driver-tab">
         <?php if (empty($offeredRides)): ?>
-            <div class="card border-0 shadow-sm rounded-4 p-5 text-center">
-                <i class="bi bi-car-front fs-1 text-muted mb-3"></i>
-                <h5 class="fw-bold">No Offered Rides</h5>
-                <p class="text-muted">You have not published any rides yet.</p>
-                <a href="<?= $baseUrl ?>/offer-ride" class="btn btn-primary fw-bold px-4 py-2.5 rounded-3 shadow-sm mt-3">
-                    <i class="bi bi-plus-circle me-2"></i>Offer a Ride
-                </a>
+            <div class="card">
+                <div class="card-body p-5 text-center">
+                    <div style="width:64px;height:64px;border-radius:18px;background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">
+                        <i class="bi bi-car-front"></i>
+                    </div>
+                    <h5 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:8px;">No Offered Rides</h5>
+                    <p style="color:var(--text-muted);font-size:13.5px;">You have not published any rides yet.</p>
+                    <a href="<?= $baseUrl ?>/offer-ride" class="btn btn-teal mt-3">
+                        <i class="bi bi-plus-circle"></i> Offer a Ride
+                    </a>
+                </div>
             </div>
         <?php else: ?>
             <div class="row row-cols-1 row-cols-lg-2 g-4">
                 <?php foreach ($offeredRides as $r): ?>
                     <div class="col">
-                        <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden ride-card">
+                        <div class="ride-card h-100">
                             <div class="card-body p-4">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="badge bg-primary bg-opacity-10 text-primary border border-primary-subtle rounded-pill px-3 py-1.5 fw-semibold">
+                                    <span class="badge badge-accent">
                                         <?= date('M d, Y', strtotime($r['travel_date'])) ?> — <?= date('h:i A', strtotime($r['travel_time'])) ?>
                                     </span>
-                                    <span class="badge rounded-pill text-uppercase px-2.5 py-1.5 fw-bold bg-info bg-opacity-10 text-info border border-info-subtle">
+                                    <span class="badge badge-teal text-uppercase">
                                         <?= str_replace('_', ' ', $r['status']) ?>
                                     </span>
                                 </div>
-                                
-                                <div class="d-flex flex-column gap-2 mb-3">
+
+                                <div class="d-flex flex-column gap-3 mb-3">
                                     <div class="d-flex align-items-start gap-2">
-                                        <i class="bi bi-geo-alt-fill text-primary mt-1"></i>
+                                        <i class="bi bi-geo-alt-fill mt-1" style="color:var(--accent);"></i>
                                         <div>
-                                            <small class="text-muted d-block" style="font-size: 0.75rem;">PICKUP</small>
-                                            <span class="fw-semibold text-dark"><?= htmlspecialchars($r['pickup_address']) ?></span>
+                                            <small style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;">PICKUP</small>
+                                            <span style="font-weight:600;color:var(--text);"><?= htmlspecialchars($r['pickup_address']) ?></span>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start gap-2">
-                                        <i class="bi bi-geo-fill text-danger mt-1"></i>
+                                        <i class="bi bi-geo-fill mt-1" style="color:var(--teal);"></i>
                                         <div>
-                                            <small class="text-muted d-block" style="font-size: 0.75rem;">DROP</small>
-                                            <span class="fw-semibold text-dark"><?= htmlspecialchars($r['drop_address']) ?></span>
+                                            <small style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;">DROP</small>
+                                            <span style="font-weight:600;color:var(--text);"><?= htmlspecialchars($r['drop_address']) ?></span>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <hr class="border-secondary opacity-10">
-                                
+
+                                <hr>
+
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">VEHICLE</small>
-                                        <span class="fw-bold text-dark"><?= htmlspecialchars($r['vehicle_model']) ?></span>
+                                        <small style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;">VEHICLE</small>
+                                        <span style="font-weight:700;color:var(--text);"><?= htmlspecialchars($r['vehicle_model']) ?></span>
                                     </div>
                                     <div class="text-end">
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">BOOKED SEATS</small>
-                                        <span class="badge bg-dark rounded-pill fw-semibold px-3 py-1.5"><?= $r['booked_seats'] ?> / <?= $r['total_seats'] ?></span>
+                                        <small style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);display:block;">BOOKED SEATS</small>
+                                        <span class="badge badge-accent px-3"><?= $r['booked_seats'] ?> / <?= $r['total_seats'] ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -151,6 +164,20 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
         <?php endif; ?>
     </div>
 </div>
+
+<script>
+// Make driver tab button visually toggle
+document.querySelectorAll('[data-bs-toggle="tab"]').forEach(btn => {
+    btn.addEventListener('shown.bs.tab', function() {
+        document.querySelectorAll('[data-bs-toggle="tab"]').forEach(b => {
+            b.style.background = 'transparent';
+            b.style.color = 'var(--text-muted)';
+        });
+        this.style.background = 'var(--accent)';
+        this.style.color = '#fff';
+    });
+});
+</script>
 
 <?php
 require_once dirname(__DIR__) . '/layouts/footer.php';

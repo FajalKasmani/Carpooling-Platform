@@ -4,78 +4,91 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2 fw-bold"><i class="bi bi-bar-chart-line me-2 text-primary"></i>Reports & Analytics</h1>
-    <a href="<?= $baseUrl ?>/ride-history" class="btn btn-outline-secondary btn-sm"><i class="bi bi-clock-history me-2"></i>Ride History</a>
+<div class="page-header reveal">
+    <div class="page-title">
+        <span class="page-title-icon" style="background:var(--yellow-soft);color:var(--yellow);">
+            <i class="bi bi-bar-chart-line"></i>
+        </span>
+        Reports & Analytics
+    </div>
+    <a href="<?= $baseUrl ?>/ride-history" class="btn btn-glass btn-sm">
+        <i class="bi bi-clock-history"></i> Ride History
+    </a>
 </div>
 
-<!-- Aggregated Summary Cards -->
+<!-- Summary Cards -->
 <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
-    <div class="col">
-        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center">
-            <div class="bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                <i class="bi bi-compass fs-3"></i>
+    <div class="col reveal" style="animation-delay:.06s">
+        <div class="stat-card p-4 text-center">
+            <div class="stat-icon orange mx-auto mb-3" style="width:52px;height:52px;border-radius:14px;font-size:22px;">
+                <i class="bi bi-compass"></i>
             </div>
-            <h6 class="text-muted fw-bold text-uppercase" style="font-size: 0.8rem;">Commute Distance</h6>
-            <h2 class="fw-bold mb-1" id="rep-distance">0 km</h2>
-            <p class="text-muted mb-0" style="font-size: 0.85rem;">Total distance shared with colleagues</p>
+            <div class="stat-label mb-2">Commute Distance</div>
+            <div class="stat-value mono mb-1" id="rep-distance">0 km</div>
+            <p style="color:var(--text-faint);font-size:12px;margin:0;">Total distance shared with colleagues</p>
         </div>
     </div>
-    
-    <div class="col">
-        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center">
-            <div class="bg-success bg-opacity-10 text-success rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                <i class="bi bi-tree fs-3"></i>
+
+    <div class="col reveal" style="animation-delay:.09s">
+        <div class="stat-card p-4 text-center">
+            <div class="stat-icon teal mx-auto mb-3" style="width:52px;height:52px;border-radius:14px;font-size:22px;">
+                <i class="bi bi-tree"></i>
             </div>
-            <h6 class="text-muted fw-bold text-uppercase" style="font-size: 0.8rem;">CO₂ Emission Saved</h6>
-            <h2 class="fw-bold text-success mb-1" id="rep-co2">0 kg</h2>
-            <p class="text-muted mb-0" style="font-size: 0.85rem;">Reduced carbon footprint metrics</p>
+            <div class="stat-label mb-2">CO₂ Emission Saved</div>
+            <div class="stat-value mono mb-1" id="rep-co2" style="color:var(--teal);">0 kg</div>
+            <p style="color:var(--text-faint);font-size:12px;margin:0;">Reduced carbon footprint metrics</p>
         </div>
     </div>
-    
-    <div class="col">
-        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center">
-            <div class="bg-warning bg-opacity-10 text-warning rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                <i class="bi bi-droplet fs-3"></i>
+
+    <div class="col reveal" style="animation-delay:.12s">
+        <div class="stat-card p-4 text-center">
+            <div class="stat-icon yellow mx-auto mb-3" style="width:52px;height:52px;border-radius:14px;font-size:22px;">
+                <i class="bi bi-droplet"></i>
             </div>
-            <h6 class="text-muted fw-bold text-uppercase" style="font-size: 0.8rem;">Fuel Saved</h6>
-            <h2 class="fw-bold mb-1" id="rep-fuel">0 Litres</h2>
-            <p class="text-muted mb-0" style="font-size: 0.85rem;">Estimated fuel consumption avoided</p>
+            <div class="stat-label mb-2">Fuel Saved</div>
+            <div class="stat-value mono mb-1" id="rep-fuel">0 Litres</div>
+            <p style="color:var(--text-faint);font-size:12px;margin:0;">Estimated fuel consumption avoided</p>
         </div>
     </div>
 </div>
 
 <div class="row g-4">
-    <!-- Chart Box -->
-    <div class="col-12 col-lg-8">
-        <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-graph-up text-primary me-2"></i>Commuting Activity Trend</h5>
-            <div style="position: relative; height: 320px;">
+    <!-- Chart -->
+    <div class="col-12 col-lg-8 reveal" style="animation-delay:.15s">
+        <div class="card p-4 h-100">
+            <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+                <i class="bi bi-graph-up" style="color:var(--accent);"></i> Commuting Activity Trend
+            </h5>
+            <div style="position:relative;height:320px;">
                 <canvas id="commuteChart"></canvas>
             </div>
         </div>
     </div>
-    
-    <!-- Cost savings sidebar widgets inside Reports -->
-    <div class="col-12 col-lg-4">
-        <div class="card border-0 bg-dark text-white shadow-sm rounded-4 p-4 h-100 d-flex flex-column justify-content-between">
+
+    <!-- Financial Benefits -->
+    <div class="col-12 col-lg-4 reveal" style="animation-delay:.18s">
+        <div class="card p-4 h-100 d-flex flex-column justify-content-between" style="background:linear-gradient(145deg,rgba(108,99,255,0.08),rgba(0,212,170,0.04))!important;">
             <div>
-                <h5 class="fw-bold mb-3"><i class="bi bi-shield-check text-warning me-2"></i>Financial Benefits</h5>
-                <p class="text-muted mb-4" style="font-size: 0.9rem;">By sharing your route or booking seats with team colleagues, you have optimized your overall travel expenses.</p>
-                
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Total Spent (Passenger)</span>
-                    <h5 class="fw-bold mb-0">₹<span id="rep-spent">0.00</span></h5>
+                <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+                    <i class="bi bi-shield-check" style="color:var(--yellow);"></i> Financial Benefits
+                </h5>
+                <p style="color:var(--text-muted);font-size:13px;margin-bottom:24px;line-height:1.65;">
+                    By sharing your route or booking seats with team colleagues, you have optimized your overall travel expenses.
+                </p>
+
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-3" style="border-bottom:1px solid var(--border);">
+                    <span style="color:var(--text-muted);font-size:13px;">Total Spent (Passenger)</span>
+                    <h5 class="mono mb-0" style="color:var(--text);">₹<span id="rep-spent">0.00</span></h5>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Total Earned (Driver)</span>
-                    <h5 class="fw-bold text-gradient mb-0" style="background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">₹<span id="rep-earned">0.00</span></h5>
+                    <span style="color:var(--text-muted);font-size:13px;">Total Earned (Driver)</span>
+                    <h5 class="mono mb-0 text-gradient">₹<span id="rep-earned">0.00</span></h5>
                 </div>
             </div>
-            
-            <div class="border-top border-secondary pt-3 mt-3">
-                <small class="text-muted d-block mb-1">AVERAGE COST SAVED PER KM</small>
-                <span class="fs-6 fw-semibold text-info">₹<?= isset($_SESSION['org_id']) ? '8.00' : '8.00' ?> / km default setting</span>
+
+            <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:8px;">
+                <small style="color:var(--text-faint);font-size:10px;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:4px;">AVG COST SAVED PER KM</small>
+                <span class="mono" style="font-size:15px;font-weight:600;color:var(--teal);">₹<?= isset($_SESSION['org_id']) ? '8.00' : '8.00' ?> / km default setting</span>
             </div>
         </div>
     </div>
@@ -90,8 +103,7 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
             document.getElementById('rep-fuel').innerText = res.summary.fuel_saved_litres + ' L';
             document.getElementById('rep-spent').innerText = res.summary.total_spent.toFixed(2);
             document.getElementById('rep-earned').innerText = res.summary.total_earned.toFixed(2);
-            
-            // Build trend chart
+
             const months = res.monthly.map(m => m.month);
             const trips = res.monthly.map(m => m.trips);
             const distances = res.monthly.map(m => m.distance);
@@ -105,18 +117,21 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
                         {
                             label: 'Rides Shared',
                             data: trips.length ? trips : [0],
-                            backgroundColor: 'rgba(14, 165, 233, 0.65)',
-                            borderColor: '#0ea5e9',
+                            backgroundColor: 'rgba(108,99,255,0.5)',
+                            borderColor: '#6C63FF',
                             borderWidth: 1,
+                            borderRadius: 6,
                             yAxisID: 'y'
                         },
                         {
                             label: 'Distance (KM)',
                             data: distances.length ? distances : [0],
                             type: 'line',
-                            borderColor: '#818cf8',
-                            backgroundColor: 'transparent',
-                            borderWidth: 3,
+                            borderColor: '#00D4AA',
+                            backgroundColor: 'rgba(0,212,170,0.08)',
+                            borderWidth: 2.5,
+                            tension: 0.4,
+                            fill: true,
                             yAxisID: 'y1'
                         }
                     ]
@@ -124,19 +139,22 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#475569', font: { family: 'Inter', size: 12 } } }
+                    },
                     scales: {
+                        x: { ticks: { color: '#64748B' }, grid: { color: 'rgba(15, 23, 42, 0.05)' } },
                         y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                            title: { display: true, text: 'Rides' }
+                            type: 'linear', display: true, position: 'left',
+                            ticks: { color: '#64748B' },
+                            grid: { color: 'rgba(15, 23, 42, 0.05)' },
+                            title: { display: true, text: 'Rides', color: '#64748B' }
                         },
                         y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
+                            type: 'linear', display: true, position: 'right',
+                            ticks: { color: '#64748B' },
                             grid: { drawOnChartArea: false },
-                            title: { display: true, text: 'Distance (KM)' }
+                            title: { display: true, text: 'Distance (KM)', color: '#64748B' }
                         }
                     }
                 }

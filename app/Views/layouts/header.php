@@ -3,74 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? htmlspecialchars($title) . ' — Odoo' : 'Odoo' ?></title>
-    
-    <!-- SVG Favicon Data URI -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
-    <!-- Bootstrap 5 CSS -->
+    <title><?= isset($title) ? htmlspecialchars($title) . ' — RideShare' : 'RideShare' ?></title>
+
+    <link rel="icon" type="image/svg+xml" href="<?= $baseUrl ?>/favicon.svg">
+
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    
-    <!-- Leaflet CSS (Map) -->
+    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Google Fonts (Inter) -->
+    <!-- Fonts: Outfit + Inter + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Custom Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <!-- Design System -->
     <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style.css">
 </head>
-<body class="d-flex flex-column h-100 bg-light">
-    
-    <!-- Top Navbar for Mobile -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-lg-none sticky-top shadow-sm">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-gradient" href="<?= $baseUrl ?>/dashboard">
-                <i class="bi bi-car-front-fill me-2 text-info"></i>Odoo
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mobileNavbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>/dashboard"><i class="bi bi-house-door me-2"></i>Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>/find-ride"><i class="bi bi-search me-2"></i>Find Ride</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>/offer-ride"><i class="bi bi-plus-circle me-2"></i>Offer Ride</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>/my-trips"><i class="bi bi-calendar-event me-2"></i>My Trips</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>/wallet"><i class="bi bi-wallet2 me-2"></i>Wallet</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>/vehicles"><i class="bi bi-car-front me-2"></i>Vehicles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>/reports"><i class="bi bi-bar-chart-line me-2"></i>Reports</a>
-                    </li>
-                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                        <li class="nav-item">
-                            <a class="nav-link text-warning" href="<?= $baseUrl ?>/admin/dashboard"><i class="bi bi-shield-lock me-2"></i>Admin Panel</a>
-                        </li>
-                    <?php endif; ?>
-                    <li class="nav-item border-top mt-2 pt-2">
-                        <a class="nav-link text-danger" href="<?= $baseUrl ?>/logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
-                    </li>
-                </ul>
-            </div>
+<body class="d-flex flex-column h-100">
+
+    <!-- Mobile Top Navbar -->
+    <nav class="navbar mobile-topnav d-lg-none sticky-top px-3" style="min-height:52px;">
+        <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="<?= $baseUrl ?>/dashboard"
+           style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--text);letter-spacing:-0.02em;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="1.8">
+                <path d="M3 16c3-6 5-9 9-9s6 3 9 9" stroke-linecap="round"/>
+                <circle cx="6" cy="18" r="1.4" fill="#6C63FF" stroke="none"/>
+                <circle cx="18" cy="18" r="1.4" fill="#00D4AA" stroke="none"/>
+            </svg>
+            RideShare
+        </a>
+        <button class="border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar"
+                style="color:var(--text-muted);font-size:1.25rem;">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="mobileNavbar"
+             style="background:var(--bg-soft);border-radius:12px;margin-top:8px;padding:0.5rem;border:1px solid var(--border-md);">
+            <ul class="list-unstyled mb-0">
+                <?php
+                $mobileLinks = [
+                    ['dashboard', 'bi-house-door', 'Dashboard'],
+                    ['find-ride', 'bi-search', 'Find Ride'],
+                    ['offer-ride', 'bi-plus-circle', 'Offer Ride'],
+                    ['my-trips', 'bi-calendar-event', 'My Trips'],
+                    ['wallet', 'bi-wallet2', 'Wallet'],
+                    ['vehicles', 'bi-car-front', 'Vehicles'],
+                ];
+                foreach ($mobileLinks as [$route, $icon, $label]): ?>
+                <li>
+                    <a class="d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-decoration-none"
+                       href="<?= $baseUrl ?>/<?= $route ?>"
+                       style="font-size:13px;font-weight:500;color:var(--text-muted);transition:color .15s;">
+                        <i class="bi <?= $icon ?>"></i> <?= $label ?>
+                    </a>
+                </li>
+                <?php endforeach; ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <li>
+                    <a class="d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-decoration-none"
+                       href="<?= $baseUrl ?>/admin/dashboard"
+                       style="font-size:13px;font-weight:600;color:var(--teal);">
+                        <i class="bi bi-shield-lock"></i> Admin Panel
+                    </a>
+                </li>
+                <?php endif; ?>
+                <li style="border-top:1px solid var(--border);margin-top:4px;padding-top:4px;">
+                    <a class="d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-decoration-none"
+                       href="<?= $baseUrl ?>/logout"
+                       style="font-size:13px;font-weight:500;color:var(--red);">
+                        <i class="bi bi-box-arrow-right"></i> Sign Out
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 
-    <!-- App Shell Layout -->
+    <!-- App Shell -->
     <div class="container-fluid flex-grow-1 d-flex p-0">
         <div class="row g-0 flex-grow-1">

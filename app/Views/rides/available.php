@@ -4,51 +4,60 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2 fw-bold"><i class="bi bi-card-list me-2 text-primary"></i>Available Rides</h1>
-    <a href="<?= $baseUrl ?>/find-ride" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-2"></i>Modify Search</a>
+<div class="page-header reveal">
+    <div class="page-title">
+        <span class="page-title-icon" style="background:var(--teal-soft);color:var(--teal);">
+            <i class="bi bi-card-list"></i>
+        </span>
+        Available Rides
+    </div>
+    <a href="<?= $baseUrl ?>/find-ride" class="btn btn-glass btn-sm">
+        <i class="bi bi-arrow-left"></i> Modify Search
+    </a>
 </div>
 
-<!-- Search Summary Header -->
-<div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-primary bg-opacity-10 text-primary-dark">
+<!-- Search Summary -->
+<div class="card p-3 mb-4 reveal" style="animation-delay:.04s;background:var(--accent-soft)!important;border-color:rgba(108,99,255,0.2)!important;">
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-        <div class="d-flex align-items-center flex-wrap gap-3">
-            <div><i class="bi bi-geo-alt-fill fs-4 text-primary"></i></div>
+        <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-geo-alt-fill fs-5" style="color:var(--accent);"></i>
             <div>
-                <span class="fw-bold" id="header-pickup">...</span>
-                <i class="bi bi-arrow-right mx-2 text-muted"></i>
-                <span class="fw-bold" id="header-drop">...</span>
+                <span style="font-weight:600;color:var(--text);" id="header-pickup">...</span>
+                <i class="bi bi-arrow-right mx-2" style="color:var(--text-muted);"></i>
+                <span style="font-weight:600;color:var(--text);" id="header-drop">...</span>
             </div>
         </div>
-        <div class="d-flex gap-3">
-            <span class="badge bg-light text-primary border border-primary-subtle py-2 px-3 fs-6 rounded-pill" id="header-date">...</span>
-            <span class="badge bg-light text-primary border border-primary-subtle py-2 px-3 fs-6 rounded-pill" id="header-seats">1 Seat</span>
+        <div class="d-flex gap-2">
+            <span class="badge badge-accent px-3 py-2" id="header-date">...</span>
+            <span class="badge badge-accent px-3 py-2" id="header-seats">1 Seat</span>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <!-- Filter sidebar -->
-    <div class="col-12 col-xl-3 mb-4 mb-xl-0">
-        <div class="card border-0 shadow-sm rounded-4 p-4">
-            <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-funnel me-2"></i>Filter Matches</h5>
-            
+<div class="row g-4">
+    <!-- Filter -->
+    <div class="col-12 col-xl-3 reveal" style="animation-delay:.07s">
+        <div class="card p-4">
+            <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+                <i class="bi bi-funnel" style="color:var(--accent);"></i> Filter Matches
+            </h5>
+
             <div class="mb-4">
-                <label class="form-label fw-semibold text-muted">Sort By</label>
+                <label class="form-label">Sort By</label>
                 <select class="form-select" id="sort-filter">
                     <option value="time">Departure Time</option>
                     <option value="fare">Lowest Fare</option>
                     <option value="rating">Driver Rating</option>
                 </select>
             </div>
-            
+
             <div class="mb-4">
-                <label class="form-label fw-semibold text-muted">Max Fare: ₹<span id="fare-range-val">500</span></label>
+                <label class="form-label">Max Fare: ₹<span id="fare-range-val">500</span></label>
                 <input type="range" class="form-range" id="fare-range" min="10" max="500" step="10" value="500">
             </div>
 
             <div class="mb-0">
-                <label class="form-label fw-semibold text-muted">Vehicle Type</label>
+                <label class="form-label">Vehicle Type</label>
                 <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" value="" id="vtype-all" checked>
                     <label class="form-check-label" for="vtype-all">All Vehicles</label>
@@ -57,69 +66,72 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
         </div>
     </div>
 
-    <!-- Matchings list -->
-    <div class="col-12 col-xl-9">
+    <!-- Rides List -->
+    <div class="col-12 col-xl-9 reveal" style="animation-delay:.1s">
         <div id="matching-rides-container">
-            <!-- Dynamic listing via search JS -->
-            <div class="text-center text-muted py-5 card border-0 shadow-sm rounded-4">
-                <div class="spinner-border text-primary mb-3" role="status">
-                    <span class="visually-hidden">Searching...</span>
+            <div class="card text-center py-5">
+                <div class="card-body">
+                    <div class="spinner-border mb-3" role="status" style="color:var(--accent);width:36px;height:36px;">
+                        <span class="visually-hidden">Searching...</span>
+                    </div>
+                    <p style="color:var(--text-muted);font-size:15px;margin:0;">Matching routes...</p>
                 </div>
-                <p class="mb-0 fs-5">Matching routes...</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Booking Confirmation Modal -->
-<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookModalLabel" aria-hidden="true" style="z-index: 1060;">
+<!-- Booking Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookModalLabel" aria-hidden="true" style="z-index:1060;">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded-4 shadow-modal">
-            <div class="modal-header border-0 bg-primary text-white py-3">
-                <h5 class="modal-title fw-bold" id="bookModalLabel"><i class="bi bi-shield-check me-2"></i>Confirm Ride Booking</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content shadow-modal">
+            <div class="modal-header" style="background:linear-gradient(135deg,rgba(108,99,255,0.15),rgba(0,212,170,0.08));border-bottom:1px solid var(--border);">
+                <h5 class="modal-title" id="bookModalLabel" style="font-family:'Outfit',sans-serif;font-weight:700;display:flex;align-items:center;gap:8px;">
+                    <i class="bi bi-shield-check" style="color:var(--teal);"></i> Confirm Ride Booking
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4">
                 <div class="d-flex align-items-center mb-4">
-                    <div class="fs-1 text-primary me-3 bg-primary bg-opacity-10 p-3 rounded-circle" id="modal-driver-avatar">🧑</div>
+                    <div style="width:52px;height:52px;border-radius:14px;background:var(--accent-soft);color:var(--accent);font-size:22px;display:flex;align-items:center;justify-content:center;margin-right:14px;" id="modal-driver-avatar">🧑</div>
                     <div>
-                        <h5 class="fw-bold mb-1" id="modal-driver-name">...</h5>
-                        <p class="text-muted mb-0" id="modal-vehicle-info">...</p>
+                        <h5 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:3px;" id="modal-driver-name">...</h5>
+                        <p style="color:var(--text-muted);font-size:13px;margin:0;" id="modal-vehicle-info">...</p>
                     </div>
                 </div>
-                
-                <hr class="border-secondary mb-4 opacity-10">
-                
+
+                <hr>
+
                 <div class="mb-3">
-                    <label class="form-label fw-semibold text-muted">Fare Breakdown</label>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Fare per seat</span>
-                        <span class="fw-semibold">₹<span id="modal-fare-seat">0.00</span></span>
+                    <label class="form-label">Fare Breakdown</label>
+                    <div class="d-flex justify-content-between mb-2" style="font-size:13.5px;">
+                        <span style="color:var(--text-muted);">Fare per seat</span>
+                        <span style="font-weight:600;">₹<span id="modal-fare-seat">0.00</span></span>
                     </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Seats requested</span>
-                        <span class="fw-semibold" id="modal-seats-count">1</span>
+                    <div class="d-flex justify-content-between mb-2" style="font-size:13.5px;">
+                        <span style="color:var(--text-muted);">Seats requested</span>
+                        <span style="font-weight:600;" id="modal-seats-count">1</span>
                     </div>
-                    <hr class="border-secondary opacity-10 my-2">
-                    <div class="d-flex justify-content-between fs-5 fw-bold text-dark">
+                    <hr>
+                    <div class="d-flex justify-content-between" style="font-size:16px;font-weight:700;">
                         <span>Total Fare</span>
-                        <span>₹<span id="modal-total-fare">0.00</span></span>
+                        <span style="color:var(--accent);">₹<span id="modal-total-fare">0.00</span></span>
                     </div>
                 </div>
-                
-                <div class="bg-light p-3 rounded-3 mb-4 border d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-wallet2 text-primary fs-4 me-2"></i>
+
+                <div class="p-3 rounded-3 mb-4 d-flex align-items-center justify-content-between" style="background:var(--bg-soft);border:1px solid var(--border);">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-wallet2 fs-5" style="color:var(--accent);"></i>
                         <div>
-                            <small class="text-muted d-block" style="font-size: 0.75rem;">Your Wallet Balance</small>
-                            <span class="fw-bold">₹<span id="modal-wallet-balance">0.00</span></span>
+                            <small style="color:var(--text-faint);font-size:10.5px;display:block;text-transform:uppercase;letter-spacing:.06em;">Your Wallet Balance</small>
+                            <span style="font-weight:700;color:var(--text);">₹<span id="modal-wallet-balance">0.00</span></span>
                         </div>
                     </div>
-                    <span id="modal-wallet-warning" class="badge bg-danger rounded-pill d-none">Low Balance</span>
+                    <span id="modal-wallet-warning" class="badge badge-red d-none">Low Balance</span>
                 </div>
-                
-                <button type="button" class="btn btn-primary btn-lg w-100 fw-bold rounded-3 py-2.5 shadow-sm" id="confirm-booking-btn">
-                    <i class="bi bi-wallet2 me-2"></i>Instant Pay & Confirm Booking
+
+                <button type="button" class="btn btn-primary btn-block" id="confirm-booking-btn">
+                    <i class="bi bi-wallet2"></i> Instant Pay & Confirm Booking
                 </button>
             </div>
         </div>

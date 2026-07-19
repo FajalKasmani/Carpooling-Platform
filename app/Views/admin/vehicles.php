@@ -4,91 +4,83 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<!-- Unified Admin Header -->
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div class="d-flex align-items-center">
-        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 48px; height: 48px; font-size: 1.2rem;">
+<!-- Admin Header -->
+<div class="d-flex justify-content-between align-items-center mb-4 reveal">
+    <div class="d-flex align-items-center gap-3">
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(245,158,11,0.15);color:#F59E0B;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;font-family:'Outfit',sans-serif;">
             <?= strtoupper(substr($stats['org']['name'] ?? 'C', 0, 1)) ?>
         </div>
-        <h4 class="mb-0 fw-bold text-dark"><?= htmlspecialchars($stats['org']['name'] ?? 'Company Name') ?></h4>
+        <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;margin:0;"><?= htmlspecialchars($stats['org']['name'] ?? 'Company Name') ?></h4>
+            <span style="font-size:11px;color:var(--text-faint);">Fleet Directory</span>
+        </div>
     </div>
-    <div>
-        <span class="badge bg-danger rounded-pill px-3 py-2 fs-6">Admin</span>
-    </div>
+    <span class="badge badge-red">Admin</span>
 </div>
 
-<!-- Unified Stats Panel -->
-<div class="row g-3 mb-4">
-    <div class="col-12 col-md-4">
-        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
-            <div class="card-body py-2 px-3">
-                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Total Employees</div>
-                <div class="fs-4 text-info fw-bold"><?= $stats['total_employees'] ?></div>
-            </div>
+<!-- Admin Stats -->
+<div class="row g-3 mb-4 reveal" style="animation-delay:.04s">
+    <div class="col-4">
+        <div class="stat-card p-3 text-center">
+            <div class="stat-label mb-1">Total Employees</div>
+            <div class="stat-value mono" style="color:var(--teal);"><?= $stats['total_employees'] ?></div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
-        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
-            <div class="card-body py-2 px-3">
-                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Registered Vehicles</div>
-                <div class="fs-4 text-info fw-bold"><?= $stats['registered_vehicles'] ?></div>
-            </div>
+    <div class="col-4">
+        <div class="stat-card p-3 text-center">
+            <div class="stat-label mb-1">Registered Vehicles</div>
+            <div class="stat-value mono" style="color:var(--accent);"><?= $stats['registered_vehicles'] ?></div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
-        <div class="card border border-secondary-subtle shadow-sm rounded-0 h-100">
-            <div class="card-body py-2 px-3">
-                <div class="text-dark fw-semibold" style="font-size: 0.85rem;">Rides This Month</div>
-                <div class="fs-4 text-info fw-bold"><?= $stats['total_rides'] ?></div>
-            </div>
+    <div class="col-4">
+        <div class="stat-card p-3 text-center">
+            <div class="stat-label mb-1">Rides This Month</div>
+            <div class="stat-value mono" style="color:var(--yellow);"><?= $stats['total_rides'] ?></div>
         </div>
     </div>
 </div>
 
-<!-- Unified Tabs -->
-<ul class="nav nav-tabs mb-0 border-bottom-0 gap-1" style="font-family: inherit;">
-    <li class="nav-item">
-        <a class="nav-link text-secondary border rounded-0 px-4 py-2" href="<?= $baseUrl ?>/admin/employees" style="font-size: 0.9rem;">Employees</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active rounded-0 border border-bottom-0 text-dark px-4 py-2" href="<?= $baseUrl ?>/admin/vehicles" style="font-size: 0.9rem;">Vehicles</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-secondary border rounded-0 px-4 py-2" href="<?= $baseUrl ?>/admin/settings" style="font-size: 0.9rem;">Settings</a>
-    </li>
-</ul>
+<!-- Tabs -->
+<div class="d-flex gap-2 mb-4 reveal" style="animation-delay:.06s">
+    <a href="<?= $baseUrl ?>/admin/employees" class="btn btn-glass btn-sm"><i class="bi bi-people"></i> Employees</a>
+    <a href="<?= $baseUrl ?>/admin/vehicles" class="btn btn-primary btn-sm"><i class="bi bi-car-front"></i> Vehicles</a>
+    <a href="<?= $baseUrl ?>/admin/settings" class="btn btn-glass btn-sm"><i class="bi bi-sliders"></i> Settings</a>
+</div>
 
-<!-- Tab Content Area -->
-<div class="card border rounded-0 shadow-sm">
-    <div class="card-body p-0">
+<!-- Fleet Table -->
+<div class="card reveal" style="animation-delay:.08s">
+    <div class="card-body p-4">
+        <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+            <i class="bi bi-car-front-fill" style="color:var(--teal);"></i> Fleet Registry
+        </h5>
         <div class="table-responsive">
-            <table class="table table-borderless table-striped align-middle mb-0" style="font-size: 0.85rem;">
+            <table class="table table-hover align-middle">
                 <thead>
-                    <tr class="border-bottom text-info">
-                        <th class="fw-normal py-3 ps-4">Registration Number</th>
-                        <th class="fw-normal py-3">Model</th>
-                        <th class="fw-normal py-3">Seating Capacity</th>
-                        <th class="fw-normal py-3">Driver</th>
-                        <th class="fw-normal py-3 pe-4">Status</th>
+                    <tr>
+                        <th>Registration Number</th>
+                        <th>Model</th>
+                        <th>Seating Capacity</th>
+                        <th>Driver</th>
+                        <th class="text-end">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($vehicles)): ?>
-                        <tr><td colspan="5" class="text-center py-4 text-muted">No vehicles found.</td></tr>
+                        <tr><td colspan="5" class="text-center py-5" style="color:var(--text-muted);">No vehicles found.</td></tr>
                     <?php else: ?>
-                        <?php foreach ($vehicles as $v): 
+                        <?php foreach ($vehicles as $v):
                             $isActive = $v['status'] === 'approved';
                         ?>
-                        <tr class="border-bottom">
-                            <td class="ps-4 text-dark"><?= htmlspecialchars($v['registration_number']) ?></td>
-                            <td class="text-dark"><?= htmlspecialchars($v['model']) ?></td>
-                            <td class="text-dark"><?= $v['seating_capacity'] ?></td>
-                            <td class="text-dark"><?= htmlspecialchars($v['owner_name'] ?? 'N/A') ?></td>
-                            <td class="pe-4">
+                        <tr>
+                            <td class="mono" style="font-weight:600;color:var(--accent);"><?= htmlspecialchars($v['registration_number']) ?></td>
+                            <td style="font-weight:500;"><?= htmlspecialchars($v['model']) ?></td>
+                            <td><span class="badge badge-teal"><?= $v['seating_capacity'] ?> seats</span></td>
+                            <td><?= htmlspecialchars($v['owner_name'] ?? 'N/A') ?></td>
+                            <td class="text-end">
                                 <?php if ($isActive): ?>
-                                    <span class="text-success" style="font-size: 0.85rem;">[Active]</span>
+                                    <span class="badge badge-green">Active</span>
                                 <?php else: ?>
-                                    <span class="text-danger" style="font-size: 0.85rem;">[Inactive]</span>
+                                    <span class="badge badge-red">Inactive</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -96,10 +88,6 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
                     <?php endif; ?>
                 </tbody>
             </table>
-        </div>
-        
-        <div class="p-4 border-top">
-            <button class="btn btn-outline-info rounded-0 text-info fw-semibold px-4 py-1" style="font-size: 0.85rem;">+ Add Vehicle</button>
         </div>
     </div>
 </div>

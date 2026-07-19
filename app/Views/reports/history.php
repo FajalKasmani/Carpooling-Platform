@@ -4,67 +4,80 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 require_once dirname(__DIR__) . '/layouts/sidebar.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2 fw-bold"><i class="bi bi-clock-history me-2 text-primary"></i>Ride History</h1>
-    <a href="<?= $baseUrl ?>/reports" class="btn btn-outline-secondary btn-sm"><i class="bi bi-bar-chart-line me-2"></i>Analytics Overview</a>
+<div class="page-header reveal">
+    <div class="page-title">
+        <span class="page-title-icon" style="background:var(--orange-soft);color:var(--orange);">
+            <i class="bi bi-clock-history"></i>
+        </span>
+        Ride History
+    </div>
+    <a href="<?= $baseUrl ?>/reports" class="btn btn-glass btn-sm">
+        <i class="bi bi-bar-chart-line"></i> Analytics Overview
+    </a>
 </div>
 
-<div class="card border-0 shadow-sm rounded-4 p-4">
-    <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-receipt text-primary me-2"></i>Completed Commutes</h5>
-    
-    <div class="table-responsive">
-        <table class="table table-hover align-middle border-0">
-            <thead class="table-light">
-                <tr>
-                    <th class="border-0 rounded-start">Date & Time</th>
-                    <th class="border-0">Role</th>
-                    <th class="border-0">Pickup & Destination</th>
-                    <th class="border-0">Driver/Vehicle</th>
-                    <th class="border-0 text-end rounded-end">Fare</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (empty($history)): ?>
+<div class="card reveal" style="animation-delay:.06s">
+    <div class="card-body p-4">
+        <h5 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+            <i class="bi bi-receipt" style="color:var(--accent);"></i> Completed Commutes
+        </h5>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
                     <tr>
-                        <td colspan="5" class="text-center text-muted py-5">
-                            <i class="bi bi-calendar-x fs-2 mb-2 d-block text-secondary opacity-50"></i>
-                            No completed rides found.
-                        </td>
+                        <th>Date & Time</th>
+                        <th>Role</th>
+                        <th>Pickup & Destination</th>
+                        <th>Driver/Vehicle</th>
+                        <th class="text-end">Fare</th>
                     </tr>
-                <?php else: ?>
-                    <?php foreach ($history as $h): ?>
+                </thead>
+                <tbody>
+                    <?php if (empty($history)): ?>
                         <tr>
-                            <td>
-                                <span class="fw-semibold text-dark"><?= date('M d, Y', strtotime($h['travel_date'])) ?></span>
-                                <small class="text-muted d-block"><?= date('h:i A', strtotime($h['travel_time'])) ?></small>
-                            </td>
-                            <td>
-                                <span class="badge rounded-pill text-uppercase px-2.5 py-1.5 fw-bold bg-<?= $h['user_role'] === 'driver' ? 'info' : 'primary' ?> bg-opacity-10 text-<?= $h['user_role'] === 'driver' ? 'info' : 'primary' ?>" style="font-size: 0.65rem;">
-                                    <?= $h['user_role'] ?>
-                                </span>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center gap-1.5 mb-1">
-                                    <i class="bi bi-geo-alt-fill text-primary" style="font-size: 0.85rem;"></i>
-                                    <small class="text-dark fw-medium text-truncate" style="max-width: 250px;"><?= htmlspecialchars($h['pickup_address']) ?></small>
+                            <td colspan="5" class="text-center py-5">
+                                <div style="width:48px;height:48px;border-radius:14px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--text-faint);margin:0 auto 14px;">
+                                    <i class="bi bi-calendar-x"></i>
                                 </div>
-                                <div class="d-flex align-items-center gap-1.5">
-                                    <i class="bi bi-geo-fill text-danger" style="font-size: 0.85rem;"></i>
-                                    <small class="text-muted text-truncate" style="max-width: 250px;"><?= htmlspecialchars($h['drop_address']) ?></small>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="fw-semibold text-dark"><?= htmlspecialchars($h['driver_name']) ?></span>
-                                <small class="text-muted d-block"><?= htmlspecialchars($h['vehicle_model']) ?></small>
-                            </td>
-                            <td class="text-end fw-bold text-dark">
-                                ₹<?= number_format($h['fare_amount'], 2) ?>
+                                <div style="color:var(--text-muted);font-size:13.5px;">No completed rides found.</div>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                    <?php else: ?>
+                        <?php foreach ($history as $h): ?>
+                            <tr>
+                                <td>
+                                    <span style="font-weight:600;"><?= date('M d, Y', strtotime($h['travel_date'])) ?></span>
+                                    <small style="color:var(--text-muted);display:block;"><?= date('h:i A', strtotime($h['travel_time'])) ?></small>
+                                </td>
+                                <td>
+                                    <span class="badge <?= $h['user_role'] === 'driver' ? 'badge-teal' : 'badge-accent' ?> text-uppercase">
+                                        <?= $h['user_role'] ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <i class="bi bi-geo-alt-fill" style="color:var(--accent);font-size:12px;"></i>
+                                        <small style="color:var(--text);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= htmlspecialchars($h['pickup_address']) ?></small>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-geo-fill" style="color:var(--teal);font-size:12px;"></i>
+                                        <small style="color:var(--text-muted);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= htmlspecialchars($h['drop_address']) ?></small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="font-weight:600;"><?= htmlspecialchars($h['driver_name']) ?></span>
+                                    <small style="color:var(--text-muted);display:block;"><?= htmlspecialchars($h['vehicle_model']) ?></small>
+                                </td>
+                                <td class="text-end mono" style="font-weight:700;color:var(--teal);">
+                                    ₹<?= number_format($h['fare_amount'], 2) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
