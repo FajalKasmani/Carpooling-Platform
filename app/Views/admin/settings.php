@@ -50,9 +50,11 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
 <!-- Settings Form Card -->
 <div class="card reveal" style="animation-delay:.08s">
     <div class="card-body p-4">
-        <?php if (!empty($flash)): ?>
+        <?php if (!empty($flash)): 
+            $msg = is_string($flash) ? $flash : ($flash['message'] ?? $flash['success'] ?? $flash['error'] ?? 'Settings updated');
+        ?>
             <div class="alert alert-info" role="alert">
-                <i class="bi bi-info-circle me-2"></i><?= htmlspecialchars($flash['message']) ?>
+                <i class="bi bi-info-circle me-2"></i><?= htmlspecialchars($msg) ?>
             </div>
         <?php endif; ?>
 

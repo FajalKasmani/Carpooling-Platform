@@ -15,13 +15,11 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
 
 <!-- Custom Tabs -->
 <div class="mb-4 reveal" style="animation-delay:.04s">
-    <div style="display:flex;gap:4px;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-md);padding:4px;width:fit-content;">
-        <button class="nav-link active" id="passenger-tab" data-bs-toggle="tab" data-bs-target="#passenger" type="button" role="tab"
-                style="padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;border:none;background:var(--accent);color:#fff;display:flex;align-items:center;gap:7px;">
+    <div class="custom-tabs-container" role="tablist">
+        <button class="nav-link active" id="passenger-tab" data-bs-toggle="tab" data-bs-target="#passenger" type="button" role="tab" aria-controls="passenger" aria-selected="true">
             <i class="bi bi-person"></i> Booked as Passenger
         </button>
-        <button class="nav-link" id="driver-tab" data-bs-toggle="tab" data-bs-target="#driver" type="button" role="tab"
-                style="padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;border:none;background:transparent;color:var(--text-muted);display:flex;align-items:center;gap:7px;transition:all .15s;">
+        <button class="nav-link" id="driver-tab" data-bs-toggle="tab" data-bs-target="#driver" type="button" role="tab" aria-controls="driver" aria-selected="false">
             <i class="bi bi-car-front"></i> Offered as Driver
         </button>
     </div>
@@ -30,7 +28,12 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
 <div class="tab-content" id="tripsTabContent">
     <!-- Passenger Tab -->
     <div class="tab-pane fade show active" id="passenger" role="tabpanel" aria-labelledby="passenger-tab">
-        <?php if (empty($activeTrips)): ?>
+        <?php 
+        $passengerBookings = array_filter($activeTrips, function($t) {
+            return (int)$t['driver_id'] !== (int)$_SESSION['user_id'];
+        });
+        if (empty($passengerBookings)): 
+        ?>
             <div class="card reveal" style="animation-delay:.06s">
                 <div class="card-body p-5 text-center">
                     <div style="width:64px;height:64px;border-radius:18px;background:var(--orange-soft);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">
@@ -45,7 +48,7 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
             </div>
         <?php else: ?>
             <div class="row row-cols-1 row-cols-lg-2 g-4">
-                <?php foreach ($activeTrips as $t): ?>
+                <?php foreach ($passengerBookings as $t): ?>
                     <div class="col reveal" style="animation-delay:.06s">
                         <div class="ride-card h-100">
                             <div class="card-body p-4">
@@ -156,6 +159,13 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
                                         <span class="badge badge-accent px-3"><?= $r['booked_seats'] ?> / <?= $r['total_seats'] ?></span>
                                     </div>
                                 </div>
+                                <?php if (!empty($r['active_booking_id'])): ?>
+                                    <div class="mt-3 pt-3 border-top d-flex justify-content-end">
+                                        <a href="<?= $baseUrl ?>/trip/<?= $r['active_booking_id'] ?>" class="btn btn-teal btn-sm">
+                                            <i class="bi bi-compass"></i> Track & Driver Center
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -164,20 +174,6 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
         <?php endif; ?>
     </div>
 </div>
-
-<script>
-// Make driver tab button visually toggle
-document.querySelectorAll('[data-bs-toggle="tab"]').forEach(btn => {
-    btn.addEventListener('shown.bs.tab', function() {
-        document.querySelectorAll('[data-bs-toggle="tab"]').forEach(b => {
-            b.style.background = 'transparent';
-            b.style.color = 'var(--text-muted)';
-        });
-        this.style.background = 'var(--accent)';
-        this.style.color = '#fff';
-    });
-});
-</script>
 
 <?php
 require_once dirname(__DIR__) . '/layouts/footer.php';

@@ -36,78 +36,9 @@
                     </div>
                     <div><div class="pt">Personal wallet</div><div class="ps">Top up, pay, and receive seat payouts from one place.</div></div>
                 </div>
-<<<<<<< HEAD
-                
-                <div class="brand-footer mt-auto">
-                    <p class="mb-0">&copy; <?= date('Y') ?> Odoo. Built for secure corporate rides.</p>
-                </div>
-            </div>
-            
-            <!-- Right Form Side -->
-            <div class="col-12 col-lg-6 form-side">
-                <div class="form-container">
-                    <div class="d-flex align-items-center mb-4 d-lg-none">
-                        <i class="bi bi-car-front-fill fs-1 text-gradient me-2"></i>
-                        <h2 class="fw-extrabold text-gradient mb-0">Odoo</h2>
-                    </div>
-
-                    <div class="mb-4">
-                        <h2 class="fw-extrabold text-dark">Get started</h2>
-                        <p class="text-muted">Create your corporate commuter account in seconds</p>
-                    </div>
-
-                    <?php if (!empty($flash['error'])): ?>
-                        <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger fw-semibold rounded-3 mb-4 d-flex align-items-center">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                            <?= htmlspecialchars($flash['error']) ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <form action="<?= $baseUrl ?>/register" method="POST" autocomplete="off">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Full Name</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control border-start-0 ps-0" id="name" name="name" value="<?= htmlspecialchars($flash['old_name'] ?? '') ?>" required placeholder="John Doe">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Company Email Address</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" value="<?= htmlspecialchars($flash['old_email'] ?? '') ?>" required placeholder="name@company.com">
-                            </div>
-                            <div class="form-text mt-1 text-muted" style="font-size: 0.78rem;">Your organization will be auto-detected via email domain.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Mobile Number</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0"><i class="bi bi-telephone"></i></span>
-                                <input type="tel" class="form-control border-start-0 ps-0" id="phone" name="phone" value="<?= htmlspecialchars($flash['old_phone'] ?? '') ?>" required placeholder="10-digit number">
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="password" class="form-label">Password</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0"><i class="bi bi-lock"></i></span>
-                                <input type="password" class="form-control border-start-0 ps-0" id="password" name="password" required minlength="8" placeholder="At least 8 characters">
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-gradient w-100 py-2.5 fw-semibold mb-4 rounded-pill">Create Account</button>
-                    </form>
-                    
-                    <div class="text-center">
-                        <span class="text-muted small">Already have an account?</span>
-                        <a href="<?= $baseUrl ?>/login" class="text-primary text-decoration-none fw-bold small ms-1">Sign In</a>
-=======
                 <div class="auth-point">
                     <div class="auth-point-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
->>>>>>> ad45126 (final commit)
                     </div>
                     <div><div class="pt">Drive or ride</div><div class="ps">Register a vehicle to offer rides, or search as a passenger.</div></div>
                 </div>

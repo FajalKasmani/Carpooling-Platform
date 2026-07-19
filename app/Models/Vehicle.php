@@ -26,14 +26,15 @@ class Vehicle extends Model
     public function create(array $data): int
     {
         $stmt = $this->db->prepare("
-            INSERT INTO vehicles (owner_id, model, registration_number, seating_capacity)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO vehicles (owner_id, model, registration_number, seating_capacity, photo)
+            VALUES (?, ?, ?, ?, ?)
         ");
         $stmt->execute([
             $data['owner_id'],
             $data['model'],
             $data['registration_number'],
             $data['seating_capacity'],
+            $data['photo'] ?? null,
         ]);
         return (int)$this->db->lastInsertId();
     }
@@ -42,13 +43,14 @@ class Vehicle extends Model
     {
         $stmt = $this->db->prepare("
             UPDATE vehicles
-            SET model = ?, registration_number = ?, seating_capacity = ?
+            SET model = ?, registration_number = ?, seating_capacity = ?, photo = ?
             WHERE id = ?
         ");
         return $stmt->execute([
             $data['model'],
             $data['registration_number'],
             $data['seating_capacity'],
+            $data['photo'] ?? null,
             $id,
         ]);
     }

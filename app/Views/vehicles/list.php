@@ -37,9 +37,13 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
             <div class="col reveal" style="animation-delay:.06s">
                 <div class="ride-card h-100" style="overflow:hidden;">
                     <!-- Vehicle Header -->
-                    <div style="background:linear-gradient(135deg,rgba(0,212,170,0.1),rgba(108,99,255,0.07));padding:32px;text-align:center;border-bottom:1px solid var(--border);">
-                        <i class="bi bi-car-front-fill" style="font-size:3.5rem;color:var(--teal);filter:drop-shadow(0 0 12px rgba(0,212,170,0.4));"></i>
-                    </div>
+                    <?php if (!empty($v['photo'])): ?>
+                        <div style="height:150px; background-image:url('<?= $baseUrl ?>/<?= htmlspecialchars($v['photo']) ?>'); background-size:cover; background-position:center; border-bottom:1px solid var(--border);"></div>
+                    <?php else: ?>
+                        <div style="background:linear-gradient(135deg,rgba(0,212,170,0.1),rgba(108,99,255,0.07));padding:32px;text-align:center;border-bottom:1px solid var(--border);">
+                            <i class="bi bi-car-front-fill" style="font-size:3.5rem;color:var(--teal);filter:drop-shadow(0 0 12px rgba(0,212,170,0.4));"></i>
+                        </div>
+                    <?php endif; ?>
                     <div class="card-body p-4">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>

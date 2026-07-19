@@ -22,7 +22,10 @@
     <!-- Design System -->
     <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style.css">
 </head>
-<body class="d-flex flex-column h-100">
+<?php
+$isAdminMode = (strpos($_SERVER['REQUEST_URI'] ?? '', '/admin') !== false);
+?>
+<body class="d-flex flex-column h-100 <?= $isAdminMode ? 'admin-mode' : '' ?>">
 
     <!-- Mobile Top Navbar -->
     <nav class="navbar mobile-topnav d-lg-none sticky-top px-3" style="min-height:52px;">

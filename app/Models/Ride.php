@@ -161,7 +161,8 @@ class Ride extends Model
     {
         $stmt = $this->db->prepare("
             SELECT r.*, v.model AS vehicle_model,
-                   (SELECT COUNT(*) FROM bookings b WHERE b.ride_id = r.id AND b.status != 'cancelled') AS booked_seats
+                   (SELECT COUNT(*) FROM bookings b WHERE b.ride_id = r.id AND b.status != 'cancelled') AS booked_seats,
+                   (SELECT b.id FROM bookings b WHERE b.ride_id = r.id AND b.status != 'cancelled' LIMIT 1) AS active_booking_id
             FROM rides r
             JOIN vehicles v ON v.id = r.vehicle_id
             WHERE r.driver_id = ?

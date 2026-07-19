@@ -11,7 +11,7 @@
 <body>
 
 <div class="auth-page">
-    <!-- Left dark panel -->
+    <!-- Left panel -->
     <div class="auth-panel">
         <a href="<?= $baseUrl ?>" class="auth-logo">
             <svg viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="1.8">
@@ -48,58 +48,9 @@
                     <div class="auth-point-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
                     </div>
-<<<<<<< HEAD
-
-                    <div class="mb-4">
-                        <h2 class="fw-extrabold text-dark">Welcome back</h2>
-                        <p class="text-muted">Enter your enterprise email to access your account</p>
-                    </div>
-
-                    <?php if (!empty($flash['error'])): ?>
-                        <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger fw-semibold rounded-3 mb-4 d-flex align-items-center">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                            <?= htmlspecialchars($flash['error']) ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (!empty($flash['success'])): ?>
-                        <div class="alert alert-success border-0 bg-success bg-opacity-10 text-success fw-semibold rounded-3 mb-4 d-flex align-items-center">
-                            <i class="bi bi-check-circle-fill me-2"></i>
-                            <?= htmlspecialchars($flash['success']) ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <form action="<?= $baseUrl ?>/login" method="POST" autocomplete="off">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Corporate Email Address</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" value="<?= htmlspecialchars($flash['old_email'] ?? '') ?>" required placeholder="name@company.com">
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <div class="d-flex justify-content-between mb-1">
-                                <label for="password" class="form-label mb-0">Password</label>
-                                <a href="<?= $baseUrl ?>/forgot-password" class="text-decoration-none text-primary fw-semibold" style="font-size: 0.8rem;">Forgot password?</a>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0"><i class="bi bi-lock"></i></span>
-                                <input type="password" class="form-control border-start-0 ps-0" id="password" name="password" required placeholder="••••••••">
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-gradient w-100 py-2.5 fw-semibold mb-4 rounded-pill">Sign In</button>
-                    </form>
-                    
-                    <div class="text-center">
-                        <span class="text-muted small">New to the platform?</span>
-                        <a href="<?= $baseUrl ?>/register" class="text-primary text-decoration-none fw-bold small ms-1">Register Account</a>
-=======
                     <div>
                         <div class="pt">Impact tracking</div>
                         <div class="ps">See kilometers shared and CO₂ saved across every trip.</div>
->>>>>>> ad45126 (final commit)
                     </div>
                 </div>
             </div>

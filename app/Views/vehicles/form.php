@@ -24,9 +24,11 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
                 <i class="bi bi-car-front-fill" style="color:var(--teal);"></i> Vehicle Specifications
             </h5>
 
-            <?php if (!empty($flash)): ?>
+            <?php if (!empty($flash)): 
+                $msg = is_string($flash) ? $flash : ($flash['message'] ?? $flash['error'] ?? 'An error occurred');
+            ?>
                 <div class="alert alert-danger" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i><?= htmlspecialchars($flash['message']) ?>
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i><?= htmlspecialchars($msg) ?>
                 </div>
             <?php endif; ?>
 
@@ -60,6 +62,12 @@ require_once dirname(__DIR__) . '/layouts/sidebar.php';
                     <div class="col-6">
                         <label for="photo" class="form-label">Vehicle Photo (Optional)</label>
                         <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                        <?php if ($isEdit && !empty($vehicle['photo'])): ?>
+                            <div class="mt-2">
+                                <small class="text-muted d-block mb-1">Current Photo:</small>
+                                <img src="<?= $baseUrl ?>/<?= htmlspecialchars($vehicle['photo']) ?>" alt="Vehicle Photo" style="max-height:80px; border-radius:var(--radius-sm);">
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
