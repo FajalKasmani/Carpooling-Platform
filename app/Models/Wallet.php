@@ -62,10 +62,10 @@ class Wallet extends Model
     /**
      * Debit wallet (deduct funds).
      */
-    public function debit(int $userId, float $amount, ?string $reference = null): bool
+    public function debit(int $userId, float $amount, ?string $reference = null, bool $force = false): bool
     {
         $balance = $this->getBalance($userId);
-        if ($balance < $amount) {
+        if (!$force && $balance < $amount) {
             return false;
         }
 

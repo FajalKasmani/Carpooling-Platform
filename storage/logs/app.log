@@ -1528,3 +1528,27 @@
 #2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
 #3 {main}
 
+[2026-07-19 08:50:22] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:141
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(141): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->adminReport()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/admin')
+#3 {main}
+
+[2026-07-19 09:01:42] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-19 09:02:15] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+
+[2026-07-19 09:03:43] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.distance_km' in 'field list' in C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php:48
+#0 C:\xampp\htdocs\CarPooling\app\Controllers\ReportController.php(48): PDO->prepare('\r\n            S...')
+#1 C:\xampp\htdocs\CarPooling\app\Core\Router.php(78): App\Controllers\ReportController->summary()
+#2 C:\xampp\htdocs\CarPooling\public\index.php(20): App\Core\Router->dispatch('GET', '/reports/summar...')
+#3 {main}
+

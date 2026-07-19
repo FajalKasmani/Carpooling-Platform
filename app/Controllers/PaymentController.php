@@ -48,6 +48,10 @@ class PaymentController extends Controller
             ]);
 
             $walletModel->debit($this->userId(), $amount, "payment_{$paymentId}");
+            
+            // Credit the driver's wallet
+            $walletModel->credit((int)$booking['driver_id'], $amount, "ride_{$booking['ride_id']}_payment_{$paymentId}");
+            
             $bookingModel->updateStatus($bookingId, 'payment_completed');
 
             $this->json([
@@ -126,7 +130,13 @@ class PaymentController extends Controller
 
         if ($payment) {
             $bookingModel = new Booking();
-            $bookingModel->updateStatus((int)$payment['booking_id'], 'payment_completed');
+            $booking = $bookingModel->findById((int)$payment['booking_id']);
+            if ($booking) {
+                $bookingModel->updateStatus((int)$payment['booking_id'], 'payment_completed');
+                // Credit the driver's wallet
+                $walletModel = new Wallet();
+                $walletModel->credit((int)$booking['driver_id'], (float)$booking['fare_amount'], "ride_{$booking['ride_id']}_payment_{$paymentId}");
+            }
         }
 
         $this->json(['success' => true, 'message' => 'Payment verified successfully!']);

@@ -211,12 +211,6 @@ class RideController extends Controller
             // Decrement seats
             $rideModel->decrementSeats($rideId, $seats);
 
-            // Debit passenger wallet
-            $walletModel->debit($this->userId(), $fareAmount, "booking_{$bookingId}");
-
-            // Credit driver wallet
-            $walletModel->credit((int)$ride['driver_id'], $fareAmount, "ride_{$rideId}_booking_{$bookingId}");
-
             // Mark ride as full if no seats left
             if ((int)$ride['available_seats'] - $seats <= 0) {
                 $rideModel->updateStatus($rideId, 'full');

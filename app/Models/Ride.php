@@ -16,8 +16,8 @@ class Ride extends Model
                 driver_id, vehicle_id, pickup_address, pickup_lat, pickup_lng,
                 drop_address, drop_lat, drop_lng, route_polyline,
                 travel_date, travel_time, available_seats, total_seats,
-                fare_per_seat, is_recurring
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                fare_per_seat, is_recurring, distance_km
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
         $seats = $data['available_seats'];
         $stmt->execute([
@@ -36,6 +36,7 @@ class Ride extends Model
             $seats,
             $data['fare_per_seat'],
             $data['is_recurring'] ?? false,
+            $data['distance_km'] ?? 0.00,
         ]);
         return (int)$this->db->lastInsertId();
     }
@@ -82,9 +83,9 @@ class Ride extends Model
             $filters['org_id'],
         ];
 
-        // Time window filter (±1 hour)
+        // Time window filter (±8 hours)
         if (!empty($filters['travel_time'])) {
-            $sql .= " AND ABS(TIME_TO_SEC(TIMEDIFF(r.travel_time, ?))) <= 3600";
+            $sql .= " AND ABS(TIME_TO_SEC(TIMEDIFF(r.travel_time, ?))) <= 28800";
             $params[] = $filters['travel_time'];
         }
 
@@ -103,12 +104,12 @@ class Ride extends Model
                 $pickupClose = GeoHelper::isWithinRadius(
                     (float)$filters['pickup_lat'], (float)$filters['pickup_lng'],
                     (float)$ride['pickup_lat'], (float)$ride['pickup_lng'],
-                    5.0 // 5km radius
+                    15.0 // 15km radius for flexible testing
                 );
                 $dropClose = GeoHelper::isWithinRadius(
                     (float)$filters['drop_lat'], (float)$filters['drop_lng'],
                     (float)$ride['drop_lat'], (float)$ride['drop_lng'],
-                    5.0
+                    15.0
                 );
                 return $pickupClose && $dropClose;
             });
